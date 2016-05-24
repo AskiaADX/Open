@@ -1,0 +1,79 @@
+{%
+Dim bordercolor = CurrentADC.PropValue("borderColor")
+Dim activebordercolor = CurrentADC.PropValue("activeBorderColor")
+Dim hoverbordercolor = CurrentADC.PropValue("hoverBorderColor")
+
+Dim bordersize = CurrentADC.PropValue("borderSize")
+Dim activebordersize = CurrentADC.PropValue("activeBorderSize")
+Dim hoverbordersize = CurrentADC.PropValue("hoverBorderSize")
+
+Dim bgcolor = CurrentADC.PropValue("bgColor")
+Dim activebgcolor = CurrentADC.PropValue("activeBGColor")
+Dim hoverbgcolor = CurrentADC.PropValue("hoverBGColor")
+
+Dim borderstyle = CurrentADC.PropValue("borderStyle")
+Dim activeborderstyle = CurrentADC.PropValue("activeBorderStyle")
+Dim hoverborderstyle = CurrentADC.PropValue("hoverBorderStyle")
+
+
+Dim opacity = CurrentADC.PropValue("opacity")
+Dim fontsize = CurrentADC.PropValue("areaFontSize")
+Dim controlwidth = CurrentADC.PropValue("controlWidth")
+Dim allowresize = On(CurrentADC.PropValue("allowResize")="1","both","none")
+Dim areatextalign = CurrentADC.PropValue("areaTextAlign")
+Dim counterposition = CurrentADC.PropValue("counterPosition")
+Dim counterfontsize = CurrentADC.PropValue("counterFontSize")
+
+
+%}
+
+#adc_{%= CurrentADC.InstanceId %} .adc-open-content {
+    max-width:{%=controlwidth%};
+    flex-direction:{%=On(counterposition.Left(1)="N","column","column-reverse")%};
+}
+
+#adc_{%= CurrentADC.InstanceId %} .contentinput{
+    font-size: {%=fontsize%}px;
+}
+
+#adc_{%= CurrentADC.InstanceId %} textarea, #adc_{%= CurrentADC.InstanceId %} input{
+    border:{%=bordersize%}px {%=borderstyle%} rgb({%=bordercolor%}) ;
+    background-color: rgba({%=bgcolor%},{%=opacity%});
+    font-size: {%=fontsize%}px;
+    resize:{%=allowresize%};
+    -moz-text-align: {%=areatextalign%}; /* Firefox 12+ */
+    text-align: {%=areatextalign%};
+}
+
+
+#adc_{%= CurrentADC.InstanceId %} textarea:hover, #adc_{%= CurrentADC.InstanceId %} input:hover {
+    border: {%=hoverbordersize%}px {%=hoverborderstyle%} rgb({%=hoverbordercolor%});
+     box-shadow: 0 0 5px rgb({%=hoverbordercolor%});
+     -webkit-box-shadow: 0 0 5px rgb({%=hoverbordercolor%});
+     -moz-box-shadow: 0 0 5px rgb({%=hoverbordercolor%});
+    background-color: rgba({%=hoverbgcolor%},{%=opacity%});
+}
+
+#adc_{%= CurrentADC.InstanceId %} textarea:focus, #adc_{%= CurrentADC.InstanceId %} input:focus {
+    border: {%=activebordersize%}px {%=activeborderstyle%} rgb({%=activebordercolor%});
+     box-shadow: 0 0 5px rgb({%=activebordercolor%});
+     -webkit-box-shadow: 0 0 5px rgb({%=activebordercolor%});
+     -moz-box-shadow: 0 0 5px rgb({%=activebordercolor%});
+    background-color: rgba({%=activebgcolor%},{%=opacity%});
+}
+
+
+#adc_{%= CurrentADC.InstanceId %} .counterdiv{
+    /*border:1px solid black;*/
+    font-size: {%=counterfontsize%}px;
+    text-align:{%=On(counterposition.Right(1)="W","left","right")%};
+    display:{%=On(counterposition="none","none","block")%};
+}
+
+#adc_{%= CurrentADC.InstanceId %} .invalidemail {
+    color:red;
+}
+#adc_{%= CurrentADC.InstanceId %} .invalidemail input{
+    border:1px solid red;
+}
+

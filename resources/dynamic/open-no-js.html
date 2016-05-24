@@ -1,0 +1,45 @@
+{% 
+Dim inputName  =  CurrentQuestion.InputName()
+Dim inputValue =  CurrentQuestion.InputValue()
+
+Dim datalist    = CurrentADC.PropValue("datalist").Split("|")     
+Dim attrList    = On(datalist.Count > 0, "list=\"" + inputName + "\"", "")
+
+
+Dim inputType  = CurrentADC.PropValue("opensubtype")
+Dim multiline  = (CurrentADC.PropValue("multiline") = "1") ' Convert to boolean
+
+
+
+Dim placeholder = CurrentADC.PropValue("placeholder")
+Dim attrPlaceholder = On(placeholder <> "", "placeholder=\"" + placeholder + "\"", "")
+
+Dim attrRequired = On(CurrentQuestion.IsAllowDK, "required=\"required\"", "")
+
+Dim maxchar = CurrentADC.PropValue("maxChar")
+Dim attrMaxLength = "maxlength=\"" + maxchar + "\""
+Dim minchar = CurrentADC.PropValue("minChar")
+Dim attrMinLength = "minlength=\"" + minchar + "\""
+
+Dim countorder = CurrentADC.PropValue("counter")
+
+dim arearows = CurrentADC.PropValue("areaRows")
+dim areacolumns = CurrentADC.PropValue("areaColumns")
+'cols="areacolumns"
+dim attrControlAlign = CurrentADC.PropValue("controlAlign")
+
+dim attrInputType = CurrentADC.PropValue("inputType")
+
+'On(countOrder="desc",maxchar,"0")
+
+
+%}
+<div id="adc_{%= CurrentADC.InstanceId %}" class="adc-open">
+    <div class="adc-open-content {%=attrControlAlign%}">        
+        {%If attrInputType = "textarea" then %}
+        	<textarea class="contentinput" rows="{%=arearows%}" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} >{%= inputValue %}</textarea>
+        {%Else%}
+        	<input type="{%=attrInputType%}" class="contentinput" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}" />
+  		 {%Endif%}
+    </div>
+</div>

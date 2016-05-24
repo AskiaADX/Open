@@ -1,0 +1,79 @@
+{% 
+Dim inputName  =  CurrentQuestion.InputName()
+Dim inputValue =  CurrentQuestion.InputValue()
+
+Dim datalist    = CurrentADC.PropValue("datalist").Split("|")     
+Dim attrList    = On(datalist.Count > 0, "list=\"" + inputName + "\"", "")
+Dim i
+
+Dim inputType  = CurrentADC.PropValue("opensubtype")
+Dim multiline  = (CurrentADC.PropValue("multiline") = "1") ' Convert to boolean
+
+
+
+Dim placeholder = CurrentADC.PropValue("placeholder")
+Dim attrPlaceholder = On(placeholder <> "", "placeholder=\"" + placeholder + "\"", "")
+
+Dim attrRequired = On(CurrentQuestion.IsAllowDK, "required=\"required\"", "")
+
+Dim maxchar = CurrentADC.PropValue("maxChar")
+Dim attrMaxLength = "maxlength=\"" + maxchar + "\""
+Dim minchar = CurrentADC.PropValue("minChar")
+Dim attrMinLength = "minlength=\"" + minchar + "\""
+
+Dim countorder = CurrentADC.PropValue("counter")
+
+dim arearows = CurrentADC.PropValue("areaRows")
+dim areacolumns = CurrentADC.PropValue("areaColumns")
+'cols="areacolumns"
+dim attrControlAlign = CurrentADC.PropValue("controlAlign")
+
+dim attrInputType = CurrentADC.PropValue("inputType")
+
+Dim adcSelector = "adc_" + CurrentADC.InstanceId
+
+'On(countOrder="desc",maxchar,"0")
+
+%}
+<div id="{%= adcSelector %}" class="adc-open">
+    <div class="adc-open-content {%=attrControlAlign%}">
+        
+        <div class="counterdiv">
+            <span class="counter">
+                {%If attrInputType = "email" or countorder="none" then%}	
+                {%Else
+					If countorder = "desc" Then %}
+        				{%=maxchar%}
+    				{%else%}
+        				0
+					{%EndIf%}
+				{%endif%}
+            </span>
+            <span>{%=On(countorder <> "asc" or attrInputType = "email","","/"+maxchar)%}</span>
+        </div>
+        
+        {%If attrInputType = "textarea" then %}
+        	<textarea class="contentinput" rows="{%=arearows%}" name="{%= inputName %}" id="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %}>{%= inputValue %}</textarea>
+        {%ElseIf attrInputType = "email" then %}
+        	<div class="contentinput">
+                <div class="row-wrapper">
+                    <div style ="min-width:40%"><input type="text" id="{%= inputName %}_open1" {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %}/></div>
+                    <div style="padding:0px 5px 0px 5px"> @ </div>
+                    <div style ="min-width:30%"><input type="text" id="{%= inputName %}_open2" {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %}/></div>
+                    <div style="padding:0px 5px 0px 5px"> . </div>
+                    <div style ="min-width:10%"><input type="text" id="{%= inputName %}_open3" {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %}/></div>
+                </div>
+            </div>
+        	<input id="{%= inputName %}" type="hidden" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
+        {%Else%}
+        	<input type="{%=attrInputType%}" class="contentinput" id="{%= inputName %}" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}" />
+        {%Endif%}
+            {% If datalist.Count > 0 Then %}
+                <datalist id="{%= inputName %}">
+                {% For i = 1 To datalist.count %}
+                    <option value="{%= datalist[i] %}" />
+                {% Next %}
+                </datalist>
+            {% EndIf %}    
+    </div>
+</div>
