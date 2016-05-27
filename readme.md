@@ -6,4 +6,4 @@ Demo here : http://show.askia.com/WebProd/cgi-bin/askiaext.dll?Action=StartSurve
 
 Counter only works with IE8+
 This control uses flexbox controls, which also have compatibility issues on IE.
-Flexbox overlap on Safari on Iphone (email input only)
+Flexbox renders slightly differently on Safari on Iphone (email input only)
