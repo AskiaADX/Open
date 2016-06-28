@@ -7,7 +7,7 @@
   <info>
     <name>adc2-open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <date>2016-03-25</date>
     <description><![CDATA[]]></description>
     <company>Askia</company>
@@ -202,7 +202,7 @@
       </property>
       <property xsi:type="standardProperty" id="areaTextAlign" name="Text alignment in the area" type="string" require="false" visible="true">
         <description><![CDATA[]]></description>
-        <value><![CDATA[center]]></value>
+        <value><![CDATA[left]]></value>
         <options>
           <option value="left" text="left" />
           <option value="center" text="center" />
