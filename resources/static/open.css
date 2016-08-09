@@ -1,14 +1,14 @@
-.adc-open ul,
-.adc-open li
-{
-    margin  : 0;
-    padding : 0;
-}
-.adc-open ul
-{
-    list-style-type: none;
+:root {
+            font-size: 16px;
+        }
+
+.adc-open{
+    
 }
 
+.adc-open textarea, .adc-open input {
+     outline:0;
+}
 .adc-open .right{
     float:right;
 }
@@ -20,7 +20,8 @@
 }
 
 .adc-open .adc-open-content {
-   	width:100%;
+   	font-family: sans-serif;
+    width:100%;
     display:flex;
     flex-wrap:wrap;
 }
@@ -44,7 +45,7 @@
   max-width:500px;
 }
 
-.adc-open textarea, .adc-open input{
+.adc-open-content > textarea, .adc-open-content > input, .row-wrapper input{
     transition: box-shadow 0.25s ease-in-out;
 	-webkit-transition: box-shadow 0.25s ease-in-out;
 	-moz-transition: box-shadow 0.25s ease-in-out;
@@ -53,7 +54,5 @@
 	border-radius: 3px;
 }
 
-.adc-open textarea:focus, .adc-open input:focus {
-     outline:none;
-}
+
 

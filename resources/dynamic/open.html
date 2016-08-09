@@ -9,12 +9,14 @@ Dim i
 Dim inputType  = CurrentADC.PropValue("opensubtype")
 Dim multiline  = (CurrentADC.PropValue("multiline") = "1") ' Convert to boolean
 
+Dim floatinglabel = (CurrentADC.PropValue("floatingLabel")="1")
 
 
-Dim placeholder = CurrentADC.PropValue("placeholder")
-Dim attrPlaceholder = On(placeholder <> "", "placeholder=\"" + placeholder + "\"", "")
+Dim placeholder = On(floatinglabel and CurrentADC.PropValue("placeholder")="", currentQuestion.LongCaption, CurrentADC.PropValue("placeholder"))
 
-Dim attrRequired = On(CurrentQuestion.IsAllowDK, "required=\"required\"", "")
+Dim attrPlaceholder = On(placeholder <> "" and Not(floatinglabel) , "placeholder=\"" + placeholder + "\"", "")
+
+Dim attrRequired = On(CurrentQuestion.IsAllowDK, "", "required=\"required\"")
 
 Dim maxchar = CurrentADC.PropValue("maxChar")
 Dim attrMaxLength = "maxlength=\"" + maxchar + "\""
@@ -55,18 +57,21 @@ Dim adcSelector = "adc_" + CurrentADC.InstanceId
         {%If attrInputType = "textarea" then %}
         	<textarea class="contentinput" rows="{%=arearows%}" name="{%= inputName %}" id="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %}>{%= inputValue %}</textarea>
         {%ElseIf attrInputType = "email" then %}
-        	<div class="contentinput">
+        	<div class="emailwrapper contentinput">
                 <div class="row-wrapper">
                     <div style="position:relative;max-width:40%;overflow:hidden;padding:0 4px 0 0;"><input type="text" id="{%= inputName %}_open1" {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %}/></div>
-                    <span style="position:relative;width:25px;text-align:center;flex-shrink:0;"> @ </span>
-                    <div style="position:relative;max-width:40%;overflow:hidden;padding:0 4px 0 0;"><input type="text" id="{%= inputName %}_open2" {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %}/></div>
-                    <span style="position:relative;width:15px;text-align:center;flex-shrink:0;"> . </span>
-                    <div style="position:relative;width:50px;overflow:hidden;padding:0 4px 0 0;flex-shrink:0;"><input type="text" id="{%= inputName %}_open3" {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %}/></div>
+                    <span style="position:relative;text-align:center;flex-shrink:0;"> @ </span>
+                    <div style="position:relative;max-width:40%;overflow:hidden;padding:0 4px 0 4px;"><input type="text" id="{%= inputName %}_open2" {%:= attrMinLength %} {%:= attrRequired %}/></div>
+                    <span style="position:relative;text-align:center;flex-shrink:0;"> . </span>
+                    <div style="position:relative;max-width:15%;overflow:hidden;padding:0 4px 0 4px;flex-shrink:0;"><input type="text" id="{%= inputName %}_open3" {%:= attrMinLength %} {%:= attrRequired %}/></div>
                 </div>
             </div>
         	<input id="{%= inputName %}" type="hidden" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
         {%Else%}
-        	<input type="{%=attrInputType%}" class="contentinput" id="{%= inputName %}" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}" />
+        {%If floatinglabel then %}<label>{%Endif%}
+        	<input type="{%=attrInputType%}" id="{%= inputName %}" name="{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
+           {%If floatinglabel then %} <div class = "floating-label">{%:= Placeholder %} </div>{%Endif%}
+        {%If floatinglabel then %}</label>{%Endif%}
         {%Endif%}
             {% If datalist.Count > 0 Then %}
                 <datalist id="{%= inputName %}">

@@ -51,10 +51,11 @@ function validateEmail(options){
                 options.val="";
                     printcounter(options);
                 var inputs = document.querySelector(options.adcSelector + " .contentinput");
-                inputs.className = "contentinput";
+                inputs.className = "emailwrapper contentinput";
             }
             else {
                options.val=options.emailvalidationmessage;
+                console.dir(options);
                printcounter(options);
                var inputs = document.querySelector(options.adcSelector + " .contentinput");
                inputs.className = "contentinput invalidemail";

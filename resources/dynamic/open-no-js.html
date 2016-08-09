@@ -14,7 +14,7 @@ Dim multiline  = (CurrentADC.PropValue("multiline") = "1") ' Convert to boolean
 Dim placeholder = CurrentADC.PropValue("placeholder")
 Dim attrPlaceholder = On(placeholder <> "", "placeholder=\"" + placeholder + "\"", "")
 
-Dim attrRequired = On(CurrentQuestion.IsAllowDK, "required=\"required\"", "")
+Dim attrRequired = On(CurrentQuestion.IsAllowDK, "","required=\"required\"")
 
 Dim maxchar = CurrentADC.PropValue("maxChar")
 Dim attrMaxLength = "maxlength=\"" + maxchar + "\""
