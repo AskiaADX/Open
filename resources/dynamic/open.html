@@ -59,11 +59,11 @@ Dim adcSelector = "adc_" + CurrentADC.InstanceId
         {%ElseIf attrInputType = "email" then %}
         	<div class="emailwrapper contentinput">
                 <div class="row-wrapper">
-                    <div style="position:relative;max-width:40%;overflow:hidden;padding:0 4px 0 0;"><input type="text" id="{%= inputName %}_open1" {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %}/></div>
+                    <div style="position:relative;max-width:40%;padding:0 4px 0 0;"><input type="text" id="{%= inputName %}_open1" {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %}/></div>
                     <span style="position:relative;text-align:center;flex-shrink:0;"> @ </span>
-                    <div style="position:relative;max-width:40%;overflow:hidden;padding:0 4px 0 4px;"><input type="text" id="{%= inputName %}_open2" {%:= attrMinLength %} {%:= attrRequired %}/></div>
+                    <div style="position:relative;max-width:40%;padding:0 4px 0 4px;"><input type="text" id="{%= inputName %}_open2" {%:= attrMinLength %} {%:= attrRequired %}/></div>
                     <span style="position:relative;text-align:center;flex-shrink:0;"> . </span>
-                    <div style="position:relative;max-width:15%;overflow:hidden;padding:0 4px 0 4px;flex-shrink:0;"><input type="text" id="{%= inputName %}_open3" {%:= attrMinLength %} {%:= attrRequired %}/></div>
+                    <div style="position:relative;max-width:15%;padding:0 4px 0 4px;flex-shrink:0;"><input type="text" id="{%= inputName %}_open3" {%:= attrMinLength %} {%:= attrRequired %}/></div>
                 </div>
             </div>
         	<input id="{%= inputName %}" type="hidden" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>

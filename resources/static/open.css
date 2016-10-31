@@ -49,10 +49,5 @@
     transition: box-shadow 0.25s ease-in-out;
 	-webkit-transition: box-shadow 0.25s ease-in-out;
 	-moz-transition: box-shadow 0.25s ease-in-out;
-    -webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
 }
-
-
 

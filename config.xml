@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<control  xmlns="http://www.askia.com/ADCSchema"
+<control  xmlns="http://www.askia.com/2.0.0/ADCSchema"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://www.askia.com/ADCSchema http://www.askia.com/Downloads/dev/schemas/adc2.0/Config.xsd"
+          xsi:schemaLocation="http://www.askia.com/2.0.0/ADCSchema https://raw.githubusercontent.com/AskiaADX/ADXSchema/2.0.0/ADCSchema.xsd"
           version="2.0.0"
           askiaCompat="5.3.3">
   <info>
     <name>adc2-open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <date>2016-03-25</date>
     <description><![CDATA[]]></description>
     <company>Askia</company>
@@ -195,6 +195,14 @@
           <option value="dashed" text="dashed" />
         </options>
       </property>
+      <property xsi:type="standardProperty" id="borderRadius" name="Border radius (in px)" type="number" require="false" visible="true">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[3]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="borderShadow" name="Border shadow (in px)" type="number" require="false" visible="true">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[0]]></value>
+      </property>
     </category>
     <category id="Styling_Hover" name="Styling when mouse hovers">
       <property xsi:type="standardProperty" id="hoverBorderColor" name="Border color on hover" type="color" mode="dynamic" require="false" visible="true" colorFormat="rgb">
@@ -224,6 +232,14 @@
           <option value="dashed" text="dashed" />
         </options>
       </property>
+      <property xsi:type="standardProperty" id="hoverBorderRadius" name="Border radius on hover (in px)" type="number" require="false" visible="true">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[3]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="hoverBorderShadow" name="Border shadow on hover (in px)" type="number" require="false" visible="true">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[5]]></value>
+      </property>
     </category>
     <category id="Styling_active" name="Styling when clicked">
       <property xsi:type="standardProperty" id="activeBorderColor" name="Border color on active" type="color" mode="dynamic" require="false" visible="true" colorFormat="rgb">
@@ -252,6 +268,14 @@
           <option value="none" text="none" />
           <option value="dashed" text="dashed" />
         </options>
+      </property>
+      <property xsi:type="standardProperty" id="activeBorderRadius" name="Border radius on active (in px)" type="number" require="false" visible="true">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[3]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="activeBorderShadow" name="Border shadow on active (in px)" type="number" require="false" visible="true">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[5]]></value>
       </property>
     </category>
   </properties>
