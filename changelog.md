@@ -14,3 +14,6 @@ Version 1.0.4
 - Re-arranged options by category
 - Fixed possible visual overlap in the "email" input type.
 - Re-worked font-sizes to use rem. Changing the font size now creates a ratio, which is applied throughout the control.
+
+Version 1.0.5
+- Added "Border radius" and "Border shadow" properties
