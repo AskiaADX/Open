@@ -24,6 +24,7 @@ Dim activebordershadow = CurrentADC.PropValue("activeBorderShadow")
 Dim hoverbordershadow = CurrentADC.PropValue("hoverBorderShadow")
 
 Dim textcolor = CurrentADC.PropValue("textColor")
+Dim paddingText = CurrentADC.PropValue("paddingText")
 Dim opacity = CurrentADC.PropValue("opacity")
 
 Dim controlwidth = CurrentADC.PropValue("controlWidth")
@@ -69,6 +70,7 @@ Dim fontsizefactor = CurrentADC.PropValue("areaFontSize").ToNumber()/16
     box-shadow: 0 0 {%=bordershadow%}px rgb({%=bordercolor%});
     -webkit-box-shadow: 0 0 {%=bordershadow%}px rgb({%=bordercolor%});
     -moz-box-shadow: 0 0 {%=bordershadow%}px rgb({%=bordercolor%});
+    padding : {%= paddingText %}
 }
 
 #adc_{%= CurrentADC.InstanceId %} .adc-open-content >textarea:hover, #adc_{%= CurrentADC.InstanceId %} .adc-open-content>input:hover, #adc_{%= CurrentADC.InstanceId %} .emailwrapper input:hover{

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<control  xmlns="http://www.askia.com/2.0.0/ADCSchema"
+<control  xmlns="http://www.askia.com/ADCSchema"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://www.askia.com/2.0.0/ADCSchema https://raw.githubusercontent.com/AskiaADX/ADXSchema/2.0.0/ADCSchema.xsd"
+          xsi:schemaLocation="http://www.askia.com/ADCSchema http://www.askia.com/Downloads/dev/schemas/adc2.0/Config.xsd"
           version="2.0.0"
           askiaCompat="5.3.3">
   <info>
@@ -149,6 +149,10 @@
           <option value="center" text="center" />
           <option value="right" text="right" />
         </options>
+      </property>
+      <property xsi:type="standardProperty" id="paddingText" name="Text padding" type="string" require="false" visible="true">
+        <description><![CDATA[The padding of the text]]></description>
+        <value><![CDATA[0 0 0 5px]]></value>
       </property>
       <property xsi:type="standardProperty" id="opacity" name="Opacity" type="number" require="false" visible="true" min="0" max="1" decimal="2">
         <description><![CDATA[]]></description>
