@@ -42,7 +42,7 @@ Dim adcSelector = "adc_" + CurrentADC.InstanceId
         
         <div class="counterdiv">
             <span class="counter">
-                {%If attrInputType = "email" or countorder="none" then%}	
+                {%If countorder="none" then%}	
                 {%Else
 					If countorder = "desc" Then %}
         				{%=maxchar%}
@@ -51,7 +51,7 @@ Dim adcSelector = "adc_" + CurrentADC.InstanceId
 					{%EndIf%}
 				{%endif%}
             </span>
-            <span>{%=On(countorder <> "asc" or attrInputType = "email","","/"+maxchar)%}</span>
+            <span>{%=On(countorder <> "asc","","/"+maxchar)%}</span>
         </div>
         
         {%If attrInputType = "textarea" then %}
