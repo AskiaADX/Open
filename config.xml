@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<control  xmlns="http://www.askia.com/ADCSchema"
+<control  xmlns="http://www.askia.com/2.1.0/ADCSchema"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://www.askia.com/ADCSchema http://www.askia.com/Downloads/dev/schemas/adc2.0/Config.xsd"
-          version="2.0.0"
-          askiaCompat="5.3.3">
+          xsi:schemaLocation="http://www.askia.com/2.1.0/ADCSchema https://raw.githubusercontent.com/AskiaADX/ADXSchema/2.1.0/ADCSchema.xsd"
+          version="2.1.0"
+          askiaCompat="5.4.2">
   <info>
-    <name>adc2-open</name>
+    <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>1.0.5</version>
+    <version>2.0.0</version>
     <date>2016-03-25</date>
     <description><![CDATA[]]></description>
     <company>Askia</company>
@@ -18,7 +18,6 @@
       <category>Features</category>
       <category>Styling</category>
     </categories>
-    <style width="400" height="300" />
     <constraints>
       <constraint on="questions" single="false" multiple="false" numeric="false" date="false" open="true" chapter="false" requireParentLoop="false" />
       <constraint on="controls" responseblock="true" checkbox="false" label="true" listbox="false" radiobutton="false" textbox="true" />
@@ -88,7 +87,7 @@
       </property>
       <property xsi:type="standardProperty" id="counterFontSize" name="Font size of the counter relatively to the input" type="number" require="false" visible="true" min="0.1" max="3">
         <description><![CDATA[]]></description>
-        <value><![CDATA[0.5]]></value>
+        <value><![CDATA[0.75]]></value>
       </property>
     </category>
     <category id="PlaceHolder" name="Placeholder style">
@@ -107,13 +106,13 @@
       </property>
       <property xsi:type="standardProperty" id="floatingLabelTextColor" name="Color of the floating label" type="color" require="false" visible="true" colorFormat="rgb">
         <description><![CDATA[]]></description>
-        <value><![CDATA[0,0,0]]></value>
+        <value><![CDATA[{%= Theme.SecondaryColor.ToRGB() %}]]></value>
       </property>
     </category>
     <category id="styling" name="Styling">
-      <property xsi:type="standardProperty" id="areaFontSize" name="Font size (in px)" type="number" require="false" visible="true" min="5">
+      <property xsi:type="standardProperty" id="fontSizeFactor" name="font size multiplicator" type="number" mode="dynamic" require="false" visible="false" min="5">
         <description><![CDATA[]]></description>
-        <value><![CDATA[30]]></value>
+        <value><![CDATA[1]]></value>
       </property>
       <property xsi:type="standardProperty" id="textColor" name="Text color" type="color" require="false" visible="true">
         <description><![CDATA[]]></description>
@@ -152,7 +151,7 @@
       </property>
       <property xsi:type="standardProperty" id="paddingText" name="Text padding" type="string" require="false" visible="true">
         <description><![CDATA[The padding of the text]]></description>
-        <value><![CDATA[0 0 0 5px]]></value>
+        <value><![CDATA[10px 0 10px 10px]]></value>
       </property>
       <property xsi:type="standardProperty" id="opacity" name="Opacity" type="number" require="false" visible="true" min="0" max="1" decimal="2">
         <description><![CDATA[]]></description>
@@ -170,25 +169,23 @@
         <description><![CDATA[attention, this is not a hard blocker. It will only display an indication on screen. Hard blockers have to be set up via blocking message filters.]]></description>
         <value><![CDATA[Please provide a valid email address]]></value>
       </property>
+      <property xsi:type="standardProperty" id="lineHeight" name="Line Height" type="number" require="false" visible="false">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[{%= Theme.LineHeight%}]]></value>
+      </property>
     </category>
     <category id="Styling_default" name="Styling default state">
       <property xsi:type="standardProperty" id="borderColor" name="Border color" type="color" mode="dynamic" require="false" visible="true" colorFormat="rgb">
         <description><![CDATA[]]></description>
-        <value><![CDATA[0,96,196]]></value>
+        <value><![CDATA[{%= Theme.NeutralDarkColor.ToRGB() %}]]></value>
       </property>
-      <property xsi:type="standardProperty" id="bgColor" name="Background color" type="color" mode="dynamic" require="false" visible="true" colorFormat="rgb">
+      <property xsi:type="standardProperty" id="bgColor" name="Background color" type="color" mode="dynamic" require="true" visible="false" colorFormat="rgb">
         <description><![CDATA[]]></description>
-        <value><![CDATA[255,255,255]]></value>
+        <value><![CDATA[{%= Theme.NeutralLightColor.ToRGB() %}]]></value>
       </property>
-      <property xsi:type="standardProperty" id="borderSize" name="Border thickness (in px)" type="number" require="false" visible="true" min="1">
+      <property xsi:type="standardProperty" id="borderSize" name="Border thickness" type="string" require="false" visible="false" min="1">
         <description><![CDATA[]]></description>
-        <value><![CDATA[1]]></value>
-        <options>
-          <option value="1" text="1px" />
-          <option value="2" text="2px" />
-          <option value="3" text="3px" />
-          <option value="5" text="5px" />
-        </options>
+        <value><![CDATA[{%= Theme.BorderWidth%}]]></value>
       </property>
       <property xsi:type="standardProperty" id="borderStyle" name="Border style" type="string" require="false" visible="true">
         <description><![CDATA[]]></description>
@@ -199,9 +196,9 @@
           <option value="dashed" text="dashed" />
         </options>
       </property>
-      <property xsi:type="standardProperty" id="borderRadius" name="Border radius (in px)" type="number" require="false" visible="true">
+      <property xsi:type="standardProperty" id="borderRadius" name="Border radius (in px)" type="string" require="false" visible="false">
         <description><![CDATA[]]></description>
-        <value><![CDATA[3]]></value>
+        <value><![CDATA[{%= Theme.BorderRadius %}]]></value>
       </property>
       <property xsi:type="standardProperty" id="borderShadow" name="Border shadow (in px)" type="number" require="false" visible="true">
         <description><![CDATA[]]></description>
@@ -211,21 +208,15 @@
     <category id="Styling_Hover" name="Styling when mouse hovers">
       <property xsi:type="standardProperty" id="hoverBorderColor" name="Border color on hover" type="color" mode="dynamic" require="false" visible="true" colorFormat="rgb">
         <description><![CDATA[]]></description>
-        <value><![CDATA[0,96,196]]></value>
+        <value><![CDATA[{%= Theme.SecondaryColor.ToRGB() %}]]></value>
       </property>
       <property xsi:type="standardProperty" id="hoverBGColor" name="Background color on hover" type="color" require="false" visible="true" colorFormat="rgb">
         <description><![CDATA[]]></description>
-        <value><![CDATA[255,255,255]]></value>
+        <value><![CDATA[{%= Theme.WhiteColor.ToRGB() %}]]></value>
       </property>
-      <property xsi:type="standardProperty" id="hoverBorderSize" name="Border thickness on hover (in px)" type="number" require="false" visible="true">
+      <property xsi:type="standardProperty" id="hoverBorderSize" name="Border thickness on hover" type="string" require="false" visible="false">
         <description><![CDATA[]]></description>
-        <value><![CDATA[1]]></value>
-        <options>
-          <option value="1" text="1px" />
-          <option value="2" text="2px" />
-          <option value="3" text="3px" />
-          <option value="5" text="5px" />
-        </options>
+        <value><![CDATA[{%= Theme.BorderWidth%}]]></value>
       </property>
       <property xsi:type="standardProperty" id="hoverBorderStyle" name="Border style on hover" type="string" require="false" visible="true">
         <description><![CDATA[]]></description>
@@ -248,21 +239,15 @@
     <category id="Styling_active" name="Styling when clicked">
       <property xsi:type="standardProperty" id="activeBorderColor" name="Border color on active" type="color" mode="dynamic" require="false" visible="true" colorFormat="rgb">
         <description><![CDATA[]]></description>
-        <value><![CDATA[0,96,196]]></value>
+        <value><![CDATA[{%= Theme.SecondaryColor.ToRGB() %}]]></value>
       </property>
       <property xsi:type="standardProperty" id="activeBGColor" name="Background color on active" type="color" require="false" visible="true" colorFormat="rgb">
         <description><![CDATA[]]></description>
-        <value><![CDATA[255,255,255]]></value>
+        <value><![CDATA[{%= Theme.WhiteColor.ToRGB() %}]]></value>
       </property>
-      <property xsi:type="standardProperty" id="activeBorderSize" name="Border thickness on active (in px)" type="number" require="false" visible="true">
+      <property xsi:type="standardProperty" id="activeBorderSize" name="Border thickness on active (in px)" type="string" require="false" visible="false">
         <description><![CDATA[]]></description>
-        <value><![CDATA[1]]></value>
-        <options>
-          <option value="1" text="1px" />
-          <option value="2" text="2px" />
-          <option value="3" text="3px" />
-          <option value="5" text="5px" />
-        </options>
+        <value><![CDATA[{%= Theme.BorderWidth%}]]></value>
       </property>
       <property xsi:type="standardProperty" id="activeBorderStyle" name="Border style on active" type="string" require="false" visible="true">
         <description><![CDATA[]]></description>

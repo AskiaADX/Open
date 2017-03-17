@@ -35,75 +35,73 @@ Dim counterfontsize = CurrentADC.PropValue("counterFontSize").ToNumber()
 
 Dim floatinglabeltextcolor = CurrentADC.PropValue("floatingLabelTextColor")
 
-Dim fontsize = CurrentADC.PropValue("areaFontSize")
-Dim fontsizefactor = CurrentADC.PropValue("areaFontSize").ToNumber()/16
 
+'Dim fontsize = CurrentADC.PropValue("areaFontSize").ToNumber()
+
+
+Dim fontsizefactor = CurrentADC.PropValue("fontSizeFactor").ToNumber()
+dim basefontsize = fontsizefactor
 
 %}
+
 
 #adc_{%= CurrentADC.InstanceId %} .adc-open-content {
     max-width:{%=controlwidth%};
     flex-direction:{%=On(counterposition.Left(1)="N","column","column-reverse")%};
-    font-size: {%=fontsize%}px;
-}
-
-#adc_{%= CurrentADC.InstanceId %} .emailwrapper{
-    font-size: {%=fontsizefactor%}rem;
 }
 
 #adc_{%= CurrentADC.InstanceId %} textarea, #adc_{%= CurrentADC.InstanceId %} input{
-    border:{%=bordersize%}px {%=borderstyle%} rgb({%=bordercolor%}) ;
+    border:{%=bordersize%} {%=borderstyle%} rgb({%=bordercolor%}) ;
     background-color: rgba({%=bgcolor%},{%=opacity%});
-    /*font-size: {%=fontsize%}px;*/
-    font-size:{%=fontsizefactor%}rem;
+	font-size: {%=basefontsize%}rem;
     resize:{%=allowresize%};
     -moz-text-align: {%=areatextalign%}; /* Firefox 12+ */
     text-align: {%=areatextalign%};
     color: rgb({%=textcolor%});
-    width:100%;
+    width:auto;
 }
 
-#adc_{%= CurrentADC.InstanceId %} .adc-open-content > textarea, #adc_{%= CurrentADC.InstanceId %} .adc-open-content > input, #adc_{%= CurrentADC.InstanceId %} .emailwrapper input{
-    -webkit-border-radius: {%=borderradius%}px;
-    -moz-border-radius: {%=borderradius%}px;
-    border-radius: {%=borderradius%}px;
-    box-shadow: 0 0 {%=bordershadow%}px rgb({%=bordercolor%});
-    -webkit-box-shadow: 0 0 {%=bordershadow%}px rgb({%=bordercolor%});
-    -moz-box-shadow: 0 0 {%=bordershadow%}px rgb({%=bordercolor%});
-    padding : {%= paddingText %}
+#adc_{%= CurrentADC.InstanceId %} .adc-open-content > textarea, #adc_{%= CurrentADC.InstanceId %} .adc-open-content > input{
+    -webkit-border-radius: {%=borderradius%};
+    -moz-border-radius: {%=borderradius%};
+    border-radius: {%=borderradius%};
+    box-shadow: 0 0 {%=bordershadow%} rgb({%=bordercolor%});
+    -webkit-box-shadow: 0 0 {%=bordershadow%} rgb({%=bordercolor%});
+    -moz-box-shadow: 0 0 {%=bordershadow%} rgb({%=bordercolor%});
+    padding : {%= paddingText %};
+    width:auto;
 }
 
-#adc_{%= CurrentADC.InstanceId %} .adc-open-content >textarea:hover, #adc_{%= CurrentADC.InstanceId %} .adc-open-content>input:hover, #adc_{%= CurrentADC.InstanceId %} .emailwrapper input:hover{
-    border: {%=hoverbordersize%}px {%=hoverborderstyle%} rgb({%=hoverbordercolor%});
-    box-shadow: 0 0 {%=hoverbordershadow%}px rgb({%=hoverbordercolor%});
-    -webkit-box-shadow: 0 0 {%=hoverbordershadow%}px rgb({%=hoverbordercolor%});
-    -moz-box-shadow: 0 0 {%=hoverbordershadow%}px rgb({%=hoverbordercolor%});
+#adc_{%= CurrentADC.InstanceId %} .adc-open-content >textarea:hover, #adc_{%= CurrentADC.InstanceId %} .adc-open-content>input:hover{
+    border: {%=hoverbordersize%} {%=hoverborderstyle%} rgb({%=hoverbordercolor%});
+    box-shadow: 0 0 {%=hoverbordershadow%} rgb({%=hoverbordercolor%});
+    -webkit-box-shadow: 0 0 {%=hoverbordershadow%} rgb({%=hoverbordercolor%});
+    -moz-box-shadow: 0 0 {%=hoverbordershadow%} rgb({%=hoverbordercolor%});
     background-color: rgba({%=hoverbgcolor%},{%=opacity%});
-    -webkit-border-radius: {%=hoverborderradius%}px;
-    -moz-border-radius: {%=hoverborderradius%}px;
-    border-radius: {%=hoverborderradius%}px;
+    -webkit-border-radius: {%=hoverborderradius%};
+    -moz-border-radius: {%=hoverborderradius%};
+    border-radius: {%=hoverborderradius%};
+    width:auto;
 }
 
-#adc_{%= CurrentADC.InstanceId %} .adc-open-content > textarea:focus, #adc_{%= CurrentADC.InstanceId %} .adc-open-content>input:focus, #adc_{%= CurrentADC.InstanceId %} .emailwrapper input:focus {
-    border: {%=activebordersize%}px {%=activeborderstyle%} rgb({%=activebordercolor%});
-    box-shadow: 0 0 {%=activebordershadow%}px rgb({%=activebordercolor%});
-    -webkit-box-shadow: 0 0 {%=activebordershadow%}px rgb({%=activebordercolor%});
-    -moz-box-shadow: 0 0 {%=activebordershadow%}px rgb({%=activebordercolor%});
+#adc_{%= CurrentADC.InstanceId %} .adc-open-content > textarea:focus, #adc_{%= CurrentADC.InstanceId %} .adc-open-content>input:focus{
+    border: {%=activebordersize%} {%=activeborderstyle%} rgb({%=activebordercolor%});
+    box-shadow: 0 0 {%=activebordershadow%} rgb({%=activebordercolor%});
+    -webkit-box-shadow: 0 0 {%=activebordershadow%} rgb({%=activebordercolor%});
+    -moz-box-shadow: 0 0 {%=activebordershadow%} rgb({%=activebordercolor%});
     background-color: rgba({%=activebgcolor%},{%=opacity%});
-    -webkit-border-radius: {%=activeborderradius%}px;
-    -moz-border-radius: {%=activeborderradius%}px;
-    border-radius: {%=activeborderradius%}px;
+    -webkit-border-radius: {%=activeborderradius%};
+    -moz-border-radius: {%=activeborderradius%};
+    border-radius: {%=activeborderradius%};
+    width:auto;
 }
 
 
 {%
-dim basefontsize = 1 * fontsizefactor
-dim basefontsizelabel = 0.75 * basefontsize
-dim baselineheight = 1.5
-dim fontsizelabelactive = 0.5 * basefontsizelabel
-
+dim basefontsizelabel = 1 * basefontsize
+dim baselineheight = CurrentADC.PropValue("lineHeight").ToNumber()
+dim fontsizelabelactive = 0.75 * basefontsizelabel
 dim activeoffset = basefontsizelabel
-
 %} 
 
 #adc_{%= CurrentADC.InstanceId %} .counterdiv{
@@ -131,15 +129,13 @@ dim activeoffset = basefontsizelabel
     line-height: {%=baselineheight%};
     text-transform: uppercase;
     -moz-transform: translateY(calc(-{%=baselineheight * basefontsizelabel %}rem));
-        -ms-transform: translateY(calc(-{%=baselineheight * basefontsizelabel %}rem));
-            -webkit-transform: translateY(calc(-{%=baselineheight * basefontsizelabel %}rem));
-                transform: translateY(-{%=baselineheight * basefontsizelabel %}rem);
-                    transition: all 0.33s;
-                    color: rgb({%=textcolor%});
-                    background-color:transparent;
-
-
-                    }
+    -ms-transform: translateY(calc(-{%=baselineheight * basefontsizelabel %}rem));
+    -webkit-transform: translateY(calc(-{%=baselineheight * basefontsizelabel %}rem));
+    transform: translateY(-{%=baselineheight * basefontsizelabel %}rem);
+    transition: all 0.33s;
+    color: rgb({%=textcolor%});
+    background-color:transparent;
+}
 
 #adc_{%= CurrentADC.InstanceId %} label input, #adc_{%= CurrentADC.InstanceId %} label textarea {
     width:100%;
@@ -149,32 +145,32 @@ dim activeoffset = basefontsizelabel
     /*font-size: {%=basefontsize%}rem;*/
     transition: all 0.33s;
     background-color:transparent;
-    padding: 20px 5px 0px 5px;
-
+    padding: 0px 0px 0px 0px;
+    border-radius:0;
 }
 
 #adc_{%= CurrentADC.InstanceId %} label input:focus, #adc_{%= CurrentADC.InstanceId %} label textarea:focus {
-    border-bottom:{%=activebordersize%}px {%=activeborderstyle%} rgb({%=activebordercolor%});
+    border-bottom:{%=activebordersize%} {%=activeborderstyle%} rgb({%=activebordercolor%});
 }
 
 #adc_{%= CurrentADC.InstanceId %} label input:focus + .floating-label, #adc_{%= CurrentADC.InstanceId %} label textarea:focus + .floating-label {
     color: rgb({%=floatingLabelTextColor%});
     font-size: {%=fontsizelabelactive%}rem;
     -moz-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
-        -ms-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
-            -webkit-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
-                transform: translateY(-{%=baselineheight * basefontsizelabel + activeoffset%}rem);
-                    }
+     -ms-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+     -webkit-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+     transform: translateY(-{%=baselineheight * basefontsizelabel + activeoffset%}rem);
+}
 
 #adc_{%= CurrentADC.InstanceId %} label input:valid + .floating-label {
     font-size: {%=fontsizelabelactive%}rem;
     -moz-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
-        -ms-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
-            -webkit-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
-                -webkit-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
-                    transform: translateY(-{%=baselineheight * basefontsizelabel + activeoffset%}rem);
-                        background-color:transparent;
-                        }
+    -ms-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+    -webkit-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+    -webkit-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+    transform: translateY(-{%=baselineheight * basefontsizelabel + activeoffset%}rem);
+    background-color:transparent;
+}
 
 
 

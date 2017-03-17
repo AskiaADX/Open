@@ -56,17 +56,6 @@ Dim adcSelector = "adc_" + CurrentADC.InstanceId
         
         {%If attrInputType = "textarea" then %}
         	<textarea class="contentinput" rows="{%=arearows%}" name="{%= inputName %}" id="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %}>{%= inputValue %}</textarea>
-        {%ElseIf attrInputType = "email" then %}
-        	<div class="emailwrapper contentinput">
-                <div class="row-wrapper">
-                    <div style="position:relative;max-width:40%;padding:0 4px 0 0;"><input type="text" id="{%= inputName %}_open1" {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %}/></div>
-                    <span style="position:relative;text-align:center;flex-shrink:0;"> @ </span>
-                    <div style="position:relative;max-width:40%;padding:0 4px 0 4px;"><input type="text" id="{%= inputName %}_open2" {%:= attrMinLength %} {%:= attrRequired %}/></div>
-                    <span style="position:relative;text-align:center;flex-shrink:0;"> . </span>
-                    <div style="position:relative;max-width:15%;padding:0 4px 0 4px;flex-shrink:0;"><input type="text" id="{%= inputName %}_open3" {%:= attrMinLength %} {%:= attrRequired %}/></div>
-                </div>
-            </div>
-        	<input id="{%= inputName %}" type="hidden" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
         {%Else%}
         {%If floatinglabel then %}<label>{%Endif%}
         	<input type="{%=attrInputType%}" id="{%= inputName %}" name="{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>

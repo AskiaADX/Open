@@ -1,13 +1,6 @@
-:root {
-            font-size: 16px;
-        }
-
-.adc-open{
-    
-}
-
 .adc-open textarea, .adc-open input {
-     outline:0;
+    outline:0;
+    max-width:100%;
 }
 .adc-open .right{
     float:right;
@@ -46,8 +39,8 @@
 }
 
 .adc-open-content > textarea, .adc-open-content > input, .row-wrapper input{
-    transition: box-shadow 0.25s ease-in-out;
-	-webkit-transition: box-shadow 0.25s ease-in-out;
-	-moz-transition: box-shadow 0.25s ease-in-out;
+    transition: box-shadow,background-color 0.25s ease-in-out;
+	-webkit-transition: box-shadow,background-color 0.25s ease-in-out;
+	-moz-transition: box-shadow,background-color 0.25s ease-in-out;
 }
 
