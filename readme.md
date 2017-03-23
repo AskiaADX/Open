@@ -1,4 +1,4 @@
-# adc2-open
+# Open
 
 Demo here : http://demo.askia.com/WebProd/cgi-bin/askiaext.dll?Action=StartSurvey&SurveyName=ADC2_open
 
