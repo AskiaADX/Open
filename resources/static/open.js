@@ -1,14 +1,5 @@
-function CounterManager(options){
-    return options.openbox;
-    /*this.updatecounter = function(){
-        console.log("toto");
-    }
-    this.
-    }*/
-}
-
 function currentcount(options){
-     options.adcSelector = '#adc_'+ options.instanceId;
+    options.adcSelector = '#adc_'+ options.instanceId;
     document.getElementById(options.inputId).addEventListener('keyup',function(){
         var inputcontent= this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r\n'); //handling of line-break characters
         if(options.direction=='desc'){
@@ -19,10 +10,14 @@ function currentcount(options){
             options.val = inputcontent.length;
             printcounter(options);
         }  
-        if (window.askia) {
-           askia.triggerAnswer();
-        }
+
     });   
+    document.getElementById(options.inputId).addEventListener('keyup',function(){
+       /* if (window.askia) {
+            console.log('trigger');
+            askia.triggerAnswer();
+        }*/
+    });
     
 }
 

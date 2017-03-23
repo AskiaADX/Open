@@ -16,7 +16,7 @@
    	font-family: sans-serif;
     width:100%;
     display:flex;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
 }
 
 .adc-open .contentinput{
