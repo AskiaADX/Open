@@ -9,14 +9,13 @@ function currentcount(options){
         else{
             options.val = inputcontent.length;
             printcounter(options);
-        }  
-
-    });   
-    document.getElementById(options.inputId).addEventListener('keyup',function(){
-       /* if (window.askia) {
-            console.log('trigger');
+        }
+        if (window.askia 
+            && window.arrLiveRoutingShortcut 
+            && window.arrLiveRoutingShortcut.length > 0
+            && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
             askia.triggerAnswer();
-        }*/
+        }
     });
     
 }
