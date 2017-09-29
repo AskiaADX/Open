@@ -7,7 +7,7 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <date>2016-03-25</date>
     <description><![CDATA[]]></description>
     <company>Askia</company>
@@ -50,9 +50,13 @@
         <description><![CDATA[]]></description>
         <value><![CDATA[50]]></value>
       </property>
-      <property xsi:type="standardProperty" id="allowResize" name="allow respondent to resize" type="boolean" require="false" visible="true">
+      <property xsi:type="standardProperty" id="allowResize" name="allow respondent to resize" type="string" mode="dynamic" require="true" visible="true">
         <description><![CDATA[]]></description>
-        <value><![CDATA[false]]></value>
+        <value><![CDATA[0]]></value>
+        <options>
+          <option value="1" text="Yes" />
+          <option value="0" text="No" />
+        </options>
       </property>
       <property xsi:type="standardProperty" id="inputType" name="Type of input" type="string" require="false" visible="true">
         <description><![CDATA[]]></description>
@@ -96,12 +100,12 @@
           Helper text shows in the input when it's empty.]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="floatingLabel" name="Floating Label" type="boolean" require="false" visible="true">
+      <property xsi:type="standardProperty" id="floatingLabel" name="Floating Label" type="string" mode="dynamic" require="true" visible="true">
         <description><![CDATA[Enable floating label styling]]></description>
-        <value><![CDATA[false]]></value>
+        <value><![CDATA[0]]></value>
         <options>
-          <option value="0" text="No" />
           <option value="1" text="Yes" />
+          <option value="0" text="No" />
         </options>
       </property>
       <property xsi:type="standardProperty" id="floatingLabelTextColor" name="Color of the floating label" type="color" require="false" visible="true" colorFormat="rgb">
