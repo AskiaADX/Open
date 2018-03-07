@@ -7,7 +7,7 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <date>2016-03-25</date>
     <description><![CDATA[]]></description>
     <company>Askia</company>
@@ -50,14 +50,6 @@
         <description><![CDATA[]]></description>
         <value><![CDATA[50]]></value>
       </property>
-      <property xsi:type="standardProperty" id="allowResize" name="allow respondent to resize" type="string" mode="dynamic" require="true" visible="true">
-        <description><![CDATA[]]></description>
-        <value><![CDATA[0]]></value>
-        <options>
-          <option value="1" text="Yes" />
-          <option value="0" text="No" />
-        </options>
-      </property>
       <property xsi:type="standardProperty" id="inputType" name="Type of input" type="string" require="false" visible="true">
         <description><![CDATA[]]></description>
         <value><![CDATA[text]]></value>
@@ -75,8 +67,9 @@
         <value><![CDATA[desc]]></value>
         <options>
           <option value="desc" text="descending" />
-          <option value="asc" text="ascending" />
+          <option value="asc" text="ascending with target" />
           <option value="none" text="none" />
+          <option value="asc-simple" text="ascending" />
         </options>
       </property>
       <property xsi:type="standardProperty" id="counterPosition" name="Position of the counter" type="string" require="false" visible="true">
@@ -92,6 +85,10 @@
       <property xsi:type="standardProperty" id="counterFontSize" name="Font size of the counter relatively to the input" type="number" require="false" visible="true" min="0.1" max="3">
         <description><![CDATA[]]></description>
         <value><![CDATA[0.75]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="prefixText" name="Prefix text" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[Prefix text when choosing text counter]]></description>
+        <value></value>
       </property>
     </category>
     <category id="PlaceHolder" name="Placeholder style">
@@ -111,6 +108,28 @@
       <property xsi:type="standardProperty" id="floatingLabelTextColor" name="Color of the floating label" type="color" require="false" visible="true" colorFormat="rgb">
         <description><![CDATA[]]></description>
         <value><![CDATA[{%= Theme.SecondaryColor.ToRGB() %}]]></value>
+      </property>
+    </category>
+    <category id="Nudge" name="Nudge features">
+      <property xsi:type="standardProperty" id="suggestedChar" name="Suggested number of characters" type="number" mode="dynamic" require="true" visible="true" min="0" decimal="0">
+        <description><![CDATA[Suggested number of characters]]></description>
+        <value><![CDATA[0]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="suggestedCharText" name="Text associated to suggested number of characters" type="string" require="true" visible="true">
+        <description><![CDATA[Text associated to suggested number of characters]]></description>
+        <value><![CDATA[Suggested :]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="showCongrats" name="Show congratulations" type="boolean" require="true" visible="true">
+        <description><![CDATA[show congratulation message when suggestion is met]]></description>
+        <value><![CDATA[false]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="congratsMessage" name="Congratulation message" type="string" require="true" visible="true">
+        <description><![CDATA[Congratulation message when suggestion is met]]></description>
+        <value><![CDATA[Thank you for your answer]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="congratsMessageBGColor" name="Congratulation message background color" type="color" require="true" visible="true" colorFormat="rgba">
+        <description><![CDATA[Congratulation message background color]]></description>
+        <value><![CDATA[52,179,0,1]]></value>
       </property>
     </category>
     <category id="styling" name="Styling">
@@ -168,6 +187,14 @@
       <property xsi:type="standardProperty" id="areaColumns" name="Number of columns" type="number" require="false" visible="true" min="1">
         <description><![CDATA[]]></description>
         <value><![CDATA[25]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="allowResize" name="allow respondent to resize" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[0]]></value>
+        <options>
+          <option value="1" text="Yes" />
+          <option value="0" text="No" />
+        </options>
       </property>
       <property xsi:type="standardProperty" id="emailValidationMessage" name="Email validation message" type="string" mode="dynamic" require="false" visible="true">
         <description><![CDATA[attention, this is not a hard blocker. It will only display an indication on screen. Hard blockers have to be set up via blocking message filters.]]></description>

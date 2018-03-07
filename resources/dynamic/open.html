@@ -22,6 +22,9 @@ Dim maxchar = CurrentADC.PropValue("maxChar")
 Dim attrMaxLength = "maxlength=\"" + maxchar + "\""
 Dim minchar = CurrentADC.PropValue("minChar")
 Dim attrMinLength = "minlength=\"" + minchar + "\""
+Dim suggestedchartext = CurrentADC.PropValue("suggestedCharText")
+Dim prefixtext = CurrentADC.PropValue("prefixText")
+Dim suggestedchar = CurrentADC.PropValue("suggestedChar").ToNumber()
 
 Dim countorder = CurrentADC.PropValue("counter")
 
@@ -33,6 +36,8 @@ dim attrControlAlign = CurrentADC.PropValue("controlAlign")
 dim attrInputType = CurrentADC.PropValue("inputType")
 
 Dim adcSelector = "adc_" + CurrentADC.InstanceId
+dim showCongrats = CurrentADC.PropValue("showCongrats")
+dim congratsMessage = CurrentADC.PropValue("congratsMessage")
 
 'On(countOrder="desc",maxchar,"0")
 
@@ -41,8 +46,13 @@ Dim adcSelector = "adc_" + CurrentADC.InstanceId
     <div class="adc-open-content {%=attrControlAlign%}">
         
         <div class="counterdiv">
+            <div class="counter-helper">
+            {%If prefixtext <>"" then%}
+            <span class="prefixtext">{%=prefixtext%}</span>
+            {%endif%}
             <span class="counter">
-                {%If countorder="none" then%}	
+                <b>
+                {%If countorder="none" then%}
                 {%Else
 					If countorder = "desc" Then %}
         				{%=maxchar%}
@@ -50,8 +60,16 @@ Dim adcSelector = "adc_" + CurrentADC.InstanceId
         				0
 					{%EndIf%}
 				{%endif%}
+                </b>
             </span>
-            <span>{%=On(countorder <> "asc","","/"+maxchar)%}</span>
+            <span><b>{%=On(countorder <> "asc","","/"+maxchar)%}</b></span>
+             	{%If suggestedchar>0 Then%}
+                <span class="suggestedchar">
+                	{%=suggestedchartext%} <b>{%=suggestedchar%}</b>
+                {%Endif%}
+            </span>
+          </div>
+            <div class="congrats-message" style="display:none">{%=congratsMessage%}</div>
         </div>
         
         {%If attrInputType = "textarea" then %}

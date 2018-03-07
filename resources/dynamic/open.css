@@ -34,6 +34,7 @@ Dim counterposition = CurrentADC.PropValue("counterPosition")
 Dim counterfontsize = CurrentADC.PropValue("counterFontSize").ToNumber()
 
 Dim floatinglabeltextcolor = CurrentADC.PropValue("floatingLabelTextColor")
+dim congratsMessageBGColor = CurrentADC.PropValue("congratsMessageBGColor")
 
 
 'Dim fontsize = CurrentADC.PropValue("areaFontSize").ToNumber()
@@ -43,7 +44,6 @@ Dim fontsizefactor = CurrentADC.PropValue("fontSizeFactor").ToNumber()
 dim basefontsize = fontsizefactor
 
 %}
-
 
 #adc_{%= CurrentADC.InstanceId %} .adc-open-content {
     max-width:{%=controlwidth%};
@@ -59,6 +59,7 @@ dim basefontsize = fontsizefactor
     text-align: {%=areatextalign%};
     color: rgb({%=textcolor%});
     width:auto;
+    max-width: 100%;
 }
 
 #adc_{%= CurrentADC.InstanceId %} .adc-open-content > textarea, #adc_{%= CurrentADC.InstanceId %} .adc-open-content > input{
@@ -106,8 +107,19 @@ dim activeoffset = basefontsizelabel
 
 #adc_{%= CurrentADC.InstanceId %} .counterdiv{
     font-size:{%=basefontsize * counterfontsize %}rem;
-    text-align:{%=On(counterposition.Right(1)="W","left","right")%};
-    display:{%=On(counterposition="none","none","block")%};
+    display:{%=On(counterposition="none","none","flex")%};
+    flex-flow:{%=On(counterposition.Right(1)="E","row-reverse wrap","row wrap")%};
+    line-height:{%=Theme.LineHeight%}rem;
+    padding:5px 0px 5px 0px;
+   
+}
+
+#adc_{%= CurrentADC.InstanceId %} .counterdiv .suggestedchar{
+    padding-left:10px;
+}
+
+#adc_{%= CurrentADC.InstanceId %} .counterdiv b{
+    color:rgb({%= Theme.SecondaryColor.ToRGB() %});
 }
 
 #adc_{%= CurrentADC.InstanceId %} .invalidemail {
@@ -172,6 +184,21 @@ dim activeoffset = basefontsizelabel
     background-color:transparent;
 }
 
+/***** congrats message ****/
+#adc_{%= CurrentADC.InstanceId %} .congrats-message {
+    background: rgba({%=congratsMessageBGColor%});
+    color: white;
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 5px 14px;
+    font-weight: normal;
+    flex: 1;
+    min-width: 40%;
+}
+
+#adc_{%= CurrentADC.InstanceId %} .counter-helper{
+    margin:{%=On(counterposition.Right(1)="W","0 20px 0 0","0 0 0 20px")%};
+}
 
 
 

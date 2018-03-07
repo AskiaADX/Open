@@ -1,7 +1,13 @@
 function currentcount(options){
     options.adcSelector = '#adc_'+ options.instanceId;
     document.getElementById(options.inputId).addEventListener('keyup',function(){
-        var inputcontent= this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r\n'); //handling of line-break characters
+        //var inputcontent= this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r\n'); //handling of line-break characters
+       var inputcontent= this.value;
+       options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
+        options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
+        
+        
+        
         if(options.direction=='desc'){
             options.val =  options.maxchar - inputcontent.length;
             printcounter(options);
@@ -10,6 +16,12 @@ function currentcount(options){
             options.val = inputcontent.length;
             printcounter(options);
         }
+        if(options.suggestedchar >0 && options.showcongrats && inputcontent.length>=options.suggestedchar){
+           options.congratsdiv.style="display:block";
+         }
+           else{
+				options.congratsdiv.style="display:none";
+           }
         if (window.askia 
             && window.arrLiveRoutingShortcut 
             && window.arrLiveRoutingShortcut.length > 0
@@ -21,9 +33,8 @@ function currentcount(options){
 }
 
 function printcounter(options){
-    var counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter");
     if (options.direction != "none"){
-        counterdiv.innerHTML = options.val;
+        options.counterdiv.innerHTML = options.val;
     }
 }
 
