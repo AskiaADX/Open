@@ -31,5 +31,3 @@ gruntfile.js
 # Linter #
 ################
 .eslintrc.json
-
-.adxstudio/workspace.json

@@ -7,8 +7,8 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>2.0.2</version>
-    <date>2016-03-25</date>
+    <version>2.0.3</version>
+    <date>2018-03-08</date>
     <description><![CDATA[]]></description>
     <company>Askia</company>
     <author><![CDATA[Stephen Bronnec]]></author>
@@ -195,10 +195,6 @@
           <option value="1" text="Yes" />
           <option value="0" text="No" />
         </options>
-      </property>
-      <property xsi:type="standardProperty" id="emailValidationMessage" name="Email validation message" type="string" mode="dynamic" require="false" visible="true">
-        <description><![CDATA[attention, this is not a hard blocker. It will only display an indication on screen. Hard blockers have to be set up via blocking message filters.]]></description>
-        <value><![CDATA[Please provide a valid email address]]></value>
       </property>
       <property xsi:type="standardProperty" id="lineHeight" name="Line Height" type="number" require="false" visible="false">
         <description><![CDATA[]]></description>
