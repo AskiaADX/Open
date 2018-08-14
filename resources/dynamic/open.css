@@ -63,37 +63,37 @@ dim basefontsize = fontsizefactor
 }
 
 #adc_{%= CurrentADC.InstanceId %} .adc-open-content > textarea, #adc_{%= CurrentADC.InstanceId %} .adc-open-content > input{
-    -webkit-border-radius: {%=borderradius%};
-    -moz-border-radius: {%=borderradius%};
-    border-radius: {%=borderradius%};
-    box-shadow: 0 0 {%=bordershadow%} rgb({%=bordercolor%});
-    -webkit-box-shadow: 0 0 {%=bordershadow%} rgb({%=bordercolor%});
-    -moz-box-shadow: 0 0 {%=bordershadow%} rgb({%=bordercolor%});
+    -webkit-border-radius: {%=borderradius%}{%=On(borderradius.IsNumber(),"px","") %};
+    -moz-border-radius: {%=borderradius%}{%=On(borderradius.IsNumber(),"px","") %};
+    border-radius: {%=borderradius%}{%=On(borderradius.IsNumber(),"px","") %};
+    box-shadow: 0 0 {%=bordershadow%}{%=On(bordershadow.IsNumber(),"px","") %} rgb({%=bordercolor%});
+    -webkit-box-shadow: 0 0 {%=bordershadow%}{%=On(bordershadow.IsNumber(),"px","") %} rgb({%=bordercolor%});
+    -moz-box-shadow: 0 0 {%=bordershadow%}{%=On(bordershadow.IsNumber(),"px","") %} rgb({%=bordercolor%});
     padding : {%= paddingText %};
     width:auto;
 }
 
 #adc_{%= CurrentADC.InstanceId %} .adc-open-content >textarea:hover, #adc_{%= CurrentADC.InstanceId %} .adc-open-content>input:hover{
     border: {%=hoverbordersize%} {%=hoverborderstyle%} rgb({%=hoverbordercolor%});
-    box-shadow: 0 0 {%=hoverbordershadow%} rgb({%=hoverbordercolor%});
-    -webkit-box-shadow: 0 0 {%=hoverbordershadow%} rgb({%=hoverbordercolor%});
-    -moz-box-shadow: 0 0 {%=hoverbordershadow%} rgb({%=hoverbordercolor%});
+    box-shadow: 0 0 {%=hoverbordershadow%}{%=On(hoverbordershadow.IsNumber(),"px","") %} rgb({%=hoverbordercolor%});
+    -webkit-box-shadow: 0 0 {%=hoverbordershadow%}{%=On(hoverbordershadow.IsNumber(),"px","") %} rgb({%=hoverbordercolor%});
+    -moz-box-shadow: 0 0 {%=hoverbordershadow%}{%=On(hoverbordershadow.IsNumber(),"px","") %} rgb({%=hoverbordercolor%});
     background-color: rgba({%=hoverbgcolor%},{%=opacity%});
-    -webkit-border-radius: {%=hoverborderradius%};
-    -moz-border-radius: {%=hoverborderradius%};
-    border-radius: {%=hoverborderradius%};
+    -webkit-border-radius: {%=hoverborderradius%}{%=On(hoverborderradius.IsNumber(),"px","") %};
+    -moz-border-radius: {%=hoverborderradius%}{%=On(hoverborderradius.IsNumber(),"px","") %};
+    border-radius: {%=hoverborderradius%}{%=On(hoverborderradius.IsNumber(),"px","") %};
     width:auto;
 }
 
 #adc_{%= CurrentADC.InstanceId %} .adc-open-content > textarea:focus, #adc_{%= CurrentADC.InstanceId %} .adc-open-content>input:focus{
     border: {%=activebordersize%} {%=activeborderstyle%} rgb({%=activebordercolor%});
-    box-shadow: 0 0 {%=activebordershadow%} rgb({%=activebordercolor%});
-    -webkit-box-shadow: 0 0 {%=activebordershadow%} rgb({%=activebordercolor%});
-    -moz-box-shadow: 0 0 {%=activebordershadow%} rgb({%=activebordercolor%});
+    box-shadow: 0 0 {%=activebordershadow%}{%=On(activebordershadow.IsNumber(),"px","") %} rgb({%=activebordercolor%});
+    -webkit-box-shadow: 0 0 {%=activebordershadow%}{%=On(activebordershadow.IsNumber(),"px","") %} rgb({%=activebordercolor%});
+    -moz-box-shadow: 0 0 {%=activebordershadow%}{%=On(activebordershadow.IsNumber(),"px","") %} rgb({%=activebordercolor%});
     background-color: rgba({%=activebgcolor%},{%=opacity%});
-    -webkit-border-radius: {%=activeborderradius%};
-    -moz-border-radius: {%=activeborderradius%};
-    border-radius: {%=activeborderradius%};
+    -webkit-border-radius: {%=activeborderradius%}{%=On(activeborderradius.IsNumber(),"px","") %};
+    -moz-border-radius: {%=activeborderradius%}{%=On(activeborderradius.IsNumber(),"px","") %};
+    border-radius: {%=activeborderradius%}{%=On(activeborderradius.IsNumber(),"px","") %};
     width:auto;
 }
 
