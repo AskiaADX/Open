@@ -20,13 +20,13 @@
       <category>Styling</category>
     </categories>
     <constraints>
-      <constraint on="questions" single="false" multiple="false" numeric="false" date="false" open="true" chapter="false" requireParentLoop="false" RequireLoopDepth="false" />
+      <constraint on="questions" single="false" multiple="false" numeric="false" date="false" open="true" chapter="false" requireParentLoop="false" RequireLoopDepth="0" />
       <constraint on="controls" responseblock="true" checkbox="false" label="true" listbox="false" radiobutton="false" textbox="true" />
       <constraint on="responses" max="*" min="*" />
     </constraints>
   </info>
   <outputs defaultOutput="default">
-    <output id="default">
+    <output id="default" ManageLoopDepth="0">
       <condition><![CDATA[Browser.support("Javascript")]]></condition>
       <content fileName="open.js" type="javascript" mode="static" position="head" />
       <content fileName="open.html" type="html" mode="dynamic" position="placeholder" />
@@ -34,7 +34,7 @@
       <content fileName="open.css" type="css" mode="dynamic" position="head" />
       <content fileName="open.js" type="javascript" mode="dynamic" position="foot" />
     </output>
-    <output id="No_JS">
+    <output id="No_JS" ManageLoopDepth="0">
       <condition><![CDATA[Browser.support("Javascript")=0]]></condition>
       <content fileName="open-no-js.html" type="html" mode="dynamic" position="placeholder" />
       <content fileName="open.css" type="css" mode="dynamic" position="head" />
