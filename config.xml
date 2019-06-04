@@ -151,7 +151,7 @@
           <option value="right" text="right" />
         </options>
       </property>
-      <property xsi:type="standardProperty" id="controlWidth" name="Maximum witdh" type="string" require="false" visible="true">
+      <property xsi:type="standardProperty" id="controlWidth" name="Maximum width" type="string" require="false" visible="true">
         <description><![CDATA[]]></description>
         <value><![CDATA[500px]]></value>
         <options>
