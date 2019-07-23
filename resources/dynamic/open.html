@@ -15,13 +15,20 @@ Dim floatinglabel = (CurrentADC.PropValue("floatingLabel")="1")
 Dim placeholder = On(floatinglabel and CurrentADC.PropValue("placeholder")="", currentQuestion.LongCaption, CurrentADC.PropValue("placeholder"))
 
 Dim attrPlaceholder = On(placeholder <> "" and Not(floatinglabel) , "placeholder=\"" + placeholder + "\"", "")
+Dim useBrowserValidation = "" + CurrentADC.PropValue("useBrowserValidation")
 
-Dim attrRequired = On(CurrentQuestion.IsAllowDK, "", "required=\"required\"")
-
+Dim attrRequired = ""
 Dim maxchar = CurrentADC.PropValue("maxChar")
-Dim attrMaxLength = "maxlength=\"" + maxchar + "\""
+Dim attrMaxLength = ""
 Dim minchar = CurrentADC.PropValue("minChar")
-Dim attrMinLength = "minlength=\"" + minchar + "\""
+Dim attrMinLength = ""
+
+if useBrowserValidation = "1" then
+	attrRequired = On(CurrentQuestion.IsAllowDK, "", "required=\"required\"")
+    attrMaxLength = "maxlength=\"" + maxchar + "\""
+   attrMinLength = "minlength=\"" + minchar + "\""
+EndIf    
+    
 Dim suggestedchartext = CurrentADC.PropValue("suggestedCharText")
 Dim prefixtext = CurrentADC.PropValue("prefixText")
 Dim suggestedchar = CurrentADC.PropValue("suggestedChar").ToNumber()
