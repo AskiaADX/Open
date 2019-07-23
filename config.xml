@@ -7,10 +7,12 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <date>2018-03-08</date>
     <description><![CDATA[
-		v2.0.4 - Modifications for HTML5 compatibility]]></description>
+v2.0.4 - Modifications for HTML5 compatibility
+v3.0.1 - JB - Added option to override browser validation using required, minLength and maxLength
+]]></description>
     <company>Askia</company>
     <author><![CDATA[Stephen Bronnec]]></author>
     <site>www.askia.com</site>
@@ -20,13 +22,13 @@
       <category>Styling</category>
     </categories>
     <constraints>
-      <constraint on="questions" single="false" multiple="false" numeric="false" date="false" open="true" chapter="false" requireParentLoop="false" requireLoopDepth="0" />
+      <constraint on="questions" single="false" multiple="false" numeric="false" date="false" open="true" chapter="false" requireParentLoop="false" requireLoopDepth="false" />
       <constraint on="controls" responseblock="true" checkbox="false" label="true" listbox="false" radiobutton="false" textbox="true" />
       <constraint on="responses" max="*" min="*" />
     </constraints>
   </info>
   <outputs defaultOutput="default">
-    <output id="default" manageLoopDepth="0">
+    <output id="default">
       <condition><![CDATA[Browser.support("Javascript")]]></condition>
       <content fileName="open.js" type="javascript" mode="static" position="head" />
       <content fileName="open.html" type="html" mode="dynamic" position="placeholder" />
@@ -34,7 +36,7 @@
       <content fileName="open.css" type="css" mode="dynamic" position="head" />
       <content fileName="open.js" type="javascript" mode="dynamic" position="foot" />
     </output>
-    <output id="No_JS" manageLoopDepth="0">
+    <output id="No_JS">
       <condition><![CDATA[Browser.support("Javascript")=0]]></condition>
       <content fileName="open-no-js.html" type="html" mode="dynamic" position="placeholder" />
       <content fileName="open.css" type="css" mode="dynamic" position="head" />
@@ -59,6 +61,14 @@
           <option value="text" text="Text input (single line)" />
           <option value="email" text="Email address" />
           <option value="password" text="Password" />
+        </options>
+      </property>
+      <property xsi:type="standardProperty" id="useBrowserValidation" name="Use Browser Validation" type="number" require="false" visible="true" min="0" max="1">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[1]]></value>
+        <options>
+          <option value="1" text="Yes" />
+          <option value="0" text="No" />
         </options>
       </property>
     </category>
