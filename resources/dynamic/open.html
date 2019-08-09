@@ -18,16 +18,20 @@ Dim attrPlaceholder = On(placeholder <> "" and Not(floatinglabel) , "placeholder
 Dim useBrowserValidation = "" + CurrentADC.PropValue("useBrowserValidation")
 
 Dim attrRequired = ""
-Dim maxchar = CurrentADC.PropValue("maxChar")
+Dim maxchar = CurrentADC.PropValue("maxChar").ToNumber()
 Dim attrMaxLength = ""
-Dim minchar = CurrentADC.PropValue("minChar")
+Dim minchar = CurrentADC.PropValue("minChar").ToNumber()
 Dim attrMinLength = ""
 
 if useBrowserValidation = "1" then
 	attrRequired = On(CurrentQuestion.IsAllowDK, "", "required=\"required\"")
     attrMaxLength = "maxlength=\"" + maxchar + "\""
    attrMinLength = "minlength=\"" + minchar + "\""
-EndIf    
+else
+    if maxchar > 0 then
+        attrMaxLength = "onkeypress=\"return imposeMaxLength(event, this, "+maxchar+");\""
+    EndIf
+EndIf
     
 Dim suggestedchartext = CurrentADC.PropValue("suggestedCharText")
 Dim prefixtext = CurrentADC.PropValue("prefixText")
