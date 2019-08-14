@@ -9,7 +9,7 @@ function currentcount(options){
         
         
         if(options.direction=='desc'){
-            options.val =  options.maxchar - inputcontent.length;
+            options.val =  (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
             printcounter(options);
         }
         else{
@@ -40,5 +40,10 @@ function printcounter(options){
 
 function imposeMaxLength(Event, Object, MaxLen)
 {
-        return (Object.value.length < MaxLen)||(Event.keyCode == 8 ||Event.keyCode==46||(Event.keyCode>=35&&Event.keyCode<=40))
+	console.log("called");
+    if ( (Object.value.length < MaxLen) || (Event.keyCode == 8 || Event.keyCode==46 || (Event.keyCode>=35&&Event.keyCode<=40))) {
+        return true;
+    } else {
+        (Event.preventDefault ? Event.preventDefault() : event.returnValue = false);
+    }
 }
