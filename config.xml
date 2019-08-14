@@ -11,7 +11,7 @@
     <date>2018-03-08</date>
     <description><![CDATA[v2.0.4 - Modifications for HTML5 compatibility
 v3.0.1 - JB - Added option to override browser validation using required, minLength and maxLength
-v3.0.2 - JB - Emulate maxLength when no browser validation]]></description>
+v3.0.2 - JB - Emulate maxLength when no browser validation, further fix]]></description>
     <company>Askia</company>
     <author><![CDATA[Stephen Bronnec]]></author>
     <site>www.askia.com</site>
