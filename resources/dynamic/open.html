@@ -1,8 +1,8 @@
-{% 
+{%
 Dim inputName  =  CurrentQuestion.InputName()
 Dim inputValue =  CurrentQuestion.InputValue()
 
-Dim datalist    = CurrentADC.PropValue("datalist").Split("|")     
+Dim datalist    = CurrentADC.PropValue("datalist").Split("|")
 Dim attrList    = On(datalist.Count > 0, "list=\"" + inputName + "\"", "")
 Dim i
 
@@ -29,10 +29,10 @@ if useBrowserValidation = "1" then
    attrMinLength = "minlength=\"" + minchar + "\""
 else
     if maxchar > 0 then
-        attrMaxLength = "onkeypress=\"return imposeMaxLength(event, this, "+maxchar+");\""
+        attrMaxLength = "onkeypress=\"return imposeMaxLength(event, this, "+maxchar+");\" onpaste=\"return imposeMaxLengthOnPaste(event, this, "+maxchar+");\""
     EndIf
 EndIf
-    
+
 Dim suggestedchartext = CurrentADC.PropValue("suggestedCharText")
 Dim prefixtext = CurrentADC.PropValue("prefixText")
 Dim suggestedchar = CurrentADC.PropValue("suggestedChar").ToNumber()
@@ -55,7 +55,7 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
 %}
 <div id="{%= adcSelector %}" class="adc-open">
     <div class="adc-open-content {%=attrControlAlign%}">
-        
+
         <div class="counterdiv">
             <div class="counter-helper">
             {%If prefixtext <>"" then%}
@@ -77,7 +77,7 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
              	{%If suggestedchar>0 Then%}
                 <span class="suggestedchar">
                 	{%=suggestedchartext%} <b>{%=suggestedchar%}</b>
-            	</span>                    
+            	</span>
                 {%Endif%}
           </div>
             <div class="congrats-message" style="display:none">{%=congratsMessage%}</div>
@@ -88,8 +88,8 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
         {%Else%}
         {%If floatinglabel then %}<label>{%Endif%}
         	<input type="{%=attrInputType%}" id="{%= inputName %}" name="{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
-           {%If floatinglabel then %} 
-        	<span class="floating-label">{%:= Placeholder %}</span>        
+           {%If floatinglabel then %}
+        	<span class="floating-label">{%:= Placeholder %}</span>
         		<!-- <div class="floating-label">{%:= Placeholder %} </div> -->
         	{%Endif%}
         {%If floatinglabel then %}</label>{%Endif%}
@@ -100,6 +100,6 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
                     <option value="{%= datalist[i] %}" />
                 {% Next %}
                 </datalist>
-            {% EndIf %}    
+            {% EndIf %}
     </div>
 </div>

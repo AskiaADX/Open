@@ -7,11 +7,12 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>3.0.2</version>
+    <version>3.0.3</version>
     <date>2018-03-08</date>
     <description><![CDATA[v2.0.4 - Modifications for HTML5 compatibility
 v3.0.1 - JB - Added option to override browser validation using required, minLength and maxLength
-v3.0.2 - JB - Emulate maxLength when no browser validation, further fix]]></description>
+v3.0.2 - JB - Emulate maxLength when no browser validation, further fix
+v3.0.3 - maxLength when no browser validation - fix]]></description>
     <company>Askia</company>
     <author><![CDATA[Stephen Bronnec]]></author>
     <site>www.askia.com</site>
@@ -21,13 +22,13 @@ v3.0.2 - JB - Emulate maxLength when no browser validation, further fix]]></desc
       <category>Styling</category>
     </categories>
     <constraints>
-      <constraint on="questions" single="false" multiple="false" numeric="false" date="false" open="true" chapter="false" requireParentLoop="false" requireLoopDepth="true" />
+      <constraint on="questions" single="false" multiple="false" numeric="false" date="false" open="true" chapter="false" requireParentLoop="false" requireLoopDepth="1" />
       <constraint on="controls" responseblock="true" checkbox="false" label="true" listbox="false" radiobutton="false" textbox="true" />
       <constraint on="responses" max="*" min="*" />
     </constraints>
   </info>
   <outputs defaultOutput="default">
-    <output id="default">
+    <output id="default" manageLoopDepth="1">
       <condition><![CDATA[Browser.support("Javascript")]]></condition>
       <content fileName="open.js" type="javascript" mode="static" position="head" />
       <content fileName="open.html" type="html" mode="dynamic" position="placeholder" />
@@ -35,7 +36,7 @@ v3.0.2 - JB - Emulate maxLength when no browser validation, further fix]]></desc
       <content fileName="open.css" type="css" mode="dynamic" position="head" />
       <content fileName="open.js" type="javascript" mode="dynamic" position="foot" />
     </output>
-    <output id="No_JS">
+    <output id="No_JS" manageLoopDepth="1">
       <condition><![CDATA[Browser.support("Javascript")=0]]></condition>
       <content fileName="open-no-js.html" type="html" mode="dynamic" position="placeholder" />
       <content fileName="open.css" type="css" mode="dynamic" position="head" />

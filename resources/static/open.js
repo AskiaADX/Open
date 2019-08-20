@@ -5,9 +5,9 @@ function currentcount(options){
        var inputcontent= this.value;
        options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
         options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
-        
-        
-        
+
+
+
         if(options.direction=='desc'){
             options.val =  (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
             printcounter(options);
@@ -22,14 +22,14 @@ function currentcount(options){
            else{
 				options.congratsdiv.style="display:none";
            }
-        if (window.askia 
-            && window.arrLiveRoutingShortcut 
+        if (window.askia
+            && window.arrLiveRoutingShortcut
             && window.arrLiveRoutingShortcut.length > 0
             && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
             askia.triggerAnswer();
         }
     });
-    
+
 }
 
 function printcounter(options){
@@ -37,6 +37,7 @@ function printcounter(options){
         options.counterdiv.innerHTML = options.val;
     }
 }
+// imposeMaxLengthPasteEvent
 
 function imposeMaxLength(Event, Object, MaxLen)
 {
@@ -46,4 +47,18 @@ function imposeMaxLength(Event, Object, MaxLen)
     } else {
         (Event.preventDefault ? Event.preventDefault() : event.returnValue = false);
     }
+}
+
+//onpaste event
+function imposeMaxLengthOnPaste(Event, Object, MaxLen){
+  let paste = (Event.clipboardData || window.clipboardData).getData('text');
+  var endP = (Object.value + paste);
+  if(endP.length >= MaxLen){
+    paste = endP.substring(0,MaxLen);
+    Object.value = paste;
+    (Event.preventDefault ? Event.preventDefault() : event.returnValue = false);
+  } else {
+      return true;
+  }
+
 }
