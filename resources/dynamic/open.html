@@ -29,7 +29,7 @@ if useBrowserValidation = "1" then
    attrMinLength = "minlength=\"" + minchar + "\""
 else
     if maxchar > 0 then
-        attrMaxLength = "onkeypress=\"return imposeMaxLength(event, this, "+maxchar+");\" onpaste=\"return imposeMaxLengthOnPaste(event, this, "+maxchar+");\""
+        attrMaxLength = "onkeypress=\"return imposeMaxLength(event, this, "+maxchar+");\" onkeydown=\"return imposeMaxLengthOnKeydown(event, this, "+maxchar+");\" onpaste=\"return imposeMaxLengthOnPaste(event, this, "+maxchar+");\""
     EndIf
 EndIf
 
