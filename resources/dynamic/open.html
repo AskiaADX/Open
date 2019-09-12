@@ -16,6 +16,7 @@ Dim placeholder = On(floatinglabel and CurrentADC.PropValue("placeholder")="", c
 
 Dim attrPlaceholder = On(placeholder <> "" and Not(floatinglabel) , "placeholder=\"" + placeholder + "\"", "")
 Dim useBrowserValidation = "" + CurrentADC.PropValue("useBrowserValidation")
+Dim errorMessageText = CurrentADC.PropValue("errorMessageText")
 
 Dim attrRequired = ""
 Dim maxchar = CurrentADC.PropValue("maxChar").ToNumber()
@@ -29,7 +30,8 @@ if useBrowserValidation = "1" then
    attrMinLength = "minlength=\"" + minchar + "\""
 else
     if maxchar > 0 then
-        attrMaxLength = "onkeypress=\"return imposeMaxLength(event, this, "+maxchar+");\" onkeydown=\"return imposeMaxLengthOnKeydown(event, this, "+maxchar+");\" onpaste=\"return imposeMaxLengthOnPaste(event, this, "+maxchar+");\""
+				attrMaxLength = "maxlength=\"" + maxchar + "\""
+			 	attrMinLength = "minlength=\"" + minchar + "\""
     EndIf
 EndIf
 
@@ -85,14 +87,16 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
         <label for="{%= inputName %}" hidden>Open</label>
         {%If attrInputType = "textarea" then %}
         	<textarea class="contentinput" rows="{%=arearows%}" name="{%= inputName %}" id="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %}>{%= inputValue %}</textarea>
-        {%Else%}
-        {%If floatinglabel then %}<label>{%Endif%}
+        {%ElseIf attrInputType = "email" then %}
+					<input type="text" id="{%= inputName %}" data-email-err="{%= errorMessageText %}" name="{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
+				{%Else%}
+        	{%If floatinglabel then %}<label>{%Endif%}
         	<input type="{%=attrInputType%}" id="{%= inputName %}" name="{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
            {%If floatinglabel then %}
         	<span class="floating-label">{%:= Placeholder %}</span>
         		<!-- <div class="floating-label">{%:= Placeholder %} </div> -->
         	{%Endif%}
-        {%If floatinglabel then %}</label>{%Endif%}
+        	{%If floatinglabel then %}</label>{%Endif%}
         {%Endif%}
             {% If datalist.Count > 0 Then %}
                 <datalist id="{%= inputName %}">
