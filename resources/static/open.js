@@ -1,5 +1,51 @@
+function exclusiveResponse(resElement){
+  if (resElement.checked) {
+
+  }
+  return true;
+}
+
 function currentcount(options) {
+    document.addEventListener("DOMContentLoaded", function(){
+      var exclusiveResponses = document.querySelectorAll('.myresponse');
+      for (var i = 0; i < exclusiveResponses.length; i++) {
+        exclusiveResponses[i].style.display = "none";
+      }
+    });
+
+    if (options.strExclusiveResponseIds != "") {
+
+      let strExclusiveResponseIds = options.strExclusiveResponseIds;
+      let arrIds = strExclusiveResponseIds.split(',');
+      for (var i = 0; i < arrIds.length; i++) {
+
+        if (document.getElementById(arrIds[i]).checked) {
+          document.getElementById(options.inputId).value = '';
+          document.getElementById(options.inputId).disabled = true;
+          document.getElementById(options.inputId).readOnly = true;
+        }
+
+        document.getElementById(arrIds[i]).addEventListener('change', function (e) {
+          if (e.srcElement.checked) {
+            document.getElementById(options.inputId).value = '';
+            document.getElementById(options.inputId).disabled = true;
+            document.getElementById(options.inputId).readOnly = true;
+          } else {
+            document.getElementById(options.inputId).disabled = false;
+            document.getElementById(options.inputId).readOnly = false;
+          }
+        });
+      }
+      if (window.askia
+          && window.arrLiveRoutingShortcut
+          && window.arrLiveRoutingShortcut.length > 0
+          && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
+          askia.triggerAnswer();
+      }
+    }
     options.adcSelector = '#adc_' + options.instanceId;
+
+    var openInputDK = document.querySelector('#adc_' + this.instanceId + ' .openDK input[type="checkbox"]');
 
     document.getElementById(options.inputId).addEventListener('keyup', function (e) {
         //var inputcontent= this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r\n'); //handling of line-break characters
@@ -11,8 +57,7 @@ function currentcount(options) {
         if (options.direction == 'desc') {
             options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
             printcounter(options);
-        }
-        else {
+        } else {
             options.val = inputcontent.length;
             printcounter(options);
         }
