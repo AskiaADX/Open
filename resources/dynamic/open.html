@@ -52,6 +52,8 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
 
 'On(countOrder="desc",maxchar,"0")
 
+Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
+
 %}
 <div id="{%= adcSelector %}" class="adc-open">
     <div class="adc-open-content {%=attrControlAlign%}">
@@ -65,12 +67,12 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
                 <b>
                 {%If countorder="none" then%}
                 {%Else
-					If countorder = "desc" Then %}
+									If countorder = "desc" Then %}
         				{%=maxchar%}
-    				{%else%}
+    						{%else%}
         				0
-					{%EndIf%}
-				{%endif%}
+								{%EndIf%}
+								{%endif%}
                 </b>
             </span>
             <span><b>{%=On(countorder <> "asc","","/"+maxchar)%}</b></span>
@@ -83,23 +85,55 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
             <div class="congrats-message" style="display:none">{%=congratsMessage%}</div>
         </div>
         <label for="{%= inputName %}" hidden>Open</label>
-        {%If attrInputType = "textarea" then %}
-        	<textarea class="contentinput" rows="{%=arearows%}" name="{%= inputName %}" id="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %}>{%= inputValue %}</textarea>
-        {%Else%}
-        {%If floatinglabel then %}<label>{%Endif%}
-        	<input type="{%=attrInputType%}" id="{%= inputName %}" name="{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
-           {%If floatinglabel then %}
+        {% If attrInputType = "textarea" then %}
+        	<textarea class="contentinput" rows="{%=arearows%}" name="{%= inputName %}" id="{%= inputName %}" {%:= attrPlaceholder %}
+					{%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %}>{%= inputValue %}</textarea>
+        {% Else %}
+        	{% If floatinglabel then %}<label>{% Endif %}
+        	<input type="{%= attrInputType %}" id="{%= inputName %}" name="{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %}
+					{%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
+          {% If floatinglabel then %}
         	<span class="floating-label">{%:= Placeholder %}</span>
-        		<!-- <div class="floating-label">{%:= Placeholder %} </div> -->
         	{%Endif%}
-        {%If floatinglabel then %}</label>{%Endif%}
-        {%Endif%}
-            {% If datalist.Count > 0 Then %}
-                <datalist id="{%= inputName %}">
-                {% For i = 1 To datalist.count %}
-                    <option value="{%= datalist[i] %}" />
-                {% Next %}
-                </datalist>
-            {% EndIf %}
+	        {% If floatinglabel then %}</label>{% Endif %}
+        {% Endif %}
+
+				{% If (exclusiveQuestion.Type = "single") Then %}
+					<ul>
+							{%
+							Dim inputId
+							Dim attrChecked
+							Dim caption
+							Dim resource
+							Dim ar = exclusiveQuestion.AvailableResponses
+							For i = 1 To ar.Count
+									'inputName		= exclusiveQuestion.InputName()
+									inputId     = inputName + "_" + i
+									attrChecked = On(ar[i].IsSelected, "checked=\"checked\"", "")
+									inputValue  = ar[i].InputValue()
+									caption     = ar[i].Caption
+									resource		= ar.ResourceURL[i]
+							%}
+							<li class="askia-response DK openDK">
+									<input type="hidden" name="B{%= i %}">
+									<input type="checkbox" name="{%= exclusiveQuestion.InputName() %}" id="{%= inputId %}" value="{%= inputValue %}" {%:= attrChecked %} class="dkbutton askia-live" onclick="exclusiveResponse(this);"/>
+									<label for="{%= inputId %}" class="askia-checkbox"><span hidden>Radio</span></label>
+									<label for="{%= inputId %}" class="askia-response-label">
+											{% IF (resource <> "") Then %}
+												<img src="{%= resource %}" style="vertical-align:middle" alt="{%:= caption %}"/>
+											{% EndIf %}{%:= caption %}
+									</label>
+							</li>
+							{% Next i %}
+						</ul>
+				{% Endif %}
+
+        {% If datalist.Count > 0 Then %}
+            <datalist id="{%= inputName %}">
+            {% For i = 1 To datalist.count %}
+                <option value="{%= datalist[i] %}" />
+            {% Next %}
+            </datalist>
+        {% EndIf %}
     </div>
 </div>

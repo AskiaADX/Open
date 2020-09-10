@@ -45,6 +45,16 @@ dim basefontsize = fontsizefactor
 
 %}
 
+#adc_{%= CurrentADC.InstanceId %} ul {
+  list-style-type: none;
+  padding: inherit;
+}
+
+#adc_{%= CurrentADC.InstanceId %} .askia-response input[type=checkbox] {
+    vertical-align: middle;
+    display: none;
+}
+
 #adc_{%= CurrentADC.InstanceId %} .adc-open-content {
     max-width:{%=controlwidth%};
     flex-direction:{%=On(counterposition.Left(1)="N","column","column-reverse")%};
@@ -103,7 +113,7 @@ dim basefontsizelabel = 1 * basefontsize
 dim baselineheight = CurrentADC.PropValue("lineHeight").ToNumber()
 dim fontsizelabelactive = 0.75 * basefontsizelabel
 dim activeoffset = basefontsizelabel
-%} 
+%}
 
 #adc_{%= CurrentADC.InstanceId %} .counterdiv{
     font-size:{%=basefontsize * counterfontsize %}rem;
@@ -111,7 +121,7 @@ dim activeoffset = basefontsizelabel
     flex-flow:{%=On(counterposition.Right(1)="E","row-reverse wrap","row wrap")%};
     line-height:{%=Theme.LineHeight%}rem;
     padding:5px 0px 5px 0px;
-   
+
 }
 
 #adc_{%= CurrentADC.InstanceId %} .counterdiv .suggestedchar{
@@ -199,6 +209,3 @@ dim activeoffset = basefontsizelabel
 #adc_{%= CurrentADC.InstanceId %} .counter-helper{
     margin:{%=On(counterposition.Right(1)="W","0 20px 0 0","0 0 0 20px")%};
 }
-
-
-

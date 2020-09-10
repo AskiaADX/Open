@@ -7,13 +7,16 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>3.0.4</version>
-    <date>2019-08-30</date>
+    <version>3.1.1</version>
+    <date>2020-09-10</date>
     <description><![CDATA[v2.0.4 - Modifications for HTML5 compatibility
 v3.0.1 - JB - Added option to override browser validation using required, minLength and maxLength
 v3.0.2 - JB - Emulate maxLength when no browser validation, further fix
 v3.0.3 - maxLength when no browser validation - fix
 v3.0.4 - maxlength issue on mobile devices - fix
+v3.0.5 - maxlength issue on android mobile devices - fix
+v3.1.0 - exclusive codes
+v3.1.1 - exclusive codes - bug fixed on inputType = textareas
     ]]></description>
     <company>Askia</company>
     <author><![CDATA[Stephen Bronnec]]></author>
@@ -25,7 +28,7 @@ v3.0.4 - maxlength issue on mobile devices - fix
     </categories>
     <constraints>
       <constraint on="questions" single="false" multiple="false" numeric="false" date="false" open="true" chapter="false" requireParentLoop="false" requireLoopDepth="1" />
-      <constraint on="controls" responseblock="true" checkbox="false" label="true" listbox="false" radiobutton="false" textbox="true" />
+      <constraint on="controls" responseblock="true" checkbox="true" label="true" listbox="false" radiobutton="true" textbox="true" />
       <constraint on="responses" max="*" min="*" />
     </constraints>
   </info>
@@ -72,6 +75,12 @@ v3.0.4 - maxlength issue on mobile devices - fix
           <option value="1" text="Yes" />
           <option value="0" text="No" />
         </options>
+      </property>
+    </category>
+    <category id="ExclusiveResponses" name="Exclusive Responses">
+      <property xsi:type="standardProperty" id="exclusiveResponsesQuestion" name="Question with exclusive codes" type="question" require="false" visible="true">
+        <description><![CDATA[Select the question for set exclusive responses]]></description>
+        <value></value>
       </property>
     </category>
     <category id="Counter" name="Character counter">
