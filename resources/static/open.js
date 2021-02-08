@@ -36,6 +36,7 @@ function currentcount(options) {
           }
         });
       }
+
       if (window.askia
           && window.arrLiveRoutingShortcut
           && window.arrLiveRoutingShortcut.length > 0
@@ -67,6 +68,9 @@ function currentcount(options) {
         else {
             options.congratsdiv.style = "display:none";
         }
+
+        setCounterMeter(inputcontent.length,options);
+
         if (window.askia
             && window.arrLiveRoutingShortcut
             && window.arrLiveRoutingShortcut.length > 0
@@ -98,6 +102,9 @@ function currentcount(options) {
         else {
             options.congratsdiv.style = "display:none";
         }
+
+        setCounterMeter(inputcontent.length,options);
+
         if (window.askia
             && window.arrLiveRoutingShortcut
             && window.arrLiveRoutingShortcut.length > 0
@@ -125,6 +132,9 @@ function currentcount(options) {
         else {
             options.congratsdiv.style = "display:none";
         }
+
+        setCounterMeter(inputcontent.length,options);
+
         if (window.askia
             && window.arrLiveRoutingShortcut
             && window.arrLiveRoutingShortcut.length > 0
@@ -134,6 +144,59 @@ function currentcount(options) {
 
     });
 
+}
+
+function doMathForMeter(f,meterDiv){
+  for (var i = 0; i < f; i++) {
+    meterDiv.children[i].children[0].classList.add("color"+(i+1));
+  }
+}
+
+function setCounterMeter(charCount,options){
+  var maxchar = options.maxchar;
+  var percentage = (charCount/maxchar) * 100;
+  var intg = Math.ceil(percentage/10);
+  var meterDiv = document.querySelector('.meterDiv');
+
+  for (var i = 0; i < 10; i++) {
+    meterDiv.children[i].children[0].classList.remove("color"+(i+1));
+  }
+
+  switch (intg) {
+    case 1:
+      doMathForMeter(intg,meterDiv);
+      break;
+    case 2:
+      doMathForMeter(intg,meterDiv);
+      break;
+    case 3:
+      doMathForMeter(intg,meterDiv);
+      break;
+    case 4:
+      doMathForMeter(intg,meterDiv);
+      break;
+    case 5:
+      doMathForMeter(intg,meterDiv);
+      break;
+    case 6:
+      doMathForMeter(intg,meterDiv);
+      break;
+    case 7:
+      doMathForMeter(intg,meterDiv);
+      break;
+    case 8:
+      doMathForMeter(intg,meterDiv);
+      break;
+    case 9:
+      doMathForMeter(intg,meterDiv);
+      break;
+    case 10:
+      doMathForMeter(intg,meterDiv);
+      break;
+
+    default:
+
+  }
 }
 
 function printcounter(options) {

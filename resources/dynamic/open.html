@@ -54,6 +54,8 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
 
 Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
 
+Dim showCharCounterMeter = CurrentADC.PropValue("showCharCounterMeter")
+
 %}
 <div id="{%= adcSelector %}" class="adc-open">
     <div class="adc-open-content {%=attrControlAlign%}">
@@ -135,5 +137,73 @@ Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
             {% Next %}
             </datalist>
         {% EndIf %}
+
+				{% IF showCharCounterMeter = "1" THEN %}
+					<style>
+						.outer {
+							display: inline-block;
+							/* height: 9px;
+							width: 15px;
+							border: 2px solid black;
+							text-align : center; */
+						}
+						.side {
+							display:flex;
+							margin-bottom:2px;
+							justify-content:center;
+						}
+						.inner {
+							display: flex;
+							height: 5px;
+							/* width: 9.5px; */
+							width:20px;
+							background-color: white;
+							margin-top: 1.3px;
+							margin-left: 2.8px;
+						}
+						.bottom {
+							display: table;
+							margin: 0 auto;
+							margin-top: 5%;
+						}
+
+						.color1{background-color: #ff0000;}
+						.color2{background-color: #fe3309;}
+						.color3{background-color: #fd7514;}
+						.color4{background-color: #fdab1d;}
+						.color5{background-color: #f3be21;}
+						.color6{background-color: #e4da27;}
+						.color7{background-color: #45fc5d;}
+						.color8{background-color: #22e417;}
+						.color9{background-color: #16c60c;}
+						.color10{background-color: #0d8806;}
+					</style>
+
+					<div class="meterDiv bottom">
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+
+						<!-- <span class="outer"><span class="inner color1"></span></span>
+						<span class="outer"><span class="inner color2"></span></span>
+						<span class="outer"><span class="inner color3"></span></span>
+						<span class="outer"><span class="inner color4"></span></span>
+						<span class="outer"><span class="inner color5"></span></span>
+						<span class="outer"><span class="inner color6"></span></span>
+						<span class="outer"><span class="inner color7"></span></span>
+						<span class="outer"><span class="inner color8"></span></span>
+						<span class="outer"><span class="inner color9"></span></span>
+						<span class="outer"><span class="inner color10"></span></span> -->
+
+					</div>
+				{% ENDIF %}
+
     </div>
 </div>
