@@ -6,6 +6,8 @@ function exclusiveResponse(resElement){
 }
 
 function currentcount(options) {
+    var showCharCounterMeter = options.showCharCounterMeter || 0;
+    
     document.addEventListener("DOMContentLoaded", function(){
       var exclusiveResponses = document.querySelectorAll('.myresponse');
       for (var i = 0; i < exclusiveResponses.length; i++) {
@@ -69,7 +71,7 @@ function currentcount(options) {
             options.congratsdiv.style = "display:none";
         }
 
-        setCounterMeter(inputcontent.length,options);
+        if(showCharCounterMeter) setCounterMeter(inputcontent.length,options);
 
         if (window.askia
             && window.arrLiveRoutingShortcut
@@ -103,7 +105,7 @@ function currentcount(options) {
             options.congratsdiv.style = "display:none";
         }
 
-        setCounterMeter(inputcontent.length,options);
+        if(showCharCounterMeter) setCounterMeter(inputcontent.length,options);
 
         if (window.askia
             && window.arrLiveRoutingShortcut
@@ -133,7 +135,7 @@ function currentcount(options) {
             options.congratsdiv.style = "display:none";
         }
 
-        setCounterMeter(inputcontent.length,options);
+        if(showCharCounterMeter) setCounterMeter(inputcontent.length,options);
 
         if (window.askia
             && window.arrLiveRoutingShortcut
@@ -146,7 +148,7 @@ function currentcount(options) {
 
 }
 
-function doMathForMeter(f,meterDiv){
+function changeGradient(f,meterDiv){
   for (var i = 0; i < f; i++) {
     meterDiv.children[i].children[0].classList.add("color"+(i+1));
   }
@@ -164,34 +166,34 @@ function setCounterMeter(charCount,options){
 
   switch (intg) {
     case 1:
-      doMathForMeter(intg,meterDiv);
+      changeGradient(intg,meterDiv);
       break;
     case 2:
-      doMathForMeter(intg,meterDiv);
+      changeGradient(intg,meterDiv);
       break;
     case 3:
-      doMathForMeter(intg,meterDiv);
+      changeGradient(intg,meterDiv);
       break;
     case 4:
-      doMathForMeter(intg,meterDiv);
+      changeGradient(intg,meterDiv);
       break;
     case 5:
-      doMathForMeter(intg,meterDiv);
+      changeGradient(intg,meterDiv);
       break;
     case 6:
-      doMathForMeter(intg,meterDiv);
+      changeGradient(intg,meterDiv);
       break;
     case 7:
-      doMathForMeter(intg,meterDiv);
+      changeGradient(intg,meterDiv);
       break;
     case 8:
-      doMathForMeter(intg,meterDiv);
+      changeGradient(intg,meterDiv);
       break;
     case 9:
-      doMathForMeter(intg,meterDiv);
+      changeGradient(intg,meterDiv);
       break;
     case 10:
-      doMathForMeter(intg,meterDiv);
+      changeGradient(intg,meterDiv);
       break;
 
     default:

@@ -43,6 +43,8 @@ dim congratsMessageBGColor = CurrentADC.PropValue("congratsMessageBGColor")
 Dim fontsizefactor = CurrentADC.PropValue("fontSizeFactor").ToNumber()
 dim basefontsize = fontsizefactor
 
+Dim charMeterPosition = CurrentADC.PropValue("charMeterPosition")
+
 %}
 
 #adc_{%= CurrentADC.InstanceId %} ul {
@@ -209,3 +211,58 @@ dim activeoffset = basefontsizelabel
 #adc_{%= CurrentADC.InstanceId %} .counter-helper{
     margin:{%=On(counterposition.Right(1)="W","0 20px 0 0","0 0 0 20px")%};
 }
+
+#adc_{%= CurrentADC.InstanceId %} .outer {
+  display: inline-block;
+  /* height: 9px;
+  width: 15px;
+  border: 2px solid black;
+  text-align : center; */
+}
+#adc_{%= CurrentADC.InstanceId %} .side {
+  display:flex;
+  margin-bottom:2px;
+  justify-content:center;
+}
+#adc_{%= CurrentADC.InstanceId %} .inner {
+  display: flex;
+  height: 5px;
+  /* width: 9.5px; */
+  width:20px;
+  background-color: white;
+  margin-top: 1.3px;
+  margin-left: 2.8px;
+}
+#adc_{%= CurrentADC.InstanceId %} .bottom {
+  display: table;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+#adc_{%= CurrentADC.InstanceId %} .top {
+  display: table;
+  margin: 0 auto;  
+  margin-bottom: 110px;
+  margin-top: -110px;
+}
+#adc_{%= CurrentADC.InstanceId %} .left {
+  display: grid;
+  margin: 0 auto;
+}
+#adc_{%= CurrentADC.InstanceId %} .right {
+  display: grid;
+  /* margin: 0 auto; */
+  float: right;
+  /* margin-right: 350px;
+  margin-top: -75px; */
+}
+
+#adc_{%= CurrentADC.InstanceId %} .color1{background-color: #ff0000;}
+#adc_{%= CurrentADC.InstanceId %} .color2{background-color: #fe3309;}
+#adc_{%= CurrentADC.InstanceId %} .color3{background-color: #fd7514;}
+#adc_{%= CurrentADC.InstanceId %} .color4{background-color: #fdab1d;}
+#adc_{%= CurrentADC.InstanceId %} .color5{background-color: #f3be21;}
+#adc_{%= CurrentADC.InstanceId %} .color6{background-color: #e4da27;}
+#adc_{%= CurrentADC.InstanceId %} .color7{background-color: #45fc5d;}
+#adc_{%= CurrentADC.InstanceId %} .color8{background-color: #22e417;}
+#adc_{%= CurrentADC.InstanceId %} .color9{background-color: #16c60c;}
+#adc_{%= CurrentADC.InstanceId %} .color10{background-color: #0d8806;}

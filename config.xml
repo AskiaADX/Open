@@ -121,6 +121,16 @@ v3.2.0 - Character counter meter
           <option value="0" text="No" />
         </options>
       </property>
+      <property xsi:type="standardProperty" id="charMeterPosition" name="Character counter meter position" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[bottom]]></value>
+        <options>
+          <option value="top" text="Top" />
+          <option value="bottom" text="Bottom" />
+          <option value="right" text="Right" />
+          <option value="left" text="Left" />
+        </options>
+      </property>
     </category>
     <category id="PlaceHolder" name="Placeholder style">
       <property xsi:type="standardProperty" id="placeholder" name="Placeholder text" type="string" mode="dynamic" require="false" visible="true">
