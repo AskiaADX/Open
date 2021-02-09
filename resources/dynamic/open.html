@@ -60,6 +60,127 @@ Dim showCharCounterMeter = CurrentADC.PropValue("showCharCounterMeter")
 <div id="{%= adcSelector %}" class="adc-open">
     <div class="adc-open-content {%=attrControlAlign%}">
 
+			{%
+				IF showCharCounterMeter = "1" THEN
+					Dim charMeterPosition = CurrentADC.PropValue("charMeterPosition")
+			%}
+
+			{% IF charMeterPosition = "top" THEN %}
+				<div class="meterDiv top">
+					<span class="outer"><span class="inner"></span></span>
+					<span class="outer"><span class="inner"></span></span>
+					<span class="outer"><span class="inner"></span></span>
+					<span class="outer"><span class="inner"></span></span>
+					<span class="outer"><span class="inner"></span></span>
+					<span class="outer"><span class="inner"></span></span>
+					<span class="outer"><span class="inner"></span></span>
+					<span class="outer"><span class="inner"></span></span>
+					<span class="outer"><span class="inner"></span></span>
+					<span class="outer"><span class="inner"></span></span>
+				</div>
+			{% ENDIF %}
+
+			{% IF charMeterPosition = "left" OR charMeterPosition = "right" THEN %}
+			<table>
+				<tr>
+					<td>
+						{% IF charMeterPosition = "left" Then %}
+						<div class="meterDiv left">
+							<span class="outer"><span class="inner-left"></span></span>
+							<span class="outer"><span class="inner-left"></span></span>
+							<span class="outer"><span class="inner-left"></span></span>
+							<span class="outer"><span class="inner-left"></span></span>
+							<span class="outer"><span class="inner-left"></span></span>
+							<span class="outer"><span class="inner-left"></span></span>
+							<span class="outer"><span class="inner-left"></span></span>
+							<span class="outer"><span class="inner-left"></span></span>
+							<span class="outer"><span class="inner-left"></span></span>
+							<span class="outer"><span class="inner-left"></span></span>
+						</div>
+						{% ENDIF %}
+					</td>
+					<td style="width:100%">
+			{% ENDIF %}
+
+				<div class="counterdiv">
+            <div class="counter-helper">
+            {%If prefixtext <>"" then%}
+            <span class="prefixtext">{%=prefixtext%}</span>
+            {%endif%}
+            <span class="counter">
+                <b>
+                {%If countorder="none" then%}
+                {%Else
+									If countorder = "desc" Then %}
+        				{%=maxchar%}
+    						{%else%}
+        				0
+								{%EndIf%}
+								{%endif%}
+                </b>
+            </span>
+            <span><b>{%=On(countorder <> "asc","","/"+maxchar)%}</b></span>
+             	{%If suggestedchar>0 Then%}
+                <span class="suggestedchar">
+                	{%=suggestedchartext%} <b>{%=suggestedchar%}</b>
+            	</span>
+                {%Endif%}
+          </div>
+            <div class="congrats-message" style="display:none">{%=congratsMessage%}</div>
+        </div>
+        <label for="{%= inputName %}" hidden>Open</label>
+        {% If attrInputType = "textarea" then %}
+        	<textarea class="contentinput open" rows="{%=arearows%}" name="{%= inputName %}" id="{%= inputName %}" {%:= attrPlaceholder %}
+					{%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %}>{%= inputValue %}</textarea>
+        {% Else %}
+        	{% If floatinglabel then %}<label>{% Endif %}
+        	<input type="{%= attrInputType %}" id="{%= inputName %}" class="open" name="{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %}
+					{%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
+          {% If floatinglabel then %}
+        	<span class="floating-label">{%:= Placeholder %}</span>
+        	{%Endif%}
+	        {% If floatinglabel then %}</label>{% Endif %}
+        {% Endif %}
+
+				{% IF charMeterPosition = "left" OR charMeterPosition = "right" THEN %}
+				</td>
+				<td>
+					{% IF charMeterPosition = "right" Then %}
+					<div class="meterDiv right">
+						<span class="outer"><span class="inner-left"></span></span>
+						<span class="outer"><span class="inner-left"></span></span>
+						<span class="outer"><span class="inner-left"></span></span>
+						<span class="outer"><span class="inner-left"></span></span>
+						<span class="outer"><span class="inner-left"></span></span>
+						<span class="outer"><span class="inner-left"></span></span>
+						<span class="outer"><span class="inner-left"></span></span>
+						<span class="outer"><span class="inner-left"></span></span>
+						<span class="outer"><span class="inner-left"></span></span>
+						<span class="outer"><span class="inner-left"></span></span>
+					</div>
+					{% ENDIF %}
+				</td>
+				</tr>
+				</table>
+				{% ENDIF %}
+
+				{% IF charMeterPosition = "bottom" THEN %}
+					<div class="meterDiv bottom">
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+						<span class="outer"><span class="inner"></span></span>
+					</div>
+				{% ENDIF %}
+
+			{% ELSE %}
+
         <div class="counterdiv">
             <div class="counter-helper">
             {%If prefixtext <>"" then%}
@@ -100,6 +221,8 @@ Dim showCharCounterMeter = CurrentADC.PropValue("showCharCounterMeter")
 	        {% If floatinglabel then %}</label>{% Endif %}
         {% Endif %}
 
+				{% ENDIF %}
+
 				{% If (exclusiveQuestion.Type = "single") Then %}
 					<ul>
 							{%
@@ -138,44 +261,4 @@ Dim showCharCounterMeter = CurrentADC.PropValue("showCharCounterMeter")
             </datalist>
         {% EndIf %}
     </div>
-		{%
-			IF showCharCounterMeter = "1" THEN
-				Dim charMeterPosition = CurrentADC.PropValue("charMeterPosition")
-		%}
-
-		{% IF charMeterPosition = "top" THEN %}
-			<div class="meterDiv top">
-		{% ELSEIF charMeterPosition = "bottom" THEN %}
-			<div class="meterDiv bottom">
-		{% ELSEIF charMeterPosition = "right" THEN %}
-			<div class="meterDiv">
-		{% ELSEIF charMeterPosition = "left" THEN %}
-			<div class="meterDiv">
-		{% ENDIF %}
-
-				<span class="outer"><span class="inner"></span></span>
-				<span class="outer"><span class="inner"></span></span>
-				<span class="outer"><span class="inner"></span></span>
-				<span class="outer"><span class="inner"></span></span>
-				<span class="outer"><span class="inner"></span></span>
-				<span class="outer"><span class="inner"></span></span>
-				<span class="outer"><span class="inner"></span></span>
-				<span class="outer"><span class="inner"></span></span>
-				<span class="outer"><span class="inner"></span></span>
-				<span class="outer"><span class="inner"></span></span>
-
-				<!-- <span class="outer"><span class="inner color1"></span></span>
-				<span class="outer"><span class="inner color2"></span></span>
-				<span class="outer"><span class="inner color3"></span></span>
-				<span class="outer"><span class="inner color4"></span></span>
-				<span class="outer"><span class="inner color5"></span></span>
-				<span class="outer"><span class="inner color6"></span></span>
-				<span class="outer"><span class="inner color7"></span></span>
-				<span class="outer"><span class="inner color8"></span></span>
-				<span class="outer"><span class="inner color9"></span></span>
-				<span class="outer"><span class="inner color10"></span></span> -->
-
-			</div>
-		{% ENDIF %}
-
 </div>
