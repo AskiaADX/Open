@@ -174,7 +174,7 @@ function setCounterMeter(charCount,options){
   var maxchar = options.trafficLightMax;
   var percentage = (charCount/maxchar) * 100;
   var intg = Math.ceil(percentage/10);
-  var meterDiv = document.querySelector('.meterDiv');
+  var meterDiv = document.querySelector('#adc_' + options.instanceId + ' .meterDiv');
 
   if (intg <= 10) {
     for (var i = 0; i < 10; i++) {
