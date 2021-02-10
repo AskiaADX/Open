@@ -113,7 +113,7 @@ v3.2.0 - Character counter meter
         <description><![CDATA[Prefix text when choosing text counter]]></description>
         <value></value>
       </property>
-      <property xsi:type="standardProperty" id="showCharCounterMeter" name="Show character counter meter" type="string" mode="dynamic" require="true" visible="true">
+      <property xsi:type="standardProperty" id="showTrafficLight" name="Show Traffic Light" type="string" mode="dynamic" require="true" visible="true">
         <description><![CDATA[]]></description>
         <value><![CDATA[0]]></value>
         <options>
@@ -121,7 +121,15 @@ v3.2.0 - Character counter meter
           <option value="0" text="No" />
         </options>
       </property>
-      <property xsi:type="standardProperty" id="charMeterPosition" name="Character counter meter position" type="string" mode="dynamic" require="true" visible="true">
+      <property xsi:type="standardProperty" id="trafficLightMin" name="Minimum number of characters for traffic light" type="number" mode="dynamic" require="false" visible="true" min="1">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[1]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="trafficLightMax" name="Maximum number of characters for traffic light" type="number" mode="dynamic" require="false" visible="true" min="1" decimal="0">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[60]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="trafficLightPosition" name="Traffic light position" type="string" mode="dynamic" require="true" visible="true">
         <description><![CDATA[]]></description>
         <value><![CDATA[bottom]]></value>
         <options>

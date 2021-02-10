@@ -54,18 +54,18 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
 
 Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
 
-Dim showCharCounterMeter = CurrentADC.PropValue("showCharCounterMeter")
+Dim showTrafficLight = CurrentADC.PropValue("showTrafficLight")
 
 %}
 <div id="{%= adcSelector %}" class="adc-open">
     <div class="adc-open-content {%=attrControlAlign%}">
 
 			{%
-				IF showCharCounterMeter = "1" THEN
-					Dim charMeterPosition = CurrentADC.PropValue("charMeterPosition")
+				IF showTrafficLight = "1" THEN
+					Dim trafficLightPosition = CurrentADC.PropValue("trafficLightPosition")
 			%}
 
-			{% IF charMeterPosition = "top" THEN %}
+			{% IF trafficLightPosition = "top" THEN %}
 				<div class="meterDiv top">
 					<span class="outer"><span class="inner"></span></span>
 					<span class="outer"><span class="inner"></span></span>
@@ -80,11 +80,11 @@ Dim showCharCounterMeter = CurrentADC.PropValue("showCharCounterMeter")
 				</div>
 			{% ENDIF %}
 
-			{% IF charMeterPosition = "left" OR charMeterPosition = "right" THEN %}
+			{% IF trafficLightPosition = "left" OR trafficLightPosition = "right" THEN %}
 			<table>
 				<tr>
 					<td>
-						{% IF charMeterPosition = "left" Then %}
+						{% IF trafficLightPosition = "left" Then %}
 						<div class="meterDiv left">
 							<span class="outer"><span class="inner-st"></span></span>
 							<span class="outer"><span class="inner-st"></span></span>
@@ -142,10 +142,10 @@ Dim showCharCounterMeter = CurrentADC.PropValue("showCharCounterMeter")
 	        {% If floatinglabel then %}</label>{% Endif %}
         {% Endif %}
 
-				{% IF charMeterPosition = "left" OR charMeterPosition = "right" THEN %}
+				{% IF trafficLightPosition = "left" OR trafficLightPosition = "right" THEN %}
 				</td>
 				<td>
-					{% IF charMeterPosition = "right" Then %}
+					{% IF trafficLightPosition = "right" Then %}
 					<div class="meterDiv right">
 						<span class="outer"><span class="inner-st"></span></span>
 						<span class="outer"><span class="inner-st"></span></span>
@@ -164,7 +164,7 @@ Dim showCharCounterMeter = CurrentADC.PropValue("showCharCounterMeter")
 				</table>
 				{% ENDIF %}
 
-				{% IF charMeterPosition = "bottom" THEN %}
+				{% IF trafficLightPosition = "bottom" THEN %}
 					<div class="meterDiv bottom">
 						<span class="outer"><span class="inner"></span></span>
 						<span class="outer"><span class="inner"></span></span>

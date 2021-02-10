@@ -21,11 +21,13 @@ currentcount({
     inputId : '{%=CurrentQuestion.InputName()%}',
     direction:"{%=CurrentADC.PropValue("counter")%}",
     maxchar:{%=CurrentADC.PropValue("maxChar")%},
-    minchar:{%=CurrentADC.PropValue("minChar")%},    
+    minchar:{%=CurrentADC.PropValue("minChar")%},
     currentQuestion: '{%:= CurrentQuestion.Shortcut %}',
     showcongrats:{%=CurrentADC.PropValue("showCongrats")%},
     suggestedchar:{%=CurrentADC.PropValue("suggestedChar").ToNumber()%},
     usebrowservalidation: {%=CurrentADC.PropValue("useBrowserValidation")%},
     strExclusiveResponseIds : '{%=strInputIds %}',
-    showCharCounterMeter : {%=CurrentADC.PropValue("showCharCounterMeter")%}
+    showTrafficLight : {%=CurrentADC.PropValue("showTrafficLight")%},
+    trafficLightMax:{%=CurrentADC.PropValue("trafficLightMax")%},
+    trafficLightMin:{%=CurrentADC.PropValue("trafficLightMin")%}    
 });

@@ -6,7 +6,7 @@ function exclusiveResponse(resElement){
 }
 
 function currentcount(options) {
-    var showCharCounterMeter = options.showCharCounterMeter || 0;
+    var showTrafficLight = options.showTrafficLight || 0;
 
     document.addEventListener("DOMContentLoaded", function(){
       var exclusiveResponses = document.querySelectorAll('.myresponse');
@@ -71,7 +71,7 @@ function currentcount(options) {
             options.congratsdiv.style = "display:none";
         }
 
-        if(showCharCounterMeter) setCounterMeter(inputcontent.length,options);
+        if(showTrafficLight) setCounterMeter(inputcontent.length,options);
 
         if (window.askia
             && window.arrLiveRoutingShortcut
@@ -105,7 +105,7 @@ function currentcount(options) {
             options.congratsdiv.style = "display:none";
         }
 
-        if(showCharCounterMeter) setCounterMeter(inputcontent.length,options);
+        if(showTrafficLight) setCounterMeter(inputcontent.length,options);
 
         if (window.askia
             && window.arrLiveRoutingShortcut
@@ -128,7 +128,7 @@ function currentcount(options) {
           printcounter(options);
       }
 
-      if(showCharCounterMeter) setCounterMeter(inputcontent.length,options);
+      if(showTrafficLight) setCounterMeter(inputcontent.length,options);
     });
 
     document.getElementById(options.inputId).addEventListener('paste', function () {
@@ -151,7 +151,7 @@ function currentcount(options) {
             options.congratsdiv.style = "display:none";
         }
 
-        if(showCharCounterMeter) setCounterMeter(inputcontent.length,options);
+        if(showTrafficLight) setCounterMeter(inputcontent.length,options);
 
         if (window.askia
             && window.arrLiveRoutingShortcut
@@ -171,14 +171,17 @@ function changeGradient(f,meterDiv){
 }
 
 function setCounterMeter(charCount,options){
-  var maxchar = options.maxchar;
+  var maxchar = options.trafficLightMax;
   var percentage = (charCount/maxchar) * 100;
   var intg = Math.ceil(percentage/10);
   var meterDiv = document.querySelector('.meterDiv');
 
-  for (var i = 0; i < 10; i++) {
-    meterDiv.children[i].children[0].classList.remove("color"+(i+1));
+  if (intg <= 10) {
+    for (var i = 0; i < 10; i++) {
+        meterDiv.children[i].children[0].classList.remove("color"+(i+1));
+    }
   }
+
 
   switch (intg) {
     case 1:

@@ -43,7 +43,7 @@ dim congratsMessageBGColor = CurrentADC.PropValue("congratsMessageBGColor")
 Dim fontsizefactor = CurrentADC.PropValue("fontSizeFactor").ToNumber()
 dim basefontsize = fontsizefactor
 
-Dim charMeterPosition = CurrentADC.PropValue("charMeterPosition")
+Dim trafficLightPosition = CurrentADC.PropValue("trafficLightPosition")
 
 %}
 
@@ -271,7 +271,7 @@ dim activeoffset = basefontsizelabel
   margin-top: 6px;
 }
 
-{% IF charMeterPosition = "left" OR charMeterPosition = "right" Then %}
+{% IF trafficLightPosition = "left" OR trafficLightPosition = "right" Then %}
 #adc_{%= CurrentADC.InstanceId %} .open {
   -webkit-border-radius: {%=borderradius%}{%=On(borderradius.IsNumber(),"px","") %};
   -moz-border-radius: {%=borderradius%}{%=On(borderradius.IsNumber(),"px","") %};
