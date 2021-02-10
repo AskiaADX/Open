@@ -257,13 +257,16 @@ dim activeoffset = basefontsizelabel
   display: grid;
   margin: 0 auto;
   margin-top: 25px;
-  margin-left: -15px;
+  /* width:20px; */
+
+  margin-right: 20px;
 }
 #adc_{%= CurrentADC.InstanceId %} .right {
   display: grid;
   margin: 0 auto;
   margin-top: 25px;
-  margin-left: 15px;
+  /* width:20px; */
+  margin-left: 20px;
 }
 
 #adc_{%= CurrentADC.InstanceId %} .left > .outer,
@@ -273,16 +276,29 @@ dim activeoffset = basefontsizelabel
 
 {% IF trafficLightPosition = "left" OR trafficLightPosition = "right" Then %}
 #adc_{%= CurrentADC.InstanceId %} .open {
+    border:{%=bordersize%} {%=borderstyle%} rgb({%=bordercolor%}) ;
+    background-color: rgba({%=bgcolor%},{%=opacity%});
+	font-size: {%=basefontsize%}rem;
+    resize:{%=allowresize%};
+    -moz-text-align: {%=areatextalign%}; /* Firefox 12+ */
+    text-align: {%=areatextalign%};
+    color: rgb({%=textcolor%});
+    width:auto;
+    width: calc(100% - 20px);
+}
+
+
+#adc_{%= CurrentADC.InstanceId %} .open {
   -webkit-border-radius: {%=borderradius%}{%=On(borderradius.IsNumber(),"px","") %};
   -moz-border-radius: {%=borderradius%}{%=On(borderradius.IsNumber(),"px","") %};
   border-radius: {%=borderradius%}{%=On(borderradius.IsNumber(),"px","") %};
   box-shadow: 0 0 {%=bordershadow%}{%=On(bordershadow.IsNumber(),"px","") %} rgb({%=bordercolor%});
   -webkit-box-shadow: 0 0 {%=bordershadow%}{%=On(bordershadow.IsNumber(),"px","") %} rgb({%=bordercolor%});
   -moz-box-shadow: 0 0 {%=bordershadow%}{%=On(bordershadow.IsNumber(),"px","") %} rgb({%=bordercolor%});
-  padding : {%= paddingText %};
-  width: 98%;
+  /* padding : {%= paddingText %}; */
+  width: calc(100% - 20px);
 }
-#adc_{%= CurrentADC.InstanceId %} .open:hover, #adc_{%= CurrentADC.InstanceId %} .open:hover{
+#adc_{%= CurrentADC.InstanceId %} .open:hover{
     border: {%=hoverbordersize%} {%=hoverborderstyle%} rgb({%=hoverbordercolor%});
     box-shadow: 0 0 {%=hoverbordershadow%}{%=On(hoverbordershadow.IsNumber(),"px","") %} rgb({%=hoverbordercolor%});
     -webkit-box-shadow: 0 0 {%=hoverbordershadow%}{%=On(hoverbordershadow.IsNumber(),"px","") %} rgb({%=hoverbordercolor%});
@@ -291,9 +307,9 @@ dim activeoffset = basefontsizelabel
     -webkit-border-radius: {%=hoverborderradius%}{%=On(hoverborderradius.IsNumber(),"px","") %};
     -moz-border-radius: {%=hoverborderradius%}{%=On(hoverborderradius.IsNumber(),"px","") %};
     border-radius: {%=hoverborderradius%}{%=On(hoverborderradius.IsNumber(),"px","") %};
-    width: 98%;
+    width: calc(100% - 20px);
 }
-#adc_{%= CurrentADC.InstanceId %} .open:focus, #adc_{%= CurrentADC.InstanceId %} .open:focus{
+#adc_{%= CurrentADC.InstanceId %} .open:focus{
     border: {%=activebordersize%} {%=activeborderstyle%} rgb({%=activebordercolor%});
     box-shadow: 0 0 {%=activebordershadow%}{%=On(activebordershadow.IsNumber(),"px","") %} rgb({%=activebordercolor%});
     -webkit-box-shadow: 0 0 {%=activebordershadow%}{%=On(activebordershadow.IsNumber(),"px","") %} rgb({%=activebordercolor%});
@@ -302,8 +318,44 @@ dim activeoffset = basefontsizelabel
     -webkit-border-radius: {%=activeborderradius%}{%=On(activeborderradius.IsNumber(),"px","") %};
     -moz-border-radius: {%=activeborderradius%}{%=On(activeborderradius.IsNumber(),"px","") %};
     border-radius: {%=activeborderradius%}{%=On(activeborderradius.IsNumber(),"px","") %};
-    width: 98%;
+    width: calc(100% - 20px);
 }
+
+#adc_{%= CurrentADC.InstanceId %} label .open {
+    width:100%;
+    border-top: 0;
+    border-left:0;
+    border-right:0;
+    /*font-size: {%=basefontsize%}rem;*/
+    transition: all 0.33s;
+    background-color:transparent;
+    padding: 0px 0px 0px 0px;
+    border-radius:0;
+}
+
+#adc_{%= CurrentADC.InstanceId %} label .open:focus {
+    border-bottom:{%=activebordersize%} {%=activeborderstyle%} rgb({%=activebordercolor%});
+}
+
+#adc_{%= CurrentADC.InstanceId %} label .open:focus + .floating-label {
+    color: rgb({%=floatingLabelTextColor%});
+    font-size: {%=fontsizelabelactive%}rem;
+    -moz-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+     -ms-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+     -webkit-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+     transform: translateY(-{%=baselineheight * basefontsizelabel + activeoffset%}rem);
+}
+
+#adc_{%= CurrentADC.InstanceId %} label .open:valid + .floating-label {
+    font-size: {%=fontsizelabelactive%}rem;
+    -moz-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+    -ms-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+    -webkit-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+    -webkit-transform: translateY(calc(-{%=baselineheight * basefontsizelabel + activeoffset%}rem));
+    transform: translateY(-{%=baselineheight * basefontsizelabel + activeoffset%}rem);
+    background-color:transparent;
+}
+
 {% EndIf %}
 
 #adc_{%= CurrentADC.InstanceId %} .color1{background-color: #ff0000;}
