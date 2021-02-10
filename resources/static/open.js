@@ -212,12 +212,15 @@ function setCounterMeter(charCount,options){
       changeGradient(intg,meterDiv);
       break;
     case 10:
-      changeGradient(intg,meterDiv);
+      changeGradient(intg-1,meterDiv);
       break;
-
     default:
-
   }
+
+  if (charCount == maxchar) {
+    changeGradient(10,meterDiv);
+  }
+
 }
 
 function printcounter(options) {

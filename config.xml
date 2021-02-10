@@ -114,7 +114,7 @@ v3.2.0 - Character counter meter
         <value></value>
       </property>
       <property xsi:type="standardProperty" id="showTrafficLight" name="Show Traffic Light" type="string" mode="dynamic" require="true" visible="true">
-        <description><![CDATA[]]></description>
+        <description><![CDATA[Show traffic light colour feedback based on length of response.]]></description>
         <value><![CDATA[0]]></value>
         <options>
           <option value="1" text="Yes" />
@@ -122,15 +122,15 @@ v3.2.0 - Character counter meter
         </options>
       </property>
       <property xsi:type="standardProperty" id="trafficLightMin" name="Minimum number of characters for traffic light" type="number" mode="dynamic" require="false" visible="true" min="1">
-        <description><![CDATA[]]></description>
+        <description><![CDATA[Minimal length of response]]></description>
         <value><![CDATA[1]]></value>
       </property>
       <property xsi:type="standardProperty" id="trafficLightMax" name="Maximum number of characters for traffic light" type="number" mode="dynamic" require="false" visible="true" min="1" decimal="0">
-        <description><![CDATA[]]></description>
+        <description><![CDATA[Optimal length of response]]></description>
         <value><![CDATA[60]]></value>
       </property>
       <property xsi:type="standardProperty" id="trafficLightPosition" name="Traffic light position" type="string" mode="dynamic" require="true" visible="true">
-        <description><![CDATA[]]></description>
+        <description><![CDATA[Position of traffic light feedback]]></description>
         <value><![CDATA[bottom]]></value>
         <options>
           <option value="top" text="Top" />
