@@ -7,7 +7,7 @@ function exclusiveResponse(resElement){
 
 function currentcount(options) {
     var showCharCounterMeter = options.showCharCounterMeter || 0;
-    
+
     document.addEventListener("DOMContentLoaded", function(){
       var exclusiveResponses = document.querySelectorAll('.myresponse');
       for (var i = 0; i < exclusiveResponses.length; i++) {
@@ -113,6 +113,22 @@ function currentcount(options) {
             && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
             askia.triggerAnswer();
         }
+    });
+
+    document.getElementById(options.inputId).addEventListener('focus', function (e) {
+      var inputcontent = this.value;
+      options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
+
+      if (options.direction == 'desc') {
+          options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
+          printcounter(options);
+      }
+      else {
+          options.val = inputcontent.length;
+          printcounter(options);
+      }
+
+      if(showCharCounterMeter) setCounterMeter(inputcontent.length,options);
     });
 
     document.getElementById(options.inputId).addEventListener('paste', function () {

@@ -233,7 +233,7 @@ dim activeoffset = basefontsizelabel
   margin-top: 1.3px;
   margin-left: 2.8px;
 }
-#adc_{%= CurrentADC.InstanceId %} .inner-left {
+#adc_{%= CurrentADC.InstanceId %} .inner-st {
   display: flex;
   height: 6px;
   /* width: 9.5px; */
