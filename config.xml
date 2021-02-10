@@ -77,6 +77,10 @@ v3.2.0 - Character counter meter
           <option value="0" text="No" />
         </options>
       </property>
+      <property xsi:type="standardProperty" id="datalist" name="Datalist" type="string" require="false" visible="false">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[]]></value>
+      </property>
     </category>
     <category id="ExclusiveResponses" name="Exclusive Responses">
       <property xsi:type="standardProperty" id="exclusiveResponsesQuestion" name="Question with exclusive codes" type="question" require="false" visible="true">
