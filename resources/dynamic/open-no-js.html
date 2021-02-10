@@ -1,12 +1,11 @@
-{% 
+{%
 Dim inputName  =  CurrentQuestion.InputName()
 Dim inputValue =  CurrentQuestion.InputValue()
 
-Dim datalist    = CurrentADC.PropValue("datalist").Split("|")     
+Dim datalist    = CurrentADC.PropValue("datalist").Split("|")
 Dim attrList    = On(datalist.Count > 0, "list=\"" + inputName + "\"", "")
 
 
-Dim inputType  = CurrentADC.PropValue("opensubtype")
 Dim multiline  = (CurrentADC.PropValue("multiline") = "1") ' Convert to boolean
 
 
@@ -35,7 +34,7 @@ dim attrInputType = CurrentADC.PropValue("inputType")
 
 %}
 <div id="adc_{%= CurrentADC.InstanceId %}" class="adc-open">
-    <div class="adc-open-content {%=attrControlAlign%}">        
+    <div class="adc-open-content {%=attrControlAlign%}">
         {%If attrInputType = "textarea" then %}
         	<textarea class="contentinput" rows="{%=arearows%}" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} >{%= inputValue %}</textarea>
         {%Else%}

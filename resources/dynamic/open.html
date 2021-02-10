@@ -6,7 +6,6 @@ Dim datalist    = CurrentADC.PropValue("datalist").Split("|")
 Dim attrList    = On(datalist.Count > 0, "list=\"" + inputName + "\"", "")
 Dim i
 
-Dim inputType  = CurrentADC.PropValue("opensubtype")
 Dim multiline  = (CurrentADC.PropValue("multiline") = "1") ' Convert to boolean
 
 Dim floatinglabel = (CurrentADC.PropValue("floatingLabel")="1")
