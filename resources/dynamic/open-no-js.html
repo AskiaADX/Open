@@ -5,11 +5,6 @@ Dim inputValue =  CurrentQuestion.InputValue()
 Dim datalist    = CurrentADC.PropValue("datalist").Split("|")
 Dim attrList    = On(datalist.Count > 0, "list=\"" + inputName + "\"", "")
 
-
-Dim multiline  = (CurrentADC.PropValue("multiline") = "1") ' Convert to boolean
-
-
-
 Dim placeholder = CurrentADC.PropValue("placeholder")
 Dim attrPlaceholder = On(placeholder <> "", "placeholder=\"" + placeholder + "\"", "")
 
