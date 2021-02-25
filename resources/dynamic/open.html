@@ -101,28 +101,30 @@ Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
 				{% If (exclusiveQuestion.Type = "single") Then %}
 					<ul>
 							{%
-							Dim inputId
-							Dim attrChecked
-							Dim caption
-							Dim resource
+							Dim exInputName
+							Dim exInputId
+							Dim exAttrChecked
+							Dim exCaption
+							Dim exResource
+							Dim exInputValue
 							Dim ar = exclusiveQuestion.AvailableResponses
 							For i = 1 To ar.Count
-									'inputName		= exclusiveQuestion.InputName()
-									inputId     = inputName + "_" + i
-									attrChecked = On(ar[i].IsSelected, "checked=\"checked\"", "")
-									inputValue  = ar[i].InputValue()
-									caption     = ar[i].Caption
-									resource		= ar.ResourceURL[i]
+									exInputName		= exclusiveQuestion.InputName()
+									exInputId     = (exInputName + "_" + ar[i].InputValue()).Replace("U", "askia-input")
+									exAttrChecked = On(ar[i].IsSelected, "checked=\"checked\"", "")
+									exInputValue  = ar[i].InputValue()
+									exCaption     = ar[i].Caption
+									exResource		= ar.ResourceURL[i]
 							%}
-							<li class="askia-response DK openDK">
-									<input type="hidden" name="B{%= i %}">
-									<input type="checkbox" name="{%= exclusiveQuestion.InputName() %}" id="{%= inputId %}" value="{%= inputValue %}" {%:= attrChecked %} class="dkbutton askia-live" onclick="exclusiveResponse(this);"/>
-									<label for="{%= inputId %}" class="askia-checkbox"><span hidden>Radio</span></label>
-									<label for="{%= inputId %}" class="askia-response-label">
-											{% IF (resource <> "") Then %}
-												<img src="{%= resource %}" style="vertical-align:middle" alt="{%:= caption %}"/>
-											{% EndIf %}{%:= caption %}
-									</label>
+							<li class="askia-response">
+									<input type="checkbox" name="{%= exInputName %}" id="{%= exInputId %}" value="{%= exInputValue %}" {%:= exAttrChecked %} class="askia-live dkButton"/>
+									<label for="{%= exInputId %}" class="askia-checkbox"><span hidden>checkbox</span></label>
+									<label for="{%= exInputId %}" class="askia-response-label">
+	                    {% IF (exResource <> "") Then %}
+	                      <img src="{%= exResource %}" style="vertical-align:middle" alt="{%:= exCaption %}"/>
+	                    {% EndIf %}{%:= exCaption %}
+	                </label>
+
 							</li>
 							{% Next i %}
 						</ul>

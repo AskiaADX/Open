@@ -1,9 +1,3 @@
-function exclusiveResponse(resElement){
-  if (resElement.checked) {
-
-  }
-  return true;
-}
 
 function currentcount(options) {
     document.addEventListener("DOMContentLoaded", function(){
@@ -21,18 +15,27 @@ function currentcount(options) {
 
         if (document.getElementById(arrIds[i]).checked) {
           document.getElementById(options.inputId).value = '';
-          document.getElementById(options.inputId).disabled = true;
-          document.getElementById(options.inputId).readOnly = true;
+
+          if (window.askia
+              && window.arrLiveRoutingShortcut
+              && window.arrLiveRoutingShortcut.length > 0
+              && window.arrLiveRoutingShortcut.indexOf(options.exclusiveQuestion) >= 0) {
+              askia.triggerAnswer();
+          }
+
         }
 
         document.getElementById(arrIds[i]).addEventListener('change', function (e) {
           if (e.srcElement.checked) {
+            uncheckResponses2(e.srcElement.id, strExclusiveResponseIds);
             document.getElementById(options.inputId).value = '';
-            document.getElementById(options.inputId).disabled = true;
-            document.getElementById(options.inputId).readOnly = true;
-          } else {
-            document.getElementById(options.inputId).disabled = false;
-            document.getElementById(options.inputId).readOnly = false;
+
+            if (window.askia
+                && window.arrLiveRoutingShortcut
+                && window.arrLiveRoutingShortcut.length > 0
+                && window.arrLiveRoutingShortcut.indexOf(options.exclusiveQuestion) >= 0) {
+                askia.triggerAnswer();
+            }
           }
         });
       }
@@ -45,9 +48,12 @@ function currentcount(options) {
     }
     options.adcSelector = '#adc_' + options.instanceId;
 
-    var openInputDK = document.querySelector('#adc_' + this.instanceId + ' .openDK input[type="checkbox"]');
+    // var openInputDK = document.querySelector('#adc_' + this.instanceId + ' .openDK input[type="checkbox"]');
 
     document.getElementById(options.inputId).addEventListener('keyup', function (e) {
+
+        uncheckResponses(options.strExclusiveResponseIds);
+
         //var inputcontent= this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r\n'); //handling of line-break characters
         var inputcontent = this.value;
         options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
@@ -75,7 +81,13 @@ function currentcount(options) {
         }
     });
 
+    document.getElementById(options.inputId).addEventListener('focus', function (e) {
+      uncheckResponses(options.strExclusiveResponseIds);
+    });
+
     document.getElementById(options.inputId).addEventListener('input', function (e) {
+        uncheckResponses(options.strExclusiveResponseIds);
+
         var inputcontent = this.value;
         options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
         options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
@@ -107,6 +119,9 @@ function currentcount(options) {
     });
 
     document.getElementById(options.inputId).addEventListener('paste', function () {
+
+        uncheckResponses(options.strExclusiveResponseIds);
+
         var inputcontent = this.value;
         options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
         options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
@@ -134,6 +149,27 @@ function currentcount(options) {
 
     });
 
+}
+
+function uncheckResponses(exResponseIds){
+  if (exResponseIds != "") {
+    let arrIds = exResponseIds.split(',');
+    for (var i = 0; i < arrIds.length; i++) {
+      document.getElementById(arrIds[i]).checked = false;
+    }
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function uncheckResponses2(inputId, exResponseIds){
+  let arrIds = exResponseIds.split(',');
+  for (var i = 0; i < arrIds.length; i++) {
+    if (arrIds[i] != inputId){
+      document.getElementById(arrIds[i]).checked = false;
+    }
+  }
 }
 
 function printcounter(options) {
