@@ -5,9 +5,11 @@
   If (exclusiveQuestion.Type = "single") Then
     Dim inputId
     Dim ar = exclusiveQuestion.AvailableResponses
+    Dim exInputName = exclusiveQuestion.InputName()
+
     Dim i
     For i = 1 To ar.Count
-      inputId = inputName + "_" + i
+      inputId = (exInputName + "_" + ar[i].InputValue()).Replace("U", "askia-input")
       If strInputIds <> "" Then
       	strInputIds = strInputIds + ","
       Endif
@@ -22,6 +24,7 @@ currentcount({
     direction:"{%=CurrentADC.PropValue("counter")%}",
     maxchar:{%=CurrentADC.PropValue("maxChar")%},
     currentQuestion: '{%:= CurrentQuestion.Shortcut %}',
+    exclusiveQuestion: '{%:= exclusiveQuestion.Shortcut %}',
     showcongrats:{%=CurrentADC.PropValue("showCongrats")%},
     suggestedchar:{%=CurrentADC.PropValue("suggestedChar").ToNumber()%},
     usebrowservalidation: {%=CurrentADC.PropValue("useBrowserValidation")%},
