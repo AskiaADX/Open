@@ -86,11 +86,15 @@ Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
         </div>
         <label for="{%= inputName %}" hidden>Open</label>
         {% If attrInputType = "textarea" then %}
-        	<textarea class="contentinput" rows="{%=arearows%}" name="{%= inputName %}" id="{%= inputName %}" {%:= attrPlaceholder %}
+			<textarea style="display:none;" class="otherHidden" rows="{%=arearows%}" name="{%= inputName %}" id="{%= inputName %}" {%:= attrPlaceholder %}
+					{%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %}>{%= inputValue %}</textarea>
+        	<textarea class="contentinput" rows="{%=arearows%}" name="other{%= inputName %}" id="other{%= inputName %}" {%:= attrPlaceholder %}
 					{%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %}>{%= inputValue %}</textarea>
         {% Else %}
         	{% If floatinglabel then %}<label>{% Endif %}
-        	<input type="{%= attrInputType %}" id="{%= inputName %}" name="{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %}
+			<input style="display:none;" {%= attrInputType %} class="otherHidden" id="{%= inputName %}" name="{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %}
+					{%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
+        	<input class="contentinput" type="{%= attrInputType %}" id="other{%= inputName %}" name="other{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %}
 					{%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
           {% If floatinglabel then %}
         	<span class="floating-label">{%:= Placeholder %}</span>

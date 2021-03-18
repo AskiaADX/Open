@@ -1,6 +1,75 @@
+    /**
+   * Add event listener in DOMElement
+   *
+   * @param {HTMLElement} obj HTMLElement which should be listen
+   * @param {String} type Type of the event to listen
+   * @param {Function} fn Callback function
+   */
+    function addEvent(obj, type, fn) {
+        if (typeof obj.addEventListener === 'function') {
+            obj.addEventListener(type, fn, false);
+        } else if (obj.attachEvent) {
+            obj['e' + type + fn] = fn;
+            obj[type + fn] = function () {
+                obj['e' + type + fn].call(obj, window.event);
+            }
+            obj.attachEvent('on' + type, obj[type + fn]);
+        }
+    }
+	
+	    /**
+   * Return the value of the input trimed
+   *
+   * @param {x} value to trim
+   */
+    function myTrim(x) {
+        return x.trim();
+      }
+	  
+	    /**
+   * Manage the input event on input semi open
+   *
+   * @param {Object} event Input event of the input semi open
+   * @param {Object} that AdcDefault object, same as options
+   */
+  function onInputSemiOpen (event, that) {
+    var el = event.target || event.srcElement;
+    if (el.className === 'contentinput') {
+        el.previousElementSibling.value = myTrim(el.value);
+    }
+}
+
+function triggerEvent(el, type) {
+    // IE9+ and other modern browsers
+    if ('createEvent' in document) {
+        var e = document.createEvent('HTMLEvents');
+        e.initEvent(type, false, true);
+        el.dispatchEvent(e);
+    } else {
+        // IE8
+        var e = document.createEventObject();
+        e.eventType = type;
+        el.fireEvent('on' + e.eventType, e);
+    }
+}
+
 
 function currentcount(options) {
     document.addEventListener("DOMContentLoaded", function(){
+
+		var inputSemiOpens = document.querySelectorAll('#adc_' + options.instanceId + ' .contentinput');
+	 
+	 // Change event on input semi open
+            for (var j1 = 0; j1 < inputSemiOpens.length; j1++) {
+                addEvent(inputSemiOpens[j1], 'input',
+                         (function (passedInElement) {
+                    return function (e) {
+                        onInputSemiOpen(e, passedInElement);
+                    };
+                }(this)));
+				triggerEvent(inputSemiOpens[j1], 'input');
+            }
+	
       var exclusiveResponses = document.querySelectorAll('.myresponse');
       for (var i = 0; i < exclusiveResponses.length; i++) {
         exclusiveResponses[i].style.display = "none";
@@ -55,7 +124,7 @@ function currentcount(options) {
         uncheckResponses(options.strExclusiveResponseIds);
 
         //var inputcontent= this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r\n'); //handling of line-break characters
-        var inputcontent = this.value;
+        var inputcontent = this.previousElementSibling.value;
         options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
         options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
 
@@ -85,7 +154,38 @@ function currentcount(options) {
       uncheckResponses(options.strExclusiveResponseIds);
     });
 
-    document.getElementById(options.inputId).addEventListener('input', function (e) {
+    document.getElementById(options.inputId).addEventListener('paste', function () {
+
+        uncheckResponses(options.strExclusiveResponseIds);
+
+        var inputcontent = this.previousElementSibling.value;
+        options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
+        options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
+
+        if (options.direction == 'desc') {
+            options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
+            printcounter(options);
+        }
+        else {
+            options.val = inputcontent.length;
+            printcounter(options);
+        }
+        if (options.suggestedchar > 0 && options.showcongrats && inputcontent.length >= options.suggestedchar) {
+            options.congratsdiv.style = "display:block";
+        }
+        else {
+            options.congratsdiv.style = "display:none";
+        }
+        if (window.askia
+            && window.arrLiveRoutingShortcut
+            && window.arrLiveRoutingShortcut.length > 0
+            && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
+            askia.triggerAnswer();
+        }
+
+    });
+
+    document.getElementById("other" + options.inputId).addEventListener('input', function (e) {
         uncheckResponses(options.strExclusiveResponseIds);
 
         var inputcontent = this.value;
@@ -116,37 +216,6 @@ function currentcount(options) {
             && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
             askia.triggerAnswer();
         }
-    });
-
-    document.getElementById(options.inputId).addEventListener('paste', function () {
-
-        uncheckResponses(options.strExclusiveResponseIds);
-
-        var inputcontent = this.value;
-        options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
-        options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
-
-        if (options.direction == 'desc') {
-            options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
-            printcounter(options);
-        }
-        else {
-            options.val = inputcontent.length;
-            printcounter(options);
-        }
-        if (options.suggestedchar > 0 && options.showcongrats && inputcontent.length >= options.suggestedchar) {
-            options.congratsdiv.style = "display:block";
-        }
-        else {
-            options.congratsdiv.style = "display:none";
-        }
-        if (window.askia
-            && window.arrLiveRoutingShortcut
-            && window.arrLiveRoutingShortcut.length > 0
-            && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
-            askia.triggerAnswer();
-        }
-
     });
 
 }
