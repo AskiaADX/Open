@@ -124,7 +124,7 @@ function currentcount(options) {
         uncheckResponses(options.strExclusiveResponseIds);
 
         //var inputcontent= this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r\n'); //handling of line-break characters
-        var inputcontent = this.previousElementSibling.value;
+        var inputcontent = this.previousElementSibling.value.trim();
         options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
         options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
 
@@ -158,7 +158,7 @@ function currentcount(options) {
 
         uncheckResponses(options.strExclusiveResponseIds);
 
-        var inputcontent = this.previousElementSibling.value;
+        var inputcontent = this.previousElementSibling.value.trim();
         options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
         options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
 
@@ -188,12 +188,12 @@ function currentcount(options) {
     document.getElementById("other" + options.inputId).addEventListener('input', function (e) {
         uncheckResponses(options.strExclusiveResponseIds);
 
-        var inputcontent = this.value;
+        var inputcontent = this.value.trim();
         options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
         options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
 
         if (options.maxchar > 0 && options.maxchar - inputcontent.length < 0) {
-            this.value = this.value.substring(0, options.maxchar);
+            this.value = this.value.trim().substring(0, options.maxchar);
         }
 
         if (options.direction == 'desc') {
@@ -249,12 +249,12 @@ function printcounter(options) {
 
 //onkeydown event
 function imposeMaxLengthOnKeydown(Event, Object, MaxLen) {
-    if ((Object.value.length < MaxLen) || (Event.keyCode == 8 || Event.keyCode == 46 || (Event.keyCode >= 35 && Event.keyCode <= 40))) {
+    if ((Object.value.trim().length < MaxLen) || (Event.keyCode == 8 || Event.keyCode == 46 || (Event.keyCode >= 35 && Event.keyCode <= 40))) {
         return true;
     } else {
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
         if (/android/i.test(userAgent)) //android detects
-            Object.value = (Object.value).substring(0, MaxLen - 1);
+            Object.value = (Object.value.trim()).substring(0, MaxLen - 1);
 
         (Event.preventDefault ? Event.preventDefault() : event.returnValue = false);
     }
@@ -263,7 +263,7 @@ function imposeMaxLengthOnKeydown(Event, Object, MaxLen) {
 
 //onkeypress event
 function imposeMaxLength(Event, Object, MaxLen) {
-    if ((Object.value.length < MaxLen) || (Event.keyCode == 8 || Event.keyCode == 46 || (Event.keyCode >= 35 && Event.keyCode <= 40))) {
+    if ((Object.value.trim().length < MaxLen) || (Event.keyCode == 8 || Event.keyCode == 46 || (Event.keyCode >= 35 && Event.keyCode <= 40))) {
         return true;
     } else {
         (Event.preventDefault ? Event.preventDefault() : event.returnValue = false);
@@ -274,10 +274,10 @@ function imposeMaxLength(Event, Object, MaxLen) {
 //onpaste event
 function imposeMaxLengthOnPaste(Event, Object, MaxLen) {
     let paste = (Event.clipboardData || window.clipboardData).getData('text');
-    var endP = (Object.value + paste);
+    var endP = (Object.value.trim() + paste).trim();
     if (endP.length >= MaxLen) {
-        paste = endP.substring(0, MaxLen);
-        Object.value = paste;
+        paste = endP.trim().substring(0, MaxLen);
+        Object.value = paste.trim();
         (Event.preventDefault ? Event.preventDefault() : event.returnValue = false);
     } else {
         return true;
