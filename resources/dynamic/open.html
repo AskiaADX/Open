@@ -220,34 +220,36 @@ Dim showTrafficLight = CurrentADC.PropValue("showTrafficLight")
 
 				{% ENDIF %}
 
-				{% If (exclusiveQuestion.Type = "single") Then %}
-					<ul>
-							{%
-							Dim inputId
-							Dim attrChecked
-							Dim caption
-							Dim resource
-							Dim ar = exclusiveQuestion.AvailableResponses
-							For i = 1 To ar.Count
-									'inputName		= exclusiveQuestion.InputName()
-									inputId     = inputName + "_" + i
-									attrChecked = On(ar[i].IsSelected, "checked=\"checked\"", "")
-									inputValue  = ar[i].InputValue()
-									caption     = ar[i].Caption
-									resource		= ar.ResourceURL[i]
-							%}
-							<li class="askia-response DK openDK">
-									<input type="hidden" name="B{%= i %}">
-									<input type="checkbox" name="{%= exclusiveQuestion.InputName() %}" id="{%= inputId %}" value="{%= inputValue %}" {%:= attrChecked %} class="dkbutton askia-live" onclick="exclusiveResponse(this);"/>
-									<label for="{%= inputId %}" class="askia-checkbox"><span hidden>Radio</span></label>
-									<label for="{%= inputId %}" class="askia-response-label">
-											{% IF (resource <> "") Then %}
-												<img src="{%= resource %}" style="vertical-align:middle" alt="{%:= caption %}"/>
-											{% EndIf %}{%:= caption %}
-									</label>
-							</li>
-							{% Next i %}
-						</ul>
+				{% If exclusiveQuestion <> "" Then %}
+					{% If (exclusiveQuestion.Type = "single") Then %}
+						<ul>
+								{%
+								Dim inputId
+								Dim attrChecked
+								Dim caption
+								Dim resource
+								Dim ar = exclusiveQuestion.AvailableResponses
+								For i = 1 To ar.Count
+										'inputName		= exclusiveQuestion.InputName()
+										inputId     = inputName + "_" + i
+										attrChecked = On(ar[i].IsSelected, "checked=\"checked\"", "")
+										inputValue  = ar[i].InputValue()
+										caption     = ar[i].Caption
+										resource		= ar.ResourceURL[i]
+								%}
+								<li class="askia-response DK openDK">
+										<input type="hidden" name="B{%= i %}">
+										<input type="checkbox" name="{%= exclusiveQuestion.InputName() %}" id="{%= inputId %}" value="{%= inputValue %}" {%:= attrChecked %} class="dkbutton askia-live" onclick="exclusiveResponse(this);"/>
+										<label for="{%= inputId %}" class="askia-checkbox"><span hidden>Radio</span></label>
+										<label for="{%= inputId %}" class="askia-response-label">
+												{% IF (resource <> "") Then %}
+													<img src="{%= resource %}" style="vertical-align:middle" alt="{%:= caption %}"/>
+												{% EndIf %}{%:= caption %}
+										</label>
+								</li>
+								{% Next i %}
+							</ul>
+					{% Endif %}
 				{% Endif %}
 
         {% If datalist.Count > 0 Then %}

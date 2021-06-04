@@ -2,18 +2,21 @@
   Dim strInputIds = ""
   Dim inputName  =  CurrentQuestion.InputName()
   Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
-  If (exclusiveQuestion.Type = "single") Then
-    Dim inputId
-    Dim ar = exclusiveQuestion.AvailableResponses
-    Dim i
-    For i = 1 To ar.Count
-      inputId = inputName + "_" + i
-      If strInputIds <> "" Then
-      	strInputIds = strInputIds + ","
-      Endif
-      strInputIds = strInputIds + inputId
-    Next i
+  If exclusiveQuestion <> "" Then
+    If (exclusiveQuestion.Type = "single") Then
+      Dim inputId
+      Dim ar = exclusiveQuestion.AvailableResponses
+      Dim i
+      For i = 1 To ar.Count
+        inputId = inputName + "_" + i
+        If strInputIds <> "" Then
+        	strInputIds = strInputIds + ","
+        Endif
+        strInputIds = strInputIds + inputId
+      Next i
+    EndIf
   EndIf
+
 %}
 
 currentcount({
@@ -29,5 +32,5 @@ currentcount({
     strExclusiveResponseIds : '{%=strInputIds %}',
     showTrafficLight : {%=CurrentADC.PropValue("showTrafficLight")%},
     trafficLightMax:{%=CurrentADC.PropValue("trafficLightMax")%},
-    trafficLightMin:{%=CurrentADC.PropValue("trafficLightMin")%}    
+    trafficLightMin:{%=CurrentADC.PropValue("trafficLightMin")%}
 });

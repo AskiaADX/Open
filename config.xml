@@ -7,8 +7,8 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>3.2.0</version>
-    <date>2021-02-07</date>
+    <version>3.2.1</version>
+    <date>2021-06-04</date>
     <description><![CDATA[v2.0.4 - Modifications for HTML5 compatibility
 v3.0.1 - JB - Added option to override browser validation using required, minLength and maxLength
 v3.0.2 - JB - Emulate maxLength when no browser validation, further fix
@@ -18,6 +18,7 @@ v3.0.5 - maxlength issue on android mobile devices - fix
 v3.1.0 - exclusive codes
 v3.1.1 - exclusive codes - bug fixed on inputType = textareas
 v3.2.0 - Character counter meter
+v3.2.1 - Fixed runtime error when exclusiveQuestion is none
     ]]></description>
     <company>Askia</company>
     <author><![CDATA[Stephen Bronnec]]></author>
