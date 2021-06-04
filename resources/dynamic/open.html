@@ -55,6 +55,7 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
 Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
 
 %}
+
 <div id="{%= adcSelector %}" class="adc-open">
     <div class="adc-open-content {%=attrControlAlign%}">
 
@@ -102,36 +103,38 @@ Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
 	        {% If floatinglabel then %}</label>{% Endif %}
         {% Endif %}
 
-				{% If (exclusiveQuestion.Type = "single") Then %}
-					<ul>
-							{%
-							Dim exInputName
-							Dim exInputId
-							Dim exAttrChecked
-							Dim exCaption
-							Dim exResource
-							Dim exInputValue
-							Dim ar = exclusiveQuestion.AvailableResponses
-							For i = 1 To ar.Count
-									exInputName		= exclusiveQuestion.InputName()
-									exInputId     = (exInputName + "_" + ar[i].InputValue()).Replace("U", "askia-input")
-									exAttrChecked = On(ar[i].IsSelected, "checked=\"checked\"", "")
-									exInputValue  = ar[i].InputValue()
-									exCaption     = ar[i].Caption
-									exResource		= ar.ResourceURL[i]
-							%}
-							<li class="askia-response">
-									<input type="checkbox" name="{%= exInputName %}" id="{%= exInputId %}" value="{%= exInputValue %}" {%:= exAttrChecked %} class="askia-live dkButton"/>
-									<label for="{%= exInputId %}" class="askia-checkbox"><span hidden>checkbox</span></label>
-									<label for="{%= exInputId %}" class="askia-response-label">
-	                    {% IF (exResource <> "") Then %}
-	                      <img src="{%= exResource %}" style="vertical-align:middle" alt="{%:= exCaption %}"/>
-	                    {% EndIf %}{%:= exCaption %}
-	                </label>
+				{% If exclusiveQuestion <> "" Then %}
+					{% If (exclusiveQuestion.Type = "single") Then %}
+						<ul>
+								{%
+								Dim exInputName
+								Dim exInputId
+								Dim exAttrChecked
+								Dim exCaption
+								Dim exResource
+								Dim exInputValue
+								Dim ar = exclusiveQuestion.AvailableResponses
+								For i = 1 To ar.Count
+										exInputName		= exclusiveQuestion.InputName()
+										exInputId     = (exInputName + "_" + ar[i].InputValue()).Replace("U", "askia-input")
+										exAttrChecked = On(ar[i].IsSelected, "checked=\"checked\"", "")
+										exInputValue  = ar[i].InputValue()
+										exCaption     = ar[i].Caption
+										exResource		= ar.ResourceURL[i]
+								%}
+								<li class="askia-response">
+										<input type="checkbox" name="{%= exInputName %}" id="{%= exInputId %}" value="{%= exInputValue %}" {%:= exAttrChecked %} class="askia-live dkButton"/>
+										<label for="{%= exInputId %}" class="askia-checkbox"><span hidden>checkbox</span></label>
+										<label for="{%= exInputId %}" class="askia-response-label">
+		                    {% IF (exResource <> "") Then %}
+		                      <img src="{%= exResource %}" style="vertical-align:middle" alt="{%:= exCaption %}"/>
+		                    {% EndIf %}{%:= exCaption %}
+		                </label>
 
-							</li>
-							{% Next i %}
-						</ul>
+								</li>
+								{% Next i %}
+							</ul>
+					{% Endif %}
 				{% Endif %}
 
         {% If datalist.Count > 0 Then %}
