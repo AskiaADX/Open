@@ -37,9 +37,9 @@ dim attrInputType = CurrentADC.PropValue("inputType")
 <div id="adc_{%= CurrentADC.InstanceId %}" class="adc-open">
     <div class="adc-open-content {%=attrControlAlign%}">        
         {%If attrInputType = "textarea" then %}
-        	<textarea class="contentinput" rows="{%=arearows%}" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} >{%= inputValue %}</textarea>
+        	<textarea class="contentinput" autocomplete="off" rows="{%=arearows%}" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} >{%= inputValue %}</textarea>
         {%Else%}
-        	<input type="{%=attrInputType%}" class="contentinput" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}" />
+        	<input type="{%=attrInputType%}" autocomplete="off" class="contentinput" name="{%= inputName %}" {%:= attrPlaceholder %} {%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}" />
   		 {%Endif%}
     </div>
 </div>
