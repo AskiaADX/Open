@@ -8,7 +8,7 @@
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
     <version>3.1.7</version>
-    <date>2021-09-17</date>
+    <date>2021-09-24</date>
     <description><![CDATA[
       v2.0.4 - Modifications for HTML5 compatibility
       v3.0.1 - JB - Added option to override browser validation using required, minLength and maxLength
