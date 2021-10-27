@@ -16,7 +16,7 @@
             obj.attachEvent('on' + type, obj[type + fn]);
         }
     }
-	
+
 	    /**
    * Return the value of the input trimed
    *
@@ -25,7 +25,7 @@
     function myTrim(x) {
         return x.trim();
       }
-	  
+
 	    /**
    * Manage the input event on input semi open
    *
@@ -58,7 +58,7 @@ function currentcount(options) {
     document.addEventListener("DOMContentLoaded", function(){
 
 		var inputSemiOpens = document.querySelectorAll('#adc_' + options.instanceId + ' .contentinput');
-	 
+
 	 // Change event on input semi open
             for (var j1 = 0; j1 < inputSemiOpens.length; j1++) {
                 addEvent(inputSemiOpens[j1], 'input',
@@ -69,11 +69,12 @@ function currentcount(options) {
                 }(this)));
 				triggerEvent(inputSemiOpens[j1], 'input');
             }
-	
+
       var exclusiveResponses = document.querySelectorAll('.myresponse');
       for (var i = 0; i < exclusiveResponses.length; i++) {
         exclusiveResponses[i].style.display = "none";
       }
+
     });
 
     if (options.strExclusiveResponseIds != "") {
@@ -98,6 +99,8 @@ function currentcount(options) {
           if (e.srcElement.checked) {
             uncheckResponses2(e.srcElement.id, strExclusiveResponseIds);
             document.getElementById(options.inputId).value = '';
+            document.getElementById('other'+options.inputId).value = '';
+
 
             if (window.askia
                 && window.arrLiveRoutingShortcut
@@ -119,7 +122,7 @@ function currentcount(options) {
 
     // var openInputDK = document.querySelector('#adc_' + this.instanceId + ' .openDK input[type="checkbox"]');
 
-    document.getElementById(options.inputId).addEventListener('keyup', function (e) {
+    document.getElementById('other'+options.inputId).addEventListener('keyup', function (e) {
 
         uncheckResponses(options.strExclusiveResponseIds);
 
@@ -150,9 +153,9 @@ function currentcount(options) {
         }
     });
 
-    document.getElementById(options.inputId).addEventListener('focus', function (e) {
-      uncheckResponses(options.strExclusiveResponseIds);
-    });
+    // document.getElementById(options.inputId).addEventListener('focus', function (e) {
+    //   uncheckResponses(options.strExclusiveResponseIds);
+    // });
 
     document.getElementById(options.inputId).addEventListener('paste', function () {
 
@@ -186,7 +189,6 @@ function currentcount(options) {
     });
 
     document.getElementById("other" + options.inputId).addEventListener('input', function (e) {
-        uncheckResponses(options.strExclusiveResponseIds);
 
         var inputcontent = this.value.trim();
         options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");

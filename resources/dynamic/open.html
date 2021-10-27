@@ -94,10 +94,10 @@ Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
         {% Else %}
         	{% If floatinglabel then %}<label>{% Endif %}
 					<input style="display:none;" autocomplete="off" type="{%= attrInputType %}" class="otherHidden" id="{%= inputName %}" name="{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %}
-					{%:= attrMinLength %} value="{%= inputValue %}"/>
+					{%:= attrMinLength %} {%:= attrRequired %} value="{%= inputValue %}"/>
 
         	<input class="contentinput" autocomplete="off" type="{%= attrInputType %}" id="other{%= inputName %}" name="other{%= inputName %}" {%:= attrMaxLength %} {%:= attrPlaceholder %}
-					{%:= attrMinLength %} value="{%= inputValue %}"/>
+					{%:= attrMinLength %}  {%:= attrRequired %} value="{%= inputValue %}"/>
           {% If floatinglabel then %}
         	<span class="floating-label">{%:= Placeholder %}</span>
         	{%Endif%}

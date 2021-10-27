@@ -7,8 +7,8 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>3.1.7</version>
-    <date>2021-09-24</date>
+    <version>3.1.8</version>
+    <date>2021-10-25</date>
     <description><![CDATA[
       v2.0.4 - Modifications for HTML5 compatibility
       v3.0.1 - JB - Added option to override browser validation using required, minLength and maxLength
@@ -23,6 +23,7 @@
       v3.1.5 - Fixed runtime error when exclusiveQuestion is none
       v3.1.6 - Added autocomplete off
       v3.1.7 - Allow numeric question type
+      v3.1.8 -
     ]]></description>
     <company>Askia</company>
     <author><![CDATA[Stephen Bronnec]]></author>
