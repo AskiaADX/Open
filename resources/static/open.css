@@ -21,7 +21,7 @@
 
 .adc-open .contentinput{
     color:black;
-    white-space: normal;
+    /* white-space: normal; */
     text-align: justify;
 	width:100%;
 }
@@ -43,4 +43,3 @@
 	-webkit-transition: box-shadow,background-color 0.25s ease-in-out;
 	-moz-transition: box-shadow,background-color 0.25s ease-in-out;
 }
-
