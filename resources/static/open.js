@@ -171,7 +171,7 @@ function changeGradient(f,meterDiv){
 }
 
 function setCounterMeter(charCount,options){
-  var maxchar = options.trafficLightMax;
+  var maxchar = options.trafficLightMax | 60;
   var percentage = (charCount/maxchar) * 100;
   var intg = Math.ceil(percentage/10);
   var meterDiv = document.querySelector('#adc_' + options.instanceId + ' .meterDiv');

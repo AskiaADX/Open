@@ -29,8 +29,8 @@ currentcount({
     showcongrats:{%=CurrentADC.PropValue("showCongrats")%},
     suggestedchar:{%=CurrentADC.PropValue("suggestedChar").ToNumber()%},
     usebrowservalidation: {%=CurrentADC.PropValue("useBrowserValidation")%},
-    strExclusiveResponseIds : '{%=strInputIds %}',
     showTrafficLight : {%=CurrentADC.PropValue("showTrafficLight")%},
-    trafficLightMax:{%=CurrentADC.PropValue("trafficLightMax")%},
-    trafficLightMin:{%=CurrentADC.PropValue("trafficLightMin")%}
+    trafficLightMax: '{%=CurrentADC.PropValue("trafficLightMax")%}',
+    trafficLightMin: '{%=CurrentADC.PropValue("trafficLightMin")%}',
+    strExclusiveResponseIds : '{%=strInputIds %}'
 });

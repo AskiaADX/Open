@@ -7,8 +7,8 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>3.2.3</version>
-    <date>2022-01-19</date>
+    <version>3.2.4</version>
+    <date>2022-01-27</date>
     <description><![CDATA[
       v2.0.4 - Modifications for HTML5 compatibility
       v3.0.1 - JB - Added option to override browser validation using required, minLength and maxLength
@@ -22,6 +22,7 @@
       v3.2.1 - Fixed runtime error when exclusiveQuestion is none
       v3.2.2 - Allow numeric question type
       v3.2.3 - Fixed, unable to add spaces on textareas.
+      v3.2.4 - Fixed, trafficLightMin/Max default value issue
     ]]></description>
     <company>Askia</company>
     <author><![CDATA[Stephen Bronnec]]></author>
