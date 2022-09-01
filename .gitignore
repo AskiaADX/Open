@@ -27,7 +27,13 @@ gruntfile.js
 .adxstudio
 .adxstudio/workspace.json
 .vscode
+workspace.json
 
 # Linter #
 ################
 .eslintrc.json
+
+# TMP #
+################
+Open.tmp/
+
