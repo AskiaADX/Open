@@ -2,15 +2,9 @@
 Dim inputName  =  CurrentQuestion.InputName()
 Dim inputValue =  CurrentQuestion.InputValue()
 
-Dim datalist    = CurrentADC.PropValue("datalist").Split("|")
-Dim attrList    = On(datalist.Count > 0, "list=\"" + inputName + "\"", "")
 Dim i
 
-Dim inputType  = CurrentADC.PropValue("opensubtype")
-Dim multiline  = (CurrentADC.PropValue("multiline") = "1") ' Convert to boolean
-
 Dim floatinglabel = (CurrentADC.PropValue("floatingLabel")="1")
-
 
 Dim placeholder = On(floatinglabel and CurrentADC.PropValue("placeholder")="", currentQuestion.LongCaption, CurrentADC.PropValue("placeholder"))
 
@@ -52,8 +46,7 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
 
 'On(countOrder="desc",maxchar,"0")
 
-Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
-
+Dim useExclusiveQuestion = CurrentADC.PropValue("useExclusive")
 %}
 
 <div id="{%= adcSelector %}" class="adc-open">
@@ -87,7 +80,7 @@ Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
         </div>
         <label for="{%= inputName %}" hidden>Open</label>
         {% If attrInputType = "textarea" then %}
-			<textarea style="display:none;" autocomplete="off" class="otherHidden" rows="{%=arearows%}" name="{%= inputName %}" id="{%= inputName %}" {%:= attrPlaceholder %}
+					<textarea style="display:none;" autocomplete="off" class="otherHidden" rows="{%=arearows%}" name="{%= inputName %}" id="{%= inputName %}" {%:= attrPlaceholder %}
 					{%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %}>{%= inputValue %}</textarea>
         	<textarea class="contentinput" autocomplete="off" rows="{%=arearows%}" name="other{%= inputName %}" id="other{%= inputName %}" {%:= attrPlaceholder %}
 					{%:= attrMaxLength %} {%:= attrMinLength %} {%:= attrRequired %}>{%= inputValue %}</textarea>
@@ -104,7 +97,9 @@ Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
 	        {% If floatinglabel then %}</label>{% Endif %}
         {% Endif %}
 
-				{% If exclusiveQuestion <> "" Then %}
+				{% If useExclusiveQuestion = "yes" Then
+				Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
+				%}
 					{% If (exclusiveQuestion.Type = "single") Then %}
 						<ul>
 								{%
@@ -137,13 +132,5 @@ Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
 							</ul>
 					{% Endif %}
 				{% Endif %}
-
-        {% If datalist.Count > 0 Then %}
-            <datalist id="{%= inputName %}">
-            {% For i = 1 To datalist.count %}
-                <option value="{%= datalist[i] %}" />
-            {% Next %}
-            </datalist>
-        {% EndIf %}
     </div>
 </div>
