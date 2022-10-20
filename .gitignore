@@ -36,3 +36,5 @@ workspace.json
 # TMP #
 ################
 Open.tmp/
+
+*.ps1
