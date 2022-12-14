@@ -1,13 +1,16 @@
 {%
-Dim inputName  =  CurrentQuestion.InputName()
-Dim inputValue =  CurrentQuestion.InputValue()
+Dim plr = CurrentQuestion.ParentLoop.AvailableAnswers
+Dim increment
+For increment = 1 To plr.Count
+
+Dim inputName  =  CurrentQuestion.Iteration(plr[increment].Index).InputName()
+Dim inputValue =  CurrentQuestion.Iteration(plr[increment].Index).InputValue()
 
 Dim datalist    = CurrentADC.PropValue("datalist").Split("|")
 Dim attrList    = On(datalist.Count > 0, "list=\"" + inputName + "\"", "")
 Dim i
 
 Dim floatinglabel = (CurrentADC.PropValue("floatingLabel")="1")
-
 
 Dim placeholder = On(floatinglabel and CurrentADC.PropValue("placeholder")="", currentQuestion.LongCaption, CurrentADC.PropValue("placeholder"))
 
@@ -51,17 +54,17 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
 Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
 
 Dim showTrafficLight = CurrentADC.PropValue("showTrafficLight")
-
 %}
-<div class="adc-open-content {%=attrControlAlign%}">
 
+<div id="text-counter{%:= increment %}" class="adc-open-content {%=attrControlAlign%} text-counter-box">
+  <label class="caption">{%:= plr[increment].Caption %}</label>
 	{%
 		IF showTrafficLight = "1" THEN
 			Dim trafficLightPosition = CurrentADC.PropValue("trafficLightPosition")
 	%}
 
 	{% IF trafficLightPosition = "top" THEN %}
-		<div class="meterDiv top">
+		<div class="meterDiv meterDiv{%:= increment %} top">
 			<span class="outer"><span class="inner"></span></span>
 			<span class="outer"><span class="inner"></span></span>
 			<span class="outer"><span class="inner"></span></span>
@@ -80,7 +83,7 @@ Dim showTrafficLight = CurrentADC.PropValue("showTrafficLight")
 		<tr>
 			<td>
 				{% IF trafficLightPosition = "left" Then %}
-				<div class="meterDiv left">
+				<div class="meterDiv meterDiv{%:= increment %} left">
 					<span class="outer"><span class="inner-st"></span></span>
 					<span class="outer"><span class="inner-st"></span></span>
 					<span class="outer"><span class="inner-st"></span></span>
@@ -141,7 +144,7 @@ Dim showTrafficLight = CurrentADC.PropValue("showTrafficLight")
 		</td>
 		<td>
 			{% IF trafficLightPosition = "right" Then %}
-			<div class="meterDiv right">
+			<div class="meterDiv meterDiv{%:= increment %} right">
 				<span class="outer"><span class="inner-st"></span></span>
 				<span class="outer"><span class="inner-st"></span></span>
 				<span class="outer"><span class="inner-st"></span></span>
@@ -160,7 +163,7 @@ Dim showTrafficLight = CurrentADC.PropValue("showTrafficLight")
 		{% ENDIF %}
 
 		{% IF trafficLightPosition = "bottom" THEN %}
-			<div class="meterDiv bottom">
+			<div class="meterDiv meterDiv{%:= increment %} bottom">
 				<span class="outer"><span class="inner"></span></span>
 				<span class="outer"><span class="inner"></span></span>
 				<span class="outer"><span class="inner"></span></span>
@@ -258,3 +261,4 @@ Dim showTrafficLight = CurrentADC.PropValue("showTrafficLight")
         </datalist>
     {% EndIf %}
 </div>
+{% Next %}

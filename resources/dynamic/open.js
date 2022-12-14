@@ -16,7 +16,6 @@
       Next i
     EndIf
   EndIf
-
 %}
 
 currentcount({

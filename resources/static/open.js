@@ -1,12 +1,14 @@
-function exclusiveResponse(resElement){
-  if (resElement.checked) {
-
-  }
-  return true;
-}
-
-function currentcount(options) {
+(function ($) {
+	$.fn.adcOpen = function adcOpen(options) {
     var showTrafficLight = options.showTrafficLight || 0;
+    var itemsLength = 1;
+
+    itemsLength = (options.isInLoop) ? options.items.length : 1;
+
+    for (var i = 0; i < itemsLength; i++) {
+
+    options.inputId = (options.isInLoop) ? options.items[i].element[0].id : options.inputId;
+    options.increment = i + 1;
 
     document.addEventListener("DOMContentLoaded", function(){
       var exclusiveResponses = document.querySelectorAll('.myresponse');
@@ -40,128 +42,135 @@ function currentcount(options) {
       }
 
       if (window.askia
+        && window.arrLiveRoutingShortcut
+        && window.arrLiveRoutingShortcut.length > 0
+        && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
+          askia.triggerAnswer();
+        }
+      }
+
+      options.adcSelector = '#adc_' + options.instanceId;
+
+      var openInputDK = document.querySelector('#adc_' + this.instanceId + ' .openDK input[type="checkbox"]');
+
+      document.getElementById(options.inputId).addEventListener('keyup', function (e) {
+        //var inputcontent= this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r\n'); //handling of line-break characters
+        var inputcontent = this.value;
+        options.counterdiv = document.getElementById(this.id).parentNode.querySelector(options.adcSelector + " .counterdiv .counter b");
+        options.congratsdiv = document.getElementById(this.id).parentNode.querySelector(options.adcSelector + " .congrats-message");
+
+        if (options.direction == 'desc') {
+          options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
+          printcounter(options);
+        } else {
+          options.val = inputcontent.length;
+          printcounter(options);
+        }
+        if (options.suggestedchar > 0 && options.showcongrats && inputcontent.length >= options.suggestedchar) {
+          options.congratsdiv.style = "display:block";
+        }
+        else {
+          options.congratsdiv.style = "display:none";
+        }
+
+        if(showTrafficLight) setCounterMeter(inputcontent.length, options, this.id);
+
+        if (window.askia
           && window.arrLiveRoutingShortcut
           && window.arrLiveRoutingShortcut.length > 0
           && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
-          askia.triggerAnswer();
-      }
-    }
-    options.adcSelector = '#adc_' + options.instanceId;
-
-    var openInputDK = document.querySelector('#adc_' + this.instanceId + ' .openDK input[type="checkbox"]');
-
-    document.getElementById(options.inputId).addEventListener('keyup', function (e) {
-        //var inputcontent= this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r\n'); //handling of line-break characters
-        var inputcontent = this.value;
-        options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
-        options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
-
-
-        if (options.direction == 'desc') {
-            options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
-            printcounter(options);
-        } else {
-            options.val = inputcontent.length;
-            printcounter(options);
-        }
-        if (options.suggestedchar > 0 && options.showcongrats && inputcontent.length >= options.suggestedchar) {
-            options.congratsdiv.style = "display:block";
-        }
-        else {
-            options.congratsdiv.style = "display:none";
-        }
-
-        if(showTrafficLight) setCounterMeter(inputcontent.length,options);
-
-        if (window.askia
-            && window.arrLiveRoutingShortcut
-            && window.arrLiveRoutingShortcut.length > 0
-            && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
             askia.triggerAnswer();
-        }
-    });
+          }
+      });
 
-    document.getElementById(options.inputId).addEventListener('input', function (e) {
+      document.getElementById(options.inputId).addEventListener('input', function (e) {
         var inputcontent = this.value;
-        options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
-        options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
+        options.counterdiv = document.getElementById(this.id).parentNode.querySelector(options.adcSelector + " .counterdiv .counter b");
+        options.congratsdiv = document.getElementById(this.id).parentNode.querySelector(options.adcSelector + " .congrats-message");
 
         if (options.maxchar > 0 && options.maxchar - inputcontent.length < 0) {
-            this.value = this.value.substring(0, options.maxchar);
+          this.value = this.value.substring(0, options.maxchar);
         }
 
         if (options.direction == 'desc') {
-            options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
-            printcounter(options);
-        }
-        else {
-            options.val = inputcontent.length;
-            printcounter(options);
-        }
-        if (options.suggestedchar > 0 && options.showcongrats && inputcontent.length >= options.suggestedchar) {
-            options.congratsdiv.style = "display:block";
-        }
-        else {
-            options.congratsdiv.style = "display:none";
-        }
-
-        if(showTrafficLight) setCounterMeter(inputcontent.length,options);
-
-        if (window.askia
-            && window.arrLiveRoutingShortcut
-            && window.arrLiveRoutingShortcut.length > 0
-            && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
-            askia.triggerAnswer();
-        }
-    });
-
-    document.getElementById(options.inputId).addEventListener('focus', function (e) {
-      var inputcontent = this.value;
-      options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
-
-      if (options.direction == 'desc') {
           options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
           printcounter(options);
-      }
-      else {
+        }
+        else {
           options.val = inputcontent.length;
           printcounter(options);
-      }
-
-      if(showTrafficLight) setCounterMeter(inputcontent.length,options);
-    });
-
-    document.getElementById(options.inputId).addEventListener('paste', function () {
-        var inputcontent = this.value;
-        options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
-        options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
-
-        if (options.direction == 'desc') {
-            options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
-            printcounter(options);
-        }
-        else {
-            options.val = inputcontent.length;
-            printcounter(options);
         }
         if (options.suggestedchar > 0 && options.showcongrats && inputcontent.length >= options.suggestedchar) {
-            options.congratsdiv.style = "display:block";
+          options.congratsdiv.style = "display:block";
         }
         else {
-            options.congratsdiv.style = "display:none";
+          options.congratsdiv.style = "display:none";
         }
 
-        if(showTrafficLight) setCounterMeter(inputcontent.length,options);
+        if(showTrafficLight) setCounterMeter(inputcontent.length, options, this.id);
 
         if (window.askia
-            && window.arrLiveRoutingShortcut
-            && window.arrLiveRoutingShortcut.length > 0
-            && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
+          && window.arrLiveRoutingShortcut
+          && window.arrLiveRoutingShortcut.length > 0
+          && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
             askia.triggerAnswer();
+          }
+        });
+
+      document.getElementById(options.inputId).addEventListener('focus', function (e) {
+        var inputcontent = this.value;
+        options.counterdiv = document.getElementById(this.id).parentNode.querySelector(options.adcSelector + " .counterdiv .counter b");
+
+        if (options.direction == 'desc') {
+          options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
+          printcounter(options);
+        }
+        else {
+          options.val = inputcontent.length;
+          printcounter(options);
         }
 
-    });
+        if(showTrafficLight) setCounterMeter(inputcontent.length, options, this.id);
+      });
 
+      document.getElementById(options.inputId).addEventListener('paste', function () {
+        var inputcontent = this.value;
+        options.counterdiv = document.getElementById(this.id).parentNode.querySelector(options.adcSelector + " .counterdiv .counter b");
+        options.congratsdiv = document.getElementById(this.id).parentNode.querySelector(options.adcSelector + " .congrats-message");
+
+        if (options.direction == 'desc') {
+          options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
+          printcounter(options);
+        }
+        else {
+          options.val = inputcontent.length;
+          printcounter(options);
+        }
+        if (options.suggestedchar > 0 && options.showcongrats && inputcontent.length >= options.suggestedchar) {
+          options.congratsdiv.style = "display:block";
+        }
+        else {
+          options.congratsdiv.style = "display:none";
+        }
+
+        if(showTrafficLight) setCounterMeter(inputcontent.length, options, this.id);
+
+        if (window.askia
+          && window.arrLiveRoutingShortcut
+          && window.arrLiveRoutingShortcut.length > 0
+          && window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
+            askia.triggerAnswer();
+          }
+        });
+      }
+  }
+}(jQuery));
+
+function exclusiveResponse(resElement){
+  if (resElement.checked) {
+
+  }
+  return true;
 }
 
 function changeGradient(f,meterDiv){
@@ -170,18 +179,16 @@ function changeGradient(f,meterDiv){
   }
 }
 
-function setCounterMeter(charCount,options){
+function setCounterMeter(charCount,options,inputId){
   var maxchar = options.trafficLightMax | 60;
   var percentage = (charCount/maxchar) * 100;
   var intg = Math.ceil(percentage/10);
-  var meterDiv = document.querySelector('#adc_' + options.instanceId + ' .meterDiv');
-
+  var meterDiv = document.getElementById(inputId).parentNode.querySelector(options.adcSelector + " .meterDiv");
   if (intg <= 10) {
     for (var i = 0; i < 10; i++) {
         meterDiv.children[i].children[0].classList.remove("color"+(i+1));
     }
   }
-
 
   switch (intg) {
     case 1:

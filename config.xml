@@ -7,8 +7,8 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>3.2.4</version>
-    <date>2022-01-27</date>
+    <version>3.3.0</version>
+    <date>2022-12-01</date>
     <description><![CDATA[
       v2.0.4 - Modifications for HTML5 compatibility
       v3.0.1 - JB - Added option to override browser validation using required, minLength and maxLength
@@ -23,6 +23,7 @@
       v3.2.2 - Allow numeric question type
       v3.2.3 - Fixed, unable to add spaces on textareas.
       v3.2.4 - Fixed, trafficLightMin/Max default value issue
+      v3.3.0 - Loop support
     ]]></description>
     <company>Askia</company>
     <author><![CDATA[Stephen Bronnec]]></author>
@@ -33,7 +34,7 @@
       <category>Styling</category>
     </categories>
     <constraints>
-      <constraint on="questions" single="false" multiple="false" numeric="true" date="false" open="true" chapter="false" requireParentLoop="false" requireLoopDepth="1" />
+      <constraint on="questions" single="false" multiple="false" numeric="true" date="false" open="true" chapter="false" requireParentLoop="false" requireLoopDepth="0" />
       <constraint on="controls" responseblock="true" checkbox="true" label="true" listbox="false" radiobutton="true" textbox="true" />
       <constraint on="responses" max="*" min="*" />
     </constraints>
@@ -42,10 +43,13 @@
     <output id="default" manageLoopDepth="1">
       <condition><![CDATA[Browser.support("Javascript")]]></condition>
       <content fileName="open.js" type="javascript" mode="static" position="head" />
-      <content fileName="open.html" type="html" mode="dynamic" position="placeholder" />
+      <content fileName="default.html" type="html" mode="dynamic" position="placeholder" />
+      <content fileName="open_loop.html" type="html" mode="dynamic" position="none" />
+      <content fileName="open.html" type="html" mode="dynamic" position="none" />
       <content fileName="open.css" type="css" mode="static" position="head" />
       <content fileName="open.css" type="css" mode="dynamic" position="head" />
-      <content fileName="open.js" type="javascript" mode="dynamic" position="foot" />
+      <content fileName="default.js" type="javascript" mode="dynamic" position="foot" />
+      <content fileName="open_loop.js" type="javascript" mode="dynamic" position="none" />
     </output>
     <output id="No_JS" manageLoopDepth="1">
       <condition><![CDATA[Browser.support("Javascript")=0]]></condition>
@@ -86,6 +90,16 @@
       <property xsi:type="standardProperty" id="datalist" name="Datalist" type="string" require="false" visible="false">
         <description><![CDATA[]]></description>
         <value><![CDATA[]]></value>
+      </property>
+    </category>
+    <category id="looped" name="Looped Questions">
+      <property xsi:type="standardProperty" id="isInLoop" name="Is in loop" type="string" mode="dynamic" require="true" visible="true">
+        <description><![CDATA[Turn this on to use the control in a loop]]></description>
+        <value><![CDATA[0]]></value>
+        <options>
+          <option value="1" text="Yes" />
+          <option value="0" text="No" />
+        </options>
       </property>
     </category>
     <category id="ExclusiveResponses" name="Exclusive Responses">
