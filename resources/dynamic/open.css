@@ -60,6 +60,17 @@ dim basefontsize = fontsizefactor
     flex-direction:{%=On(counterposition.Left(1)="N","column","column-reverse")%};
 }
 
+#adc_{%= CurrentADC.InstanceId %} .caption {
+  position: relative;
+  display: block;
+  text-align: center;
+  font-size: 1.05rem;
+  padding: 10px 0;
+  width: 100%;
+  padding: 10px 0;
+  clear: both;
+}
+
 #adc_{%= CurrentADC.InstanceId %} textarea, #adc_{%= CurrentADC.InstanceId %} input{
     border:{%=bordersize%} {%=borderstyle%} rgb({%=bordercolor%}) ;
     background-color: rgba({%=bgcolor%},{%=opacity%});
