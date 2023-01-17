@@ -54,35 +54,41 @@ function triggerEvent(el, type) {
 }
 
 
-function currentcount(options) {
-    document.addEventListener("DOMContentLoaded", function(){
+(function ($) {
+	$.fn.adcOpen = function adcOpen(options) {
 
-		var inputSemiOpens = document.querySelectorAll('#adc_' + options.instanceId + ' .contentinput');
+  // Change event on input semi open
+  var inputSemiOpens = document.querySelectorAll('#adc_' + options.instanceId + ' .contentinput');
+  for (var j1 = 0; j1 < inputSemiOpens.length; j1++) {
+    addEvent(inputSemiOpens[j1], 'input',
+    (function (passedInElement) {
+      return function (e) {
+        onInputSemiOpen(e, passedInElement);
+      };
+    }(this)));
+    triggerEvent(inputSemiOpens[j1], 'input');
+  }
 
-	 // Change event on input semi open
-            for (var j1 = 0; j1 < inputSemiOpens.length; j1++) {
-                addEvent(inputSemiOpens[j1], 'input',
-                         (function (passedInElement) {
-                    return function (e) {
-                        onInputSemiOpen(e, passedInElement);
-                    };
-                }(this)));
-				triggerEvent(inputSemiOpens[j1], 'input');
-            }
+  // Hide native responses(class=".myresponse")
+  var exclusiveResponses = document.querySelectorAll('.myresponse');
+  for (var i = 0; i < exclusiveResponses.length; i++) {
+    exclusiveResponses[i].style.display = "none";
+  }
 
-      var exclusiveResponses = document.querySelectorAll('.myresponse');
-      for (var i = 0; i < exclusiveResponses.length; i++) {
-        exclusiveResponses[i].style.display = "none";
-      }
+   var itemsLength = 1,
+          itemsLength = (options.isInLoop) ? options.items.length : 1;
+   for (var i = 0; i < itemsLength; i++) {
 
-    });
+    options.inputId = (options.isInLoop) ? options.items[i].element[0].id : options.inputId;
+    options.increment = i + 1;
+
 
     if (options.strExclusiveResponseIds != "") {
 
       let strExclusiveResponseIds = options.strExclusiveResponseIds;
       let arrIds = strExclusiveResponseIds.split(',');
-      for (var i = 0; i < arrIds.length; i++) {
 
+      for (var i = 0; i < arrIds.length; i++) {
         if (document.getElementById(arrIds[i]).checked) {
           document.getElementById(options.inputId).value = '';
 
@@ -123,14 +129,14 @@ function currentcount(options) {
     // var openInputDK = document.querySelector('#adc_' + this.instanceId + ' .openDK input[type="checkbox"]');
 
     document.getElementById('other'+options.inputId).addEventListener('keyup', function (e) {
-
         uncheckResponses(options.strExclusiveResponseIds);
 
         //var inputcontent= this.value.replace(/\r(?!\n)|\n(?!\r)/g, '\r\n'); //handling of line-break characters
-        var inputcontent = this.previousElementSibling.value.trim();
-        options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
-        options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
+        var inputcontent = this.value.trim();
+        this.previousElementSibling.value = inputcontent;
 
+        options.counterdiv = getContainer(this.id).querySelector(options.adcSelector + " .counterdiv .counter b");
+        options.congratsdiv = getContainer(this.id).querySelector(options.adcSelector + " .congrats-message");
 
         if (options.direction == 'desc') {
             options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
@@ -162,8 +168,8 @@ function currentcount(options) {
         uncheckResponses(options.strExclusiveResponseIds);
 
         var inputcontent = this.previousElementSibling.value.trim();
-        options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
-        options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
+        options.counterdiv = getContainer(this.id).querySelector(options.adcSelector + " .counterdiv .counter b");
+        options.congratsdiv = getContainer(this.id).querySelector(options.adcSelector + " .congrats-message");
 
         if (options.direction == 'desc') {
             options.val = (options.maxchar - inputcontent.length > 0 ? options.maxchar - inputcontent.length : 0);
@@ -189,10 +195,11 @@ function currentcount(options) {
     });
 
     document.getElementById("other" + options.inputId).addEventListener('input', function (e) {
-
         var inputcontent = this.value.trim();
-        options.counterdiv = document.querySelector(options.adcSelector + " .counterdiv .counter b");
-        options.congratsdiv = document.querySelector(options.adcSelector + " .congrats-message");
+        this.previousElementSibling.value = inputcontent;
+
+        options.counterdiv = getContainer(this.id).querySelector(options.adcSelector + " .counterdiv .counter b");
+        options.congratsdiv = getContainer(this.id).querySelector(options.adcSelector + " .congrats-message");
 
         if (options.maxchar > 0 && options.maxchar - inputcontent.length < 0) {
             this.value = this.value.trim().substring(0, options.maxchar);
@@ -219,8 +226,9 @@ function currentcount(options) {
             askia.triggerAnswer();
         }
     });
-
+  }
 }
+}(jQuery));
 
 function uncheckResponses(exResponseIds){
   if (exResponseIds != "") {
@@ -247,6 +255,14 @@ function printcounter(options) {
     if (options.direction != "none") {
         options.counterdiv.innerHTML = options.val;
     }
+}
+
+function getContainer(id) {
+  var containerElem = document.getElementById(id).parentNode;
+  if (containerElem.tagName == "LABEL") {
+    containerElem = containerElem.parentNode;
+  }
+  return containerElem;
 }
 
 //onkeydown event
