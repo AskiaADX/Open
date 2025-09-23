@@ -1,4 +1,5 @@
-<p id="messageDisplay_{%= CurrentADC.InstanceId %}" class="bubble thought" style="display:none"></p>
+
+
 
 {%
 Dim inputName  =  CurrentQuestion.InputName()
@@ -49,7 +50,12 @@ dim congratsMessage = CurrentADC.PropValue("congratsMessage")
 'On(countOrder="desc",maxchar,"0")
 
 Dim useExclusiveQuestion = CurrentADC.PropValue("useExclusive")
+dim usePrompt = CurrentADC.PropValue("useAI").ToNumber()
 %}
+
+{% IF usePrompt <> 2 Then %}
+<p id="messageDisplay_{%= CurrentADC.InstanceId %}" class="bubble thought" style="display:none"></p>
+{% EndIf %}
 
     <div class="adc-open-content {%=attrControlAlign%}">
 
