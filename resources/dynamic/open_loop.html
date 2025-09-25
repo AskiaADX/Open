@@ -53,8 +53,12 @@ For increment = 1 To plr.Count
   'On(countOrder="desc",maxchar,"0")
 
   Dim useExclusiveQuestion = CurrentADC.PropValue("useExclusive")
-
+  dim usePrompt = CurrentADC.PropValue("useAI").ToNumber()
 %}
+
+{% IF usePrompt <> 2 Then %}
+<p id="messageDisplay_{%= CurrentADC.InstanceId %}" class="bubble thought" style="display:none"></p>
+{% EndIf %}
 
   <div id="counter{%:= increment %}" class="adc-open-content {%=attrControlAlign%}">
       <label class="caption">{%:= plr[increment].Caption %}</label>
