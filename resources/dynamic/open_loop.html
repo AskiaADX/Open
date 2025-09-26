@@ -108,7 +108,7 @@ For increment = 1 To plr.Count
       {% Endif %}
 
   		{% If useExclusiveQuestion = "yes" Then
-  		Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
+    Dim exclusiveQuestion = CurrentADC.PropValue("exclusiveResponsesQuestion")
   		%}
   			{% If (exclusiveQuestion.Type = "single") Then %}
   				<ul>
