@@ -2,7 +2,7 @@
 {%
  Dim strInputIds = ""
  Dim inputName  =  CurrentQuestion.InputName()
-Dim exclusiveQuestion = CurrentADC.PropValue("exclusiveResponsesQuestion")
+Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
  If exclusiveQuestion <> "" Then
    If (exclusiveQuestion.Type = "single") Then
      Dim inputId
