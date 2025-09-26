@@ -105,7 +105,7 @@ dim usePrompt = CurrentADC.PropValue("useAI").ToNumber()
         {% Endif %}
 
 				{% If useExclusiveQuestion = "yes" Then
-    Dim exclusiveQuestion = CurrentADC.PropValue("exclusiveResponsesQuestion")
+    Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
 				%}
 					{% If (exclusiveQuestion.Type = "single") Then %}
 						<ul>
