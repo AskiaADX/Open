@@ -95,7 +95,7 @@
           <option value="no" text="No" />
         </options>
       </property>
-      <property xsi:type="standardProperty" id="exclusiveResponsesQuestion" name="Question with exclusive codes" type="string" require="false" visible="true">
+      <property xsi:type="standardProperty" id="exclusiveResponsesQuestion" name="Question with exclusive codes" type="question" require="false" visible="true">
         <description><![CDATA[Select the question for set exclusive responses]]></description>
         <value><![CDATA[none]]></value>
       </property>
