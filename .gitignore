@@ -37,3 +37,4 @@ workspace.json
 ################
 *.tmp/
 *.ps1
+.adxstudio/workspace.json

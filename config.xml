@@ -14,7 +14,7 @@
     <author><![CDATA[Stephen Bronnec]]></author>
     <site>www.askia.com</site>
     <helpURL></helpURL>
-<categories>
+    <categories>
       <category>Prompt</category>
       <category>Features</category>
       <category>Styling</category>
@@ -47,61 +47,6 @@
     </output>
   </outputs>
   <properties>
-    <category id="prompt" name="Prompt">
-      <property xsi:type="standardProperty" id="useAI" name="Prompt Model" type="number" require="false" visible="true" min="0" max="2">
-        <description><![CDATA[]]></description>
-        <value><![CDATA[2]]></value>
-        <options>
-          <option value="2" text="None" />
-          <option value="1" text="AI Model" />
-          <option value="0" text="Survey Question" />
-        </options>
-      </property>
-      <property xsi:type="standardProperty" id="promptQuestion" name="Prompt Question" type="string" require="false" visible="true">
-        <description><![CDATA[]]></description>
-        <value><![CDATA[question shortcut]]></value>
-      </property>
-      <property xsi:type="standardProperty" id="maxPrompts" name="Number of prompts to return (0 = unlimited)" type="number" mode="dynamic" require="false" visible="true" min="0">
-        <description><![CDATA[]]></description>
-        <value><![CDATA[5]]></value>
-      </property>
-      <property xsi:type="standardProperty" id="timePrompts" name="Seconds between prompts (0 = disabled)" type="number" mode="dynamic" require="false" visible="true" min="0">
-        <description><![CDATA[]]></description>
-        <value><![CDATA[5]]></value>
-      </property>
-      <property xsi:type="standardProperty" id="minChars" name="Minimum number of characters" type="number" mode="dynamic" require="false" visible="true" min="0">
-        <description><![CDATA[]]></description>
-        <value><![CDATA[3]]></value>
-      </property>
-      <property xsi:type="standardProperty" id="useSpace" name="Trigger prompt on Space" type="number" require="false" visible="true" min="0" max="1">
-        <description><![CDATA[]]></description>
-        <value><![CDATA[1]]></value>
-        <options>
-          <option value="1" text="Yes" />
-          <option value="0" text="No" />
-        </options>
-      </property>
-      <property xsi:type="standardProperty" id="useEnd" name="Trigger prompt on Punctuation (.,!?;)" type="number" require="false" visible="true" min="0" max="1">
-        <description><![CDATA[]]></description>
-        <value><![CDATA[1]]></value>
-        <options>
-          <option value="1" text="Yes" />
-          <option value="0" text="No" />
-        </options>
-      </property>
-      <property xsi:type="standardProperty" id="timeDelay" name="Space/Punctuation Delay (in seconds)" type="number" mode="dynamic" require="false" visible="true" min="0">
-        <description><![CDATA[]]></description>
-        <value><![CDATA[5]]></value>
-      </property>
-      <property xsi:type="standardProperty" id="hideNext" name="Hide Next button until prompt is triggered" type="number" require="false" visible="true" min="0" max="1">
-        <description><![CDATA[]]></description>
-        <value><![CDATA[1]]></value>
-        <options>
-          <option value="1" text="Yes" />
-          <option value="0" text="No" />
-        </options>
-      </property>
-    </category>
     <category id="features" name="Features">
       <property xsi:type="standardProperty" id="minChar" name="Minimum number of characters" type="number" mode="dynamic" require="false" visible="true" min="0">
         <description><![CDATA[]]></description>
@@ -150,7 +95,7 @@
           <option value="no" text="No" />
         </options>
       </property>
-      <property xsi:type="standardProperty" id="exclusiveResponsesQuestion" name="Question with exclusive codes" type="question" require="false" visible="true">
+      <property xsi:type="standardProperty" id="exclusiveResponsesQuestion" name="Question with exclusive codes" type="string" require="false" visible="true">
         <description><![CDATA[Select the question for set exclusive responses]]></description>
         <value><![CDATA[none]]></value>
       </property>
@@ -224,6 +169,61 @@
       <property xsi:type="standardProperty" id="congratsMessageBGColor" name="Congratulation message background color" type="color" require="true" visible="true" colorFormat="rgba">
         <description><![CDATA[Congratulation message background color]]></description>
         <value><![CDATA[52,179,0,1]]></value>
+      </property>
+    </category>
+    <category id="prompt" name="Prompt">
+      <property xsi:type="standardProperty" id="useAI" name="Prompt Model" type="number" require="false" visible="true" min="0" max="2">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[2]]></value>
+        <options>
+          <option value="2" text="None" />
+          <option value="1" text="AI Model" />
+          <option value="0" text="Survey Question" />
+        </options>
+      </property>
+      <property xsi:type="standardProperty" id="promptQuestion" name="Prompt Question" type="string" require="false" visible="true">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[question shortcut]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="maxPrompts" name="Number of prompts to return (0 = unlimited)" type="number" mode="dynamic" require="false" visible="true" min="0">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[5]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="timePrompts" name="Seconds between prompts (0 = disabled)" type="number" mode="dynamic" require="false" visible="true" min="0">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[5]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="minChars" name="Minimum number of characters" type="number" mode="dynamic" require="false" visible="true" min="0">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[3]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="useSpace" name="Trigger prompt on Space" type="number" require="false" visible="true" min="0" max="1">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[1]]></value>
+        <options>
+          <option value="1" text="Yes" />
+          <option value="0" text="No" />
+        </options>
+      </property>
+      <property xsi:type="standardProperty" id="useEnd" name="Trigger prompt on Punctuation (.,!?;)" type="number" require="false" visible="true" min="0" max="1">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[1]]></value>
+        <options>
+          <option value="1" text="Yes" />
+          <option value="0" text="No" />
+        </options>
+      </property>
+      <property xsi:type="standardProperty" id="timeDelay" name="Space/Punctuation Delay (in seconds)" type="number" mode="dynamic" require="false" visible="true" min="0">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[5]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="hideNext" name="Hide Next button until prompt is triggered" type="number" require="false" visible="true" min="0" max="1">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[1]]></value>
+        <options>
+          <option value="1" text="Yes" />
+          <option value="0" text="No" />
+        </options>
       </property>
     </category>
     <category id="styling" name="Styling">
