@@ -40,3 +40,6 @@ v3.3.0 - Added the loop support
 Version 4.0.1
 - incorporated AI functionality to return text prompts via Ipsos Facto API model script
 - included non-ai prompt capability   
+
+Version 4.0.2
+- exclusive response code troubleshooting
