@@ -37,7 +37,7 @@
       <content fileName="default.js" type="javascript" mode="dynamic" position="foot" />
       <content fileName="open_loop.js" type="javascript" mode="dynamic" position="none" />
       <content fileName="prompt.js" type="javascript" mode="static" position="foot" />
-      <content fileName="aiprompt.css" type="css" mode="static" position="head" />
+      <content fileName="prompt.css" type="css" mode="static" position="head" />
     </output>
     <output id="No_JS" manageLoopDepth="1">
       <condition><![CDATA[Browser.support("Javascript")=0]]></condition>
