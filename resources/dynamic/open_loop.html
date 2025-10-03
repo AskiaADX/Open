@@ -57,7 +57,9 @@ For increment = 1 To plr.Count
 %}
 
 {% IF usePrompt <> 2 Then %}
+<div class="adc-open">
 <p id="messageDisplay_{%= CurrentADC.InstanceId %}" class="bubble thought" style="display:none"></p>
+</div>
 {% EndIf %}
 
   <div id="counter{%:= increment %}" class="adc-open-content {%=attrControlAlign%}">
