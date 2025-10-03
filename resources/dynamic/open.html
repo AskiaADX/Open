@@ -54,7 +54,9 @@ dim usePrompt = CurrentADC.PropValue("useAI").ToNumber()
 %}
 
 {% IF usePrompt <> 2 Then %}
+<div class="adc-open">
 <p id="messageDisplay_{%= CurrentADC.InstanceId %}" class="bubble thought" style="display:none"></p>
+</div>
 {% EndIf %}
 
     <div class="adc-open-content {%=attrControlAlign%}">

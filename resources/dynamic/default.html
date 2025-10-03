@@ -1,4 +1,4 @@
-<div id="adc_{%= CurrentADC.InstanceId %}" class="adc-prompt">
+<div id="adc_{%= CurrentADC.InstanceId %}" class="adc-open">
   {% If CurrentADC.PropValue("isInLoop") = "1" Then %}
       {%:= CurrentADC.GetContent("dynamic/open_loop.html").ToText() %}
   {% Else %}
