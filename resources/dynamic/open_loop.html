@@ -1,3 +1,5 @@
+
+
 {%
 Dim plr = CurrentQuestion.ParentLoop.AvailableAnswers
 Dim increment
@@ -51,8 +53,14 @@ For increment = 1 To plr.Count
   'On(countOrder="desc",maxchar,"0")
 
   Dim useExclusiveQuestion = CurrentADC.PropValue("useExclusive")
-
+  dim usePrompt = CurrentADC.PropValue("useAI").ToNumber()
 %}
+
+{% IF usePrompt <> 2 Then %}
+<div class="adc-open">
+<p id="messageDisplay_{%= CurrentADC.InstanceId %}" class="bubble thought" style="display:none"></p>
+</div>
+{% EndIf %}
 
   <div id="counter{%:= increment %}" class="adc-open-content {%=attrControlAlign%}">
       <label class="caption">{%:= plr[increment].Caption %}</label>
@@ -102,7 +110,7 @@ For increment = 1 To plr.Count
       {% Endif %}
 
   		{% If useExclusiveQuestion = "yes" Then
-  		Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
+    Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
   		%}
   			{% If (exclusiveQuestion.Type = "single") Then %}
   				<ul>

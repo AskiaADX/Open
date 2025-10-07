@@ -7,32 +7,15 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>3.3.0</version>
-    <date>2022-12-15</date>
-    <description><![CDATA[
-      v2.0.4 - Modifications for HTML5 compatibility
-      v3.0.1 - JB - Added option to override browser validation using required, minLength and maxLength
-      v3.0.2 - JB - Emulate maxLength when no browser validation, further fix
-      v3.0.3 - maxLength when no browser validation - fix
-      v3.0.4 - maxlength issue on mobile devices - fix
-      v3.0.5 - maxlength issue on android mobile devices - fix
-      v3.1.0 - exclusive codes
-      v3.1.1 - exclusive codes - bug fixed on inputType = textareas
-      v3.1.3 - Trim single and multiple lines
-      v3.1.4 - Fixed counter trim
-      v3.1.5 - Fixed runtime error when exclusiveQuestion is none
-      v3.1.6 - Added autocomplete off
-      v3.1.7 - Allow numeric question type
-      v3.1.8 -
-      v3.1.9 - Fixed, unable to add spaces on textareas
-      v3.2.0 - fixed - dof runtime errors, Added new adc property 'Use Exclusive Question'
-      v3.3.0 - Added the loop support
-    ]]></description>
+    <version>4.0.2</version>
+    <date>2025-09-23</date>
+    <description><![CDATA[]]></description>
     <company>Askia</company>
-    <author><![CDATA[Stephen Bronnec]]></author>
+    <author><![CDATA[Jordan Grindle]]></author>
     <site>www.askia.com</site>
     <helpURL></helpURL>
     <categories>
+      <category>Prompt</category>
       <category>Features</category>
       <category>Styling</category>
     </categories>
@@ -53,6 +36,8 @@
       <content fileName="open.css" type="css" mode="dynamic" position="head" />
       <content fileName="default.js" type="javascript" mode="dynamic" position="foot" />
       <content fileName="open_loop.js" type="javascript" mode="dynamic" position="none" />
+      <content fileName="prompt.js" type="javascript" mode="static" position="foot" />
+      <content fileName="prompt.css" type="css" mode="static" position="head" />
     </output>
     <output id="No_JS" manageLoopDepth="1">
       <condition><![CDATA[Browser.support("Javascript")=0]]></condition>
@@ -184,6 +169,61 @@
       <property xsi:type="standardProperty" id="congratsMessageBGColor" name="Congratulation message background color" type="color" require="true" visible="true" colorFormat="rgba">
         <description><![CDATA[Congratulation message background color]]></description>
         <value><![CDATA[52,179,0,1]]></value>
+      </property>
+    </category>
+    <category id="prompt" name="Prompt">
+      <property xsi:type="standardProperty" id="useAI" name="Prompt Model" type="number" require="false" visible="true" min="0" max="2">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[2]]></value>
+        <options>
+          <option value="2" text="None" />
+          <option value="1" text="AI Model" />
+          <option value="0" text="Survey Question" />
+        </options>
+      </property>
+      <property xsi:type="standardProperty" id="promptQuestion" name="Prompt Question" type="string" require="false" visible="true">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[question shortcut]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="maxPrompts" name="Number of prompts to return (0 = unlimited)" type="number" mode="dynamic" require="false" visible="true" min="0">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[5]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="timePrompts" name="Seconds between prompts (0 = disabled)" type="number" mode="dynamic" require="false" visible="true" min="0">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[5]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="minChars" name="Minimum number of characters" type="number" mode="dynamic" require="false" visible="true" min="0">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[3]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="useSpace" name="Trigger prompt on Space" type="number" require="false" visible="true" min="0" max="1">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[1]]></value>
+        <options>
+          <option value="1" text="Yes" />
+          <option value="0" text="No" />
+        </options>
+      </property>
+      <property xsi:type="standardProperty" id="useEnd" name="Trigger prompt on Punctuation (.,!?;)" type="number" require="false" visible="true" min="0" max="1">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[1]]></value>
+        <options>
+          <option value="1" text="Yes" />
+          <option value="0" text="No" />
+        </options>
+      </property>
+      <property xsi:type="standardProperty" id="timeDelay" name="Space/Punctuation Delay (in seconds)" type="number" mode="dynamic" require="false" visible="true" min="0">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[5]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="hideNext" name="Hide Next button until prompt is triggered" type="number" require="false" visible="true" min="0" max="1">
+        <description><![CDATA[]]></description>
+        <value><![CDATA[1]]></value>
+        <options>
+          <option value="1" text="Yes" />
+          <option value="0" text="No" />
+        </options>
       </property>
     </category>
     <category id="styling" name="Styling">

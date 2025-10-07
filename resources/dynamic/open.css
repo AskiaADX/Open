@@ -36,14 +36,16 @@ Dim counterfontsize = CurrentADC.PropValue("counterFontSize").ToNumber()
 Dim floatinglabeltextcolor = CurrentADC.PropValue("floatingLabelTextColor")
 dim congratsMessageBGColor = CurrentADC.PropValue("congratsMessageBGColor")
 
-
 'Dim fontsize = CurrentADC.PropValue("areaFontSize").ToNumber()
-
-
 Dim fontsizefactor = CurrentADC.PropValue("fontSizeFactor").ToNumber()
 dim basefontsize = fontsizefactor
-
+Dim hideNextButton = CurrentADC.PropValue("hideNext").ToNumber()
+dim usePrompt = CurrentADC.PropValue("useAI").ToNumber()
 %}
+
+{% IF hideNextButton = 1 AND usePrompt <> 2 Then %}
+input[name="Next"] { visibility:hidden;}
+{% EndIf %}
 
 #adc_{%= CurrentADC.InstanceId %} ul {
   list-style-type: none;
@@ -220,3 +222,5 @@ dim activeoffset = basefontsizelabel
 #adc_{%= CurrentADC.InstanceId %} .counter-helper{
     margin:{%=On(counterposition.Right(1)="W","0 20px 0 0","0 0 0 20px")%};
 }
+
+
