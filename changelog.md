@@ -68,3 +68,7 @@ v4.0.1
 
 v4.0.2
 - exclusive response code troubleshooting
+
+v4.0.3
+- styling fixes for prompts
+- fixed issue where single quotes weren't escaped if HTML tags were included in the long caption
