@@ -68,3 +68,6 @@ v4.0.1
 
 v4.0.2
 - exclusive response code troubleshooting
+
+v4.0.3
+- styling fixes for prompts
