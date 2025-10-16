@@ -71,3 +71,4 @@ v4.0.2
 
 v4.0.3
 - styling fixes for prompts
+- fixed issue where single quotes weren't escaped if HTML tags were included in the long caption

@@ -47,7 +47,7 @@ $(window).on("load", function() {
         instanceId: {%= CurrentADC.InstanceID %},
         inputId: '{%=CurrentQuestion.InputName()%}',
         currentQuestion: '{%:= CurrentQuestion.Shortcut %}',
-        questionText: '{%=CurrentQuestion.LongCaption%}',
+        questionText: "{%= Replace(CurrentQuestion.LongCaption, "'", "\\'") %}",
         maxPrompts: {%=CurrentADC.PropValue("maxPrompts")%},
         promptQuestion: "{%=CurrentADC.PropValue("promptQuestion")%}",
         useAI: {%=CurrentADC.PropValue("useAI")%},
