@@ -76,4 +76,4 @@ v4.0.3
 v4.0.4
 - changed timeDelay option to generically target prompt returns from all sources instead of just space/punctuation
 - included prompt cooldowns for all prompt listeners to remove possibility of double-prompt returns
-- included a function to properlky decode unicode characters if not UTF encoded from the AI model
+- included a function to properly decode unicode characters if not UTF encoded from the AI model
