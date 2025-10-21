@@ -190,10 +190,23 @@ async function getAI(aiInfo, options) {
 				window.addEventListener('keyup', handleKeyup);
 			}
 
+
+			// --- Decode escaped Unicode sequences 
+				function decodeUnicode(str) {
+					try {
+					// Replace any \uXXXX sequence with real characters
+						return str.replace(/\\u([\dA-Fa-f]{4})/g, (match, grp) =>
+						String.fromCharCode(parseInt(grp, 16))
+					);
+						} catch (e) {
+					return str;
+				}
+}
 			// GET AI RESPONSE
 			function handlePromptResponse(event) {
 				if(event.detail.question.shortcut === options.currentQuestion && event.detail.value.startsWith("||")) {
 					var aiMessage = event.detail.value.split("||")[1] || "AI error: no response";
+					aiMessage = decodeUnicode(aiMessage);
 
 					setTimeout(() => {
 						messageElement.textContent = aiMessage;
