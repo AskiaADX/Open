@@ -72,3 +72,7 @@ v4.0.2
 v4.0.3
 - styling fixes for prompts
 - fixed issue where single quotes weren't escaped if HTML tags were included in the long caption
+
+v4.0.4
+- changed timeDelay option to generically target prompt returns from all sources instead of just space/punctuation
+- included prompt cooldowns for all prompt listeners to remove possibility of double-prompt returns

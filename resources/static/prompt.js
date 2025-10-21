@@ -54,11 +54,12 @@ async function getAI(aiInfo, options) {
 			var maxPrompt = options.maxPrompts;
 			var cntPrompt = 0;
 			var punctMarks = ['.', ',', '!', '?', ';'];
-			var lastSpacePress = 0; 
 			var cooldown = (options.timeDelay || 1) * 1000; 
+			var dtLastPrompt = Date.now();
 			var inputElement = document.getElementById("other" + options.inputId);
 			var formElement = inputElement ? inputElement.previousElementSibling : null;			
 			var messageElement = document.getElementById("messageDisplay_" + adcinstanceID);
+
 
 			function displayRandomMessage() {
 				var questionText = options.questionText;
@@ -142,10 +143,10 @@ async function getAI(aiInfo, options) {
 			function handleSpacedown(event) {
 				if (event.code === 'Space') {
 					const now = Date.now();
-					if (now - lastSpacePress >= cooldown) {
+					if (now - dtLastPrompt >= cooldown) {
 						displayRandomMessage();
 						console.log("Prompt triggered by spacebar (instance " + adcinstanceID + ")");
-						lastSpacePress = now;
+						dtLastPrompt = now;
 					}
 				}
 			}
@@ -158,10 +159,10 @@ async function getAI(aiInfo, options) {
 			function handlePunctdown(event) {
 				if (punctMarks.includes(event.key)) {
 					const now = Date.now();
-					if (now - lastSpacePress >= cooldown) {
+					if (now - dtLastPrompt >= cooldown) {
 						displayRandomMessage();
 						console.log("Prompt triggered by punctuation (instance " + adcinstanceID + ")");
-						lastSpacePress = now;
+						dtLastPrompt = now;
 					}
 				}
 			}
@@ -177,9 +178,15 @@ async function getAI(aiInfo, options) {
 
 				function handleKeyup() {
 					clearTimeout(typingTimer); // Clear any previous timeout
-					typingTimer = setTimeout(displayRandomMessage, delay); // Set a new timeout
-				}
-
+					typingTimer = setTimeout(() => {
+						const now = Date.now();
+						if (now - dtLastPrompt >= cooldown) {
+							displayRandomMessage();
+							dtLastPrompt = now;
+						 }
+						 },delay); // Set a new timeout	
+					} 				
+				
 				window.addEventListener('keyup', handleKeyup);
 			}
 
