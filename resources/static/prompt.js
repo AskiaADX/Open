@@ -58,7 +58,7 @@ async function getAI(aiInfo, options) {
 			var dtLastPrompt = Date.now();
 			var inputElement = document.getElementById("other" + options.inputId);
 			var formElement = inputElement ? inputElement.previousElementSibling : null;			
-			var messageElement = document.getElementById("messageDisplay_" + adcinstanceID);
+			var messageElement = document.getElementById("messageDisplay_" + adcinstanceID);           
 
 
 			function displayRandomMessage() {
@@ -231,3 +231,40 @@ async function getAI(aiInfo, options) {
 	
 	};
 })(jQuery);
+
+(function() {
+	// Function to clear Askia "other" inputs on page load
+	function clearAskiaInputs() {
+		// Find all text inputs whose IDs start with "other"
+		var inputs = document.querySelectorAll("input[id^='other']");
+
+		if (inputs.length > 0) {
+			for (var i = 0; i < inputs.length; i++) {
+				inputs[i].value = "";
+
+				// Also clear linked hidden Askia input if present
+				var formElement = inputs[i].previousElementSibling;
+				if (formElement && formElement.tagName === "INPUT") {
+					formElement.value = "";
+				}
+			}
+			console.log("✅ Cleared all Askia 'other' inputs:", inputs.length);
+		} else {
+			console.log("⚠️ No inputs found to clear.");
+		}
+	}
+
+	// Run after DOM is ready
+	if (document.readyState === "complete" || document.readyState === "interactive") {
+		clearAskiaInputs();
+	} else {
+		document.addEventListener("DOMContentLoaded", clearAskiaInputs);
+	}
+
+	// Handle browser back/forward cache (Safari/Firefox)
+	window.addEventListener("pageshow", function(event) {
+		if (event.persisted) {
+			clearAskiaInputs();
+		}
+	});
+})();
