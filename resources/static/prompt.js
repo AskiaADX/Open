@@ -14,35 +14,6 @@ async function getAI(aiInfo, options) {
 		askia.triggerAnswer();
 	}
 
-
-	/* Client side request to AI service with dynamic headers */
-	/*
-	const headers = {
-		'Content-Type': 'application/json',
-		[options.apiHead]: options.apiAuth
-	};
-
-	console.log("Headers being sent:", headers); // ✅ Debug log
-
-	return fetch('https://ipsos.litellm-prod.ai/v1/chat/completions', {
-		method: 'POST',
-		headers: headers,
-		body: JSON.stringify(aiInfo)
-	})
-	.then(response => {
-		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
-		}
-		return response.json();
-	})
-	.then(data => {
-		console.log('Data received:', data);
-		return data;
-	})
-	.catch(error => {
-		console.error('Fetch error:', error);
-	});
-	*/
 }
 
 (function($) {
@@ -105,19 +76,6 @@ async function getAI(aiInfo, options) {
 
 							getAI(aiInfo, options);
 							
-							/*
-							.then(data => {
-								let aiMessage = data?.choices?.[0]?.message?.content || "AI error: no response";
-
-								setTimeout(() => {
-									messageElement.textContent = aiMessage;
-									messageElement.classList.add("ChangeTo");
-									setTimeout(() => {
-										messageElement.classList.remove("ChangeTo");
-									}, 1000);
-								}, 1000);
-							});
-							*/
 						} else {
 							// fallback to random prompt
 							var randomIndex = Math.floor(Math.random() * options.promptArray.length);
