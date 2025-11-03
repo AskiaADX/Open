@@ -162,7 +162,7 @@ async function getAI(aiInfo, options) {
 }
 			// GET AI RESPONSE
 			function handlePromptResponse(event) {
-				if(event.detail.question.shortcut === options.currentQuestion && event.detail.value.startsWith("||")) {
+				if(event.detail.question.shortcut === options.promptQuestion && event.detail.value.startsWith("||")) {
 					var aiMessage = event.detail.value.split("||")[1] || "AI error: no response";
 					aiMessage = decodeUnicode(aiMessage);
 
@@ -181,6 +181,7 @@ async function getAI(aiInfo, options) {
 
 			if (options.useAI === 1 && formElement !== null) {
 				document.addEventListener('askiaSetValue', handlePromptResponse);
+                
 			}
 
 
