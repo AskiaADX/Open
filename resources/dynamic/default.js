@@ -19,8 +19,6 @@ Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
  EndIf
 %}
 
- 
-
 $(window).on("load", function() {
     var $el = $('#adc_{%= CurrentADC.InstanceId %}');
 
@@ -47,7 +45,7 @@ $(window).on("load", function() {
         instanceId: {%= CurrentADC.InstanceID %},
         inputId: '{%=CurrentQuestion.InputName()%}',
         currentQuestion: '{%:= CurrentQuestion.Shortcut %}',
-        questionText: '{%=CurrentQuestion.LongCaption%}',
+        questionText: "{%= Replace(CurrentQuestion.LongCaption, "'", "\\'") %}",
         maxPrompts: {%=CurrentADC.PropValue("maxPrompts")%},
         promptQuestion: "{%=CurrentADC.PropValue("promptQuestion")%}",
         useAI: {%=CurrentADC.PropValue("useAI")%},
@@ -55,7 +53,8 @@ $(window).on("load", function() {
         timeDelay: {%=CurrentADC.PropValue("timeDelay")%},
         minChars: {%=CurrentADC.PropValue("minChars")%},
         useSpace: {%=CurrentADC.PropValue("useSpace")%},
-        useEnd: {%=CurrentADC.PropValue("useEnd")%},        
+        useEnd: {%=CurrentADC.PropValue("useEnd")%},
+        useNext: {%=CurrentADC.PropValue("hideNext")%},
         promptArray:  [
         {%
           Dim i
@@ -69,5 +68,31 @@ $(window).on("load", function() {
     });
 });
 
+// Disable Enter key from submitting the page, except for TEXTAREAs
+{% Dim hideNextButton = CurrentADC.PropValue("hideNext").ToNumber() %}
+{% IF hideNextButton = 1 Then %}
+AskiaScript.addReadyEvent(function () {
+    NavigatorHandler.keydown = function (e) {
+        e = e || window.event;
+        var elt = e.target || e.srcElement;
+
+        // Only handle Enter key
+        var key = e.key || e.keyCode || e.which;
+        if (key !== 'Enter' && key !== 13) return true;
+
+        // Allow line breaks in TEXTAREAs
+        if (elt && elt.tagName && elt.tagName.toUpperCase() === "TEXTAREA") return true;
+
+        // Stop Enter from submitting or navigating
+        if (e.preventDefault) e.preventDefault();
+        if (e.stopPropagation) e.stopPropagation();
+
+        e.returnValue = false;
+        e.cancelBubble = true;
+
+        return false;
+    };
+ });
+{% EndIf %}
 
 

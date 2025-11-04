@@ -14,35 +14,6 @@ async function getAI(aiInfo, options) {
 		askia.triggerAnswer();
 	}
 
-
-	/* Client side request to AI service with dynamic headers */
-	/*
-	const headers = {
-		'Content-Type': 'application/json',
-		[options.apiHead]: options.apiAuth
-	};
-
-	console.log("Headers being sent:", headers); // ✅ Debug log
-
-	return fetch('https://ipsos.litellm-prod.ai/v1/chat/completions', {
-		method: 'POST',
-		headers: headers,
-		body: JSON.stringify(aiInfo)
-	})
-	.then(response => {
-		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
-		}
-		return response.json();
-	})
-	.then(data => {
-		console.log('Data received:', data);
-		return data;
-	})
-	.catch(error => {
-		console.error('Fetch error:', error);
-	});
-	*/
 }
 
 (function($) {
@@ -54,11 +25,12 @@ async function getAI(aiInfo, options) {
 			var maxPrompt = options.maxPrompts;
 			var cntPrompt = 0;
 			var punctMarks = ['.', ',', '!', '?', ';'];
-			var lastSpacePress = 0; 
 			var cooldown = (options.timeDelay || 1) * 1000; 
+			var dtLastPrompt = Date.now();
 			var inputElement = document.getElementById("other" + options.inputId);
 			var formElement = inputElement ? inputElement.previousElementSibling : null;			
-			var messageElement = document.getElementById("messageDisplay_" + adcinstanceID);
+			var messageElement = document.getElementById("messageDisplay_" + adcinstanceID);           
+
 
 			function displayRandomMessage() {
 				var questionText = options.questionText;
@@ -104,19 +76,6 @@ async function getAI(aiInfo, options) {
 
 							getAI(aiInfo, options);
 							
-							/*
-							.then(data => {
-								let aiMessage = data?.choices?.[0]?.message?.content || "AI error: no response";
-
-								setTimeout(() => {
-									messageElement.textContent = aiMessage;
-									messageElement.classList.add("ChangeTo");
-									setTimeout(() => {
-										messageElement.classList.remove("ChangeTo");
-									}, 1000);
-								}, 1000);
-							});
-							*/
 						} else {
 							// fallback to random prompt
 							var randomIndex = Math.floor(Math.random() * options.promptArray.length);
@@ -142,10 +101,10 @@ async function getAI(aiInfo, options) {
 			function handleSpacedown(event) {
 				if (event.code === 'Space') {
 					const now = Date.now();
-					if (now - lastSpacePress >= cooldown) {
+					if (now - dtLastPrompt >= cooldown) {
 						displayRandomMessage();
 						console.log("Prompt triggered by spacebar (instance " + adcinstanceID + ")");
-						lastSpacePress = now;
+						dtLastPrompt = now;
 					}
 				}
 			}
@@ -158,10 +117,10 @@ async function getAI(aiInfo, options) {
 			function handlePunctdown(event) {
 				if (punctMarks.includes(event.key)) {
 					const now = Date.now();
-					if (now - lastSpacePress >= cooldown) {
+					if (now - dtLastPrompt >= cooldown) {
 						displayRandomMessage();
 						console.log("Prompt triggered by punctuation (instance " + adcinstanceID + ")");
-						lastSpacePress = now;
+						dtLastPrompt = now;
 					}
 				}
 			}
@@ -177,16 +136,35 @@ async function getAI(aiInfo, options) {
 
 				function handleKeyup() {
 					clearTimeout(typingTimer); // Clear any previous timeout
-					typingTimer = setTimeout(displayRandomMessage, delay); // Set a new timeout
-				}
-
+					typingTimer = setTimeout(() => {
+						const now = Date.now();
+						if (now - dtLastPrompt >= cooldown) {
+							displayRandomMessage();
+							dtLastPrompt = now;
+						 }
+						 },delay); // Set a new timeout	
+					} 				
+				
 				window.addEventListener('keyup', handleKeyup);
 			}
 
+
+			// --- Decode escaped Unicode sequences 
+				function decodeUnicode(str) {
+					try {
+					// Replace any \uXXXX sequence with real characters
+						return str.replace(/\\u([\dA-Fa-f]{4})/g, (match, grp) =>
+						String.fromCharCode(parseInt(grp, 16))
+					);
+						} catch (e) {
+					return str;
+				}
+}
 			// GET AI RESPONSE
 			function handlePromptResponse(event) {
-				if(event.detail.question.shortcut === options.currentQuestion && event.detail.value.startsWith("||")) {
+				if(event.detail.question.shortcut === options.promptQuestion && event.detail.value.startsWith("||")) {
 					var aiMessage = event.detail.value.split("||")[1] || "AI error: no response";
+					aiMessage = decodeUnicode(aiMessage);
 
 					setTimeout(() => {
 						messageElement.textContent = aiMessage;
@@ -203,6 +181,7 @@ async function getAI(aiInfo, options) {
 
 			if (options.useAI === 1 && formElement !== null) {
 				document.addEventListener('askiaSetValue', handlePromptResponse);
+                
 			}
 
 

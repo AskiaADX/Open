@@ -68,3 +68,15 @@ v4.0.1
 
 v4.0.2
 - exclusive response code troubleshooting
+
+v4.0.3
+- styling fixes for prompts
+- fixed issue where single quotes weren't escaped if HTML tags were included in the long caption
+
+v4.0.4
+- changed timeDelay option to generically target prompt returns from all sources instead of just space/punctuation
+- included prompt cooldowns for all prompt listeners to remove possibility of double-prompt returns
+- included a function to properly decode unicode characters if not UTF encoded from the AI model
+
+v4.0.5
+- fixed bug that would insert the prompt text into the input field upon page refresh
