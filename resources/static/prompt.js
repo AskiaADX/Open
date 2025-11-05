@@ -1,4 +1,4 @@
-async function getAI(aiInfo, options) {
+function getAI(aiInfo, options) {
 	var inputElement = document.getElementById("other" + options.inputId);
 	var inputValue = inputElement ? inputElement.value.trim() : "";
 	var formElement = inputElement ? inputElement.previousElementSibling : null;
@@ -13,7 +13,6 @@ async function getAI(aiInfo, options) {
 		&& window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
 		askia.triggerAnswer();
 	}
-
 }
 
 (function($) {
@@ -59,7 +58,7 @@ async function getAI(aiInfo, options) {
 
 					if (messageElement) {
 						// STEP 1: Show jumping dots as loading indicator
-						messageElement.innerHTML = `<span class="jumping-dots"><span></span><span></span><span></span></span> `;
+						messageElement.innerHTML = '<span class="jumping-dots"><span></span><span></span><span></span></span> ';
 						messageElement.style.display = '';
 
 						// STEP 2: Build prompt (dynamic between AI selection)
@@ -82,10 +81,10 @@ async function getAI(aiInfo, options) {
 							var randomMessage = options.promptArray[randomIndex] || "";
 
 							// STEP 3: Simulate a loading delay before showing Prompt
-							setTimeout(() => {
+							setTimeout(function() {
 								messageElement.textContent = randomMessage;
 								messageElement.classList.add("ChangeTo");
-								setTimeout(() => {
+								setTimeout(function() {
 									messageElement.classList.remove("ChangeTo");
 								}, 1000);
 							}, 1000); // show loading dots for 1 second before displaying message
@@ -115,7 +114,7 @@ async function getAI(aiInfo, options) {
 
 			// PUNCTUATION LISTENER
 			function handlePunctdown(event) {
-				if (punctMarks.includes(event.key)) {
+				if (punctMarks.indexOf(event.key) >= 0) {
 					const now = Date.now();
 					if (now - dtLastPrompt >= cooldown) {
 						displayRandomMessage();
@@ -136,7 +135,7 @@ async function getAI(aiInfo, options) {
 
 				function handleKeyup() {
 					clearTimeout(typingTimer); // Clear any previous timeout
-					typingTimer = setTimeout(() => {
+					typingTimer = setTimeout(function() {
 						const now = Date.now();
 						if (now - dtLastPrompt >= cooldown) {
 							displayRandomMessage();
@@ -153,8 +152,9 @@ async function getAI(aiInfo, options) {
 				function decodeUnicode(str) {
 					try {
 					// Replace any \uXXXX sequence with real characters
-						return str.replace(/\\u([\dA-Fa-f]{4})/g, (match, grp) =>
-						String.fromCharCode(parseInt(grp, 16))
+						return str.replace(/\\u([\dA-Fa-f]{4})/g, function(match, grp) {
+							return String.fromCharCode(parseInt(grp, 16));
+						}
 					);
 						} catch (e) {
 					return str;
@@ -166,16 +166,16 @@ async function getAI(aiInfo, options) {
 					var aiMessage = event.detail.value.split("||")[1] || "AI error: no response";
 					aiMessage = decodeUnicode(aiMessage);
 
-					setTimeout(() => {
+					setTimeout(function() {
 						messageElement.textContent = aiMessage;
 						messageElement.classList.add("ChangeTo");
-						setTimeout(() => {
+						setTimeout(function() {
 							messageElement.classList.remove("ChangeTo");
 
 							// Reset value
 							formElement.value = inputElement.value.trim();
-						}, 1000);
-					}, 1000);
+						}, 250);
+					}, 250);
 				}
 			}
 
