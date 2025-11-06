@@ -1,16 +1,15 @@
-function getAI(aiInfo, options) {
-	var inputElement = document.getElementById("other" + options.inputId);
-	var inputValue = inputElement ? inputElement.value.trim() : "";
-	var formElement = inputElement ? inputElement.previousElementSibling : null;
-
-	if(formElement !== null) {
-		formElement.value = "|" + inputValue;
-	}
-
+function getAI(options) {
+    console.info("GET AI", options, window.arrLiveRoutingShortcut);
+    
+     var aiInput = document.getElementsByName(options.aiQuestionId);
+     if(aiInput && aiInput.length>0) {
+		aiInput[0].value = "|";
+      }
+    
 	if (window.askia
 		&& window.arrLiveRoutingShortcut
 		&& window.arrLiveRoutingShortcut.length > 0
-		&& window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
+		&& window.arrLiveRoutingShortcut.indexOf(options.aiQuestion) >= 0) {
 		askia.triggerAnswer();
 	}
 }
@@ -18,7 +17,7 @@ function getAI(aiInfo, options) {
 (function($) {
 	$.fn.adcPrompt = function(options) {
 		
-			console.log("Options passed in:", options);
+			// console.log("Options passed in:", options);
 			var $this = $(this);
 			var adcinstanceID = options.instanceId;
 			var maxPrompt = options.maxPrompts;
@@ -28,8 +27,16 @@ function getAI(aiInfo, options) {
 			var dtLastPrompt = Date.now();
 			var inputElement = document.getElementById("other" + options.inputId);
 			var formElement = inputElement ? inputElement.previousElementSibling : null;			
-			var messageElement = document.getElementById("messageDisplay_" + adcinstanceID);           
-
+			var messageElement = document.getElementById("messageDisplay_" + adcinstanceID);       
+        
+          // Hide AI question
+           if(options.aiQuestionId && options.aiQuestionId !== '') {
+              var aiInput = document.getElementsByName(options.aiQuestionId);
+               if(aiInput && aiInput.length>0) {
+                   aiInput[0].parentNode.parentNode.previousElementSibling.style.display = 'none';
+                   aiInput[0].parentNode.parentNode.style.display = 'none';
+               }
+           }
 
 			function displayRandomMessage() {
 				var questionText = options.questionText;
@@ -48,7 +55,7 @@ function getAI(aiInfo, options) {
 					}
 
 					// Remove listeners if max prompts reached
-					console.log("cntPrompt:", cntPrompt, "maxPrompt:", maxPrompt);
+					// console.log("cntPrompt:", cntPrompt, "maxPrompt:", maxPrompt);
 					if (cntPrompt >= maxPrompt && maxPrompt != 0) {
 						window.removeEventListener("keyup", handleKeyup);
 						document.removeEventListener('keydown', handleSpacedown);
@@ -63,18 +70,7 @@ function getAI(aiInfo, options) {
 
 						// STEP 2: Build prompt (dynamic between AI selection)
 						if (options.useAI === 1) {
-							let aiInfo = {
-								"model": "gpt-4o",
-								"messages": [
-									{
-										"role": "user",
-										"content": "Given this question '" + questionText + "' and this response '" + responseText + "' and using the language in the response, provide a short one sentence to prompt for more detail. Do not provide reasoning or explanation."
-									}
-								]
-							};
-
-							getAI(aiInfo, options);
-							
+							getAI(options);							
 						} else {
 							// fallback to random prompt
 							var randomIndex = Math.floor(Math.random() * options.promptArray.length);
@@ -86,8 +82,8 @@ function getAI(aiInfo, options) {
 								messageElement.classList.add("ChangeTo");
 								setTimeout(function() {
 									messageElement.classList.remove("ChangeTo");
-								}, 1000);
-							}, 1000); // show loading dots for 1 second before displaying message
+								}, 250);
+							}, 250); // show loading dots for 1 second before displaying message
 						}
 					} else {
 						console.error("Element not found for ID: messageDisplay_" + adcinstanceID);
@@ -102,7 +98,7 @@ function getAI(aiInfo, options) {
 					const now = Date.now();
 					if (now - dtLastPrompt >= cooldown) {
 						displayRandomMessage();
-						console.log("Prompt triggered by spacebar (instance " + adcinstanceID + ")");
+						// console.log("Prompt triggered by spacebar (instance " + adcinstanceID + ")");
 						dtLastPrompt = now;
 					}
 				}
@@ -118,7 +114,7 @@ function getAI(aiInfo, options) {
 					const now = Date.now();
 					if (now - dtLastPrompt >= cooldown) {
 						displayRandomMessage();
-						console.log("Prompt triggered by punctuation (instance " + adcinstanceID + ")");
+						// console.log("Prompt triggered by punctuation (instance " + adcinstanceID + ")");
 						dtLastPrompt = now;
 					}
 				}
@@ -162,8 +158,8 @@ function getAI(aiInfo, options) {
 }
 			// GET AI RESPONSE
 			function handlePromptResponse(event) {
-				if(event.detail.question.shortcut === options.promptQuestion && event.detail.value.startsWith("||")) {
-					var aiMessage = event.detail.value.split("||")[1] || "AI error: no response";
+				if(event.detail.question.shortcut === options.aiQuestion) {
+					var aiMessage = event.detail.value || "AI error: no response";
 					aiMessage = decodeUnicode(aiMessage);
 
 					setTimeout(function() {
@@ -173,7 +169,7 @@ function getAI(aiInfo, options) {
 							messageElement.classList.remove("ChangeTo");
 
 							// Reset value
-							formElement.value = inputElement.value.trim();
+							// formElement.value = inputElement.value.trim();
 						}, 250);
 					}, 250);
 				}
@@ -183,10 +179,5 @@ function getAI(aiInfo, options) {
 				document.addEventListener('askiaSetValue', handlePromptResponse);
                 
 			}
-
-
-			console.log('adcinstanceID:', adcinstanceID);
-			console.log(options.maxPrompts);
-	
 	};
 })(jQuery);

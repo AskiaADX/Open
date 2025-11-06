@@ -80,3 +80,7 @@ v4.0.4
 
 v4.0.5
 - fixed bug that would insert the prompt text into the input field upon page refresh
+
+v4.0.6
+- fixes for IE compatibility
+- fixes for AI prompt helper question
