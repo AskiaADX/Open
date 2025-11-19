@@ -183,11 +183,11 @@
       </property>
       <property xsi:type="standardProperty" id="promptQuestion" name="Prompt question" type="question" require="false" visible="true">
         <description><![CDATA[Select the question for the prompt messages]]></description>
-        <value><![CDATA[none]]></value>
+        <value><![CDATA[]]></value>
       </property>
       <property xsi:type="standardProperty" id="aiQuestion" name="AI response question" type="question" require="false" visible="true">
         <description><![CDATA[Select the question for the AI response]]></description>
-        <value><![CDATA[none]]></value>
+        <value><![CDATA[]]></value>
       </property>
       <property xsi:type="standardProperty" id="maxPrompts" name="Number of prompts to return (0 = unlimited)" type="number" mode="dynamic" require="false" visible="true" min="0">
         <description><![CDATA[]]></description>
