@@ -2,7 +2,10 @@
 {%
  Dim strInputIds = ""
  Dim inputName  =  CurrentQuestion.InputName()
-Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
+ Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
+ Dim promptQuestion = CurrentADC.PropQuestion("promptQuestion")
+ Dim aiQuestion = CurrentADC.PropQuestion("aiQuestion")
+
  If exclusiveQuestion <> "" Then
    If (exclusiveQuestion.Type = "single") Then
      Dim inputId
@@ -17,6 +20,7 @@ Dim exclusiveQuestion = CurrentADC.PropQuestion("exclusiveResponsesQuestion")
      Next i
    EndIf
  EndIf
+
 %}
 
 $(window).on("load", function() {
@@ -24,7 +28,7 @@ $(window).on("load", function() {
 
     $el.adcOpen({
         instanceId: {%= CurrentADC.InstanceID %},
-        inputId: '{%=CurrentQuestion.InputName()%}',
+        inputId: '{%= InputName %}',
         direction: "{%=CurrentADC.PropValue("counter")%}",
         maxchar: {%=CurrentADC.PropValue("maxChar")%},
         minchar: {%=CurrentADC.PropValue("minChar")%},
@@ -47,8 +51,10 @@ $(window).on("load", function() {
         currentQuestion: '{%:= CurrentQuestion.Shortcut %}',
         questionText: "{%= Replace(CurrentQuestion.LongCaption, "'", "\\'") %}",
         maxPrompts: {%=CurrentADC.PropValue("maxPrompts")%},
-        promptQuestion: "{%=CurrentADC.PropValue("promptQuestion")%}",
+        promptQuestion: "{%= promptQuestion.Shortcut %}",
         useAI: {%=CurrentADC.PropValue("useAI")%},
+        aiQuestion: "{%=  aiQuestion.Shortcut %}",
+        aiQuestionId: "{%=  aiQuestion.InputName() %}",
         timePrompt: {%=CurrentADC.PropValue("timePrompts")%},
         timeDelay: {%=CurrentADC.PropValue("timeDelay")%},
         minChars: {%=CurrentADC.PropValue("minChars")%},
@@ -58,7 +64,7 @@ $(window).on("load", function() {
         promptArray:  [
         {%
           Dim i
-          Dim myQuestion = Survey.Questions.FindByShortcut(CurrentADC.PropValue("promptQuestion"))
+          Dim myQuestion = CurrentADC.PropQuestion("promptQuestion")
           For i = 1 To  myQuestion.Responses.Count 
           %}"{%:= myQuestion.Responses[i].Caption %}" {%:= On(i <> myQuestion.Responses.Count, ",", "") %}
           {%

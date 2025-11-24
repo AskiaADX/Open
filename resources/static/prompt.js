@@ -1,25 +1,23 @@
-async function getAI(aiInfo, options) {
-	var inputElement = document.getElementById("other" + options.inputId);
-	var inputValue = inputElement ? inputElement.value.trim() : "";
-	var formElement = inputElement ? inputElement.previousElementSibling : null;
-
-	if(formElement !== null) {
-		formElement.value = "|" + inputValue;
-	}
-
+function getAI(options) {
+    console.info("GET AI", options, window.arrLiveRoutingShortcut);
+    
+     var aiInput = document.getElementsByName(options.aiQuestionId);
+     if(aiInput && aiInput.length>0) {
+		aiInput[0].value = "|";
+      }
+    
 	if (window.askia
 		&& window.arrLiveRoutingShortcut
 		&& window.arrLiveRoutingShortcut.length > 0
-		&& window.arrLiveRoutingShortcut.indexOf(options.currentQuestion) >= 0) {
+		&& window.arrLiveRoutingShortcut.indexOf(options.aiQuestion) >= 0) {
 		askia.triggerAnswer();
 	}
-
 }
 
 (function($) {
 	$.fn.adcPrompt = function(options) {
 		
-			console.log("Options passed in:", options);
+			// console.log("Options passed in:", options);
 			var $this = $(this);
 			var adcinstanceID = options.instanceId;
 			var maxPrompt = options.maxPrompts;
@@ -29,8 +27,16 @@ async function getAI(aiInfo, options) {
 			var dtLastPrompt = Date.now();
 			var inputElement = document.getElementById("other" + options.inputId);
 			var formElement = inputElement ? inputElement.previousElementSibling : null;			
-			var messageElement = document.getElementById("messageDisplay_" + adcinstanceID);           
-
+			var messageElement = document.getElementById("messageDisplay_" + adcinstanceID);       
+        
+          // Hide AI question
+           if(options.aiQuestionId && options.aiQuestionId !== '') {
+              var aiInput = document.getElementsByName(options.aiQuestionId);
+               if(aiInput && aiInput.length>0) {
+                   aiInput[0].parentNode.parentNode.previousElementSibling.style.display = 'none';
+                   aiInput[0].parentNode.parentNode.style.display = 'none';
+               }
+           }
 
 			function displayRandomMessage() {
 				var questionText = options.questionText;
@@ -49,7 +55,7 @@ async function getAI(aiInfo, options) {
 					}
 
 					// Remove listeners if max prompts reached
-					console.log("cntPrompt:", cntPrompt, "maxPrompt:", maxPrompt);
+					// console.log("cntPrompt:", cntPrompt, "maxPrompt:", maxPrompt);
 					if (cntPrompt >= maxPrompt && maxPrompt != 0) {
 						window.removeEventListener("keyup", handleKeyup);
 						document.removeEventListener('keydown', handleSpacedown);
@@ -59,36 +65,25 @@ async function getAI(aiInfo, options) {
 
 					if (messageElement) {
 						// STEP 1: Show jumping dots as loading indicator
-						messageElement.innerHTML = `<span class="jumping-dots"><span></span><span></span><span></span></span> `;
+						messageElement.innerHTML = '<span class="jumping-dots"><span></span><span></span><span></span></span> ';
 						messageElement.style.display = '';
 
 						// STEP 2: Build prompt (dynamic between AI selection)
 						if (options.useAI === 1) {
-							let aiInfo = {
-								"model": "gpt-4o",
-								"messages": [
-									{
-										"role": "user",
-										"content": "Given this question '" + questionText + "' and this response '" + responseText + "' and using the language in the response, provide a short one sentence to prompt for more detail. Do not provide reasoning or explanation."
-									}
-								]
-							};
-
-							getAI(aiInfo, options);
-							
+							getAI(options);							
 						} else {
 							// fallback to random prompt
 							var randomIndex = Math.floor(Math.random() * options.promptArray.length);
 							var randomMessage = options.promptArray[randomIndex] || "";
 
 							// STEP 3: Simulate a loading delay before showing Prompt
-							setTimeout(() => {
+							setTimeout(function() {
 								messageElement.textContent = randomMessage;
 								messageElement.classList.add("ChangeTo");
-								setTimeout(() => {
+								setTimeout(function() {
 									messageElement.classList.remove("ChangeTo");
-								}, 1000);
-							}, 1000); // show loading dots for 1 second before displaying message
+								}, 250);
+							}, 250); // show loading dots for 1 second before displaying message
 						}
 					} else {
 						console.error("Element not found for ID: messageDisplay_" + adcinstanceID);
@@ -103,7 +98,7 @@ async function getAI(aiInfo, options) {
 					const now = Date.now();
 					if (now - dtLastPrompt >= cooldown) {
 						displayRandomMessage();
-						console.log("Prompt triggered by spacebar (instance " + adcinstanceID + ")");
+						// console.log("Prompt triggered by spacebar (instance " + adcinstanceID + ")");
 						dtLastPrompt = now;
 					}
 				}
@@ -115,11 +110,11 @@ async function getAI(aiInfo, options) {
 
 			// PUNCTUATION LISTENER
 			function handlePunctdown(event) {
-				if (punctMarks.includes(event.key)) {
+				if (punctMarks.indexOf(event.key) >= 0) {
 					const now = Date.now();
 					if (now - dtLastPrompt >= cooldown) {
 						displayRandomMessage();
-						console.log("Prompt triggered by punctuation (instance " + adcinstanceID + ")");
+						// console.log("Prompt triggered by punctuation (instance " + adcinstanceID + ")");
 						dtLastPrompt = now;
 					}
 				}
@@ -136,7 +131,7 @@ async function getAI(aiInfo, options) {
 
 				function handleKeyup() {
 					clearTimeout(typingTimer); // Clear any previous timeout
-					typingTimer = setTimeout(() => {
+					typingTimer = setTimeout(function() {
 						const now = Date.now();
 						if (now - dtLastPrompt >= cooldown) {
 							displayRandomMessage();
@@ -153,8 +148,9 @@ async function getAI(aiInfo, options) {
 				function decodeUnicode(str) {
 					try {
 					// Replace any \uXXXX sequence with real characters
-						return str.replace(/\\u([\dA-Fa-f]{4})/g, (match, grp) =>
-						String.fromCharCode(parseInt(grp, 16))
+						return str.replace(/\\u([\dA-Fa-f]{4})/g, function(match, grp) {
+							return String.fromCharCode(parseInt(grp, 16));
+						}
 					);
 						} catch (e) {
 					return str;
@@ -162,20 +158,20 @@ async function getAI(aiInfo, options) {
 }
 			// GET AI RESPONSE
 			function handlePromptResponse(event) {
-				if(event.detail.question.shortcut === options.promptQuestion && event.detail.value.startsWith("||")) {
-					var aiMessage = event.detail.value.split("||")[1] || "AI error: no response";
+				if(event.detail.question.shortcut === options.aiQuestion) {
+					var aiMessage = event.detail.value || "AI error: no response";
 					aiMessage = decodeUnicode(aiMessage);
 
-					setTimeout(() => {
+					setTimeout(function() {
 						messageElement.textContent = aiMessage;
 						messageElement.classList.add("ChangeTo");
-						setTimeout(() => {
+						setTimeout(function() {
 							messageElement.classList.remove("ChangeTo");
 
 							// Reset value
-							formElement.value = inputElement.value.trim();
-						}, 1000);
-					}, 1000);
+							// formElement.value = inputElement.value.trim();
+						}, 250);
+					}, 250);
 				}
 			}
 
@@ -183,10 +179,5 @@ async function getAI(aiInfo, options) {
 				document.addEventListener('askiaSetValue', handlePromptResponse);
                 
 			}
-
-
-			console.log('adcinstanceID:', adcinstanceID);
-			console.log(options.maxPrompts);
-	
 	};
 })(jQuery);

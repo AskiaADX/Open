@@ -55,10 +55,15 @@ function triggerEvent(el, type) {
 
 // Add debounce function at the top or before usage
 function debounce(fn, delay) {
-    let timer = null;
-    return function(...args) {
+    var timer = null;
+
+    return function() {
+        var context = this;
+        var args = Array.prototype.slice.call(arguments);
         clearTimeout(timer);
-        timer = setTimeout(() => fn.apply(this, args), delay);
+        timer = setTimeout(function() {
+            fn.apply(context, args);
+        }, delay);
     };
 }
 

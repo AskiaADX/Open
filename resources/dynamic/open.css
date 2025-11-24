@@ -223,4 +223,3 @@ dim activeoffset = basefontsizelabel
     margin:{%=On(counterposition.Right(1)="W","0 20px 0 0","0 0 0 20px")%};
 }
 
-

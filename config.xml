@@ -7,7 +7,7 @@
   <info>
     <name>Open</name>
     <guid>8b1644fe-83cc-4a97-b946-be47f512aeba</guid>
-    <version>4.0.5</version>
+    <version>4.0.6</version>
     <date>2025-09-23</date>
     <description><![CDATA[]]></description>
     <company>Askia</company>
@@ -181,9 +181,13 @@
           <option value="0" text="Survey Question" />
         </options>
       </property>
-      <property xsi:type="standardProperty" id="promptQuestion" name="Prompt Question" type="string" require="false" visible="true">
-        <description><![CDATA[]]></description>
-        <value><![CDATA[question shortcut]]></value>
+      <property xsi:type="standardProperty" id="promptQuestion" name="Prompt question" type="question" require="false" visible="true">
+        <description><![CDATA[Select the question for the prompt messages]]></description>
+        <value><![CDATA[]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="aiQuestion" name="AI response question" type="question" require="false" visible="true">
+        <description><![CDATA[Select the question for the AI response]]></description>
+        <value><![CDATA[]]></value>
       </property>
       <property xsi:type="standardProperty" id="maxPrompts" name="Number of prompts to return (0 = unlimited)" type="number" mode="dynamic" require="false" visible="true" min="0">
         <description><![CDATA[]]></description>
