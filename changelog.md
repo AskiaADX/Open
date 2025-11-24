@@ -84,3 +84,7 @@ v4.0.5
 v4.0.6
 - fixes for IE compatibility
 - fixes for AI prompt helper question
+
+v4.0.7
+- fixes for exclusiveResponsesQuestion property
+
